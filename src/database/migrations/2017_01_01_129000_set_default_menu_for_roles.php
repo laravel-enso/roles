@@ -1,8 +1,8 @@
 <?php
 
 use Illuminate\Database\Migrations\Migration;
-use LaravelEnso\RoleManager\app\Models\Role;
 use LaravelEnso\MenuManager\app\Models\Menu;
+use LaravelEnso\RoleManager\app\Models\Role;
 
 class SetDefaultMenuForRoles extends Migration
 {

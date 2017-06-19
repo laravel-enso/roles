@@ -44,10 +44,10 @@ class RolesController extends Controller
         $permissionsList = $this->buildPermissionGroupsStructure($permissionsGroups);
 
         return [
-            'menusList' => $menusList,
-            'roleMenusList' => $roleMenusList,
+            'menusList'           => $menusList,
+            'roleMenusList'       => $roleMenusList,
             'rolePermissionsList' => $rolePermissionsList,
-            'permissionsList' => $permissionsList,
+            'permissionsList'     => $permissionsList,
         ];
     }
 
@@ -60,7 +60,7 @@ class RolesController extends Controller
         });
 
         return [
-            'level' => 'success',
+            'level'   => 'success',
             'message' => __('Operation was successfull'),
         ];
     }
@@ -81,7 +81,7 @@ class RolesController extends Controller
         $role->permissions()->attach($permissions);
         flash()->success(__('Role Created'));
 
-        return redirect('system/roles/' . $role->id . '/edit');
+        return redirect('system/roles/'.$role->id.'/edit');
     }
 
     public function edit(Role $role)
@@ -105,7 +105,7 @@ class RolesController extends Controller
         $role->delete();
 
         return [
-            'level' => 'success',
+            'level'   => 'success',
             'message' => __('Operation was successfull'),
         ];
     }
@@ -130,7 +130,7 @@ class RolesController extends Controller
         $labels = array_unique($labels);
 
         foreach ($labels as $currentLabel) {
-            $structure[$currentLabel] = $this->buildPermissionGroupsStructure($permissionsGroups, $label ? $label . '.' . $currentLabel : $currentLabel);
+            $structure[$currentLabel] = $this->buildPermissionGroupsStructure($permissionsGroups, $label ? $label.'.'.$currentLabel : $currentLabel);
         }
 
         return $structure;
