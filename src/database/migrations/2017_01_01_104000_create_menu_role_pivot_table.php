@@ -15,16 +15,6 @@ class CreateMenuRolePivotTable extends Migration
             $table->timestamps();
             $table->primary(['role_id', 'menu_id']);
         });
-
-        DB::insert(
-
-            'INSERT INTO `menu_role` (`menu_id`, `role_id`)
-                select id, 1 from `menus`'
-        );
-
-        $now = "'".date('Y-m-d H:i:s')."'";
-
-        DB::update("update `menu_role` set created_at = $now, updated_at = $now");
     }
 
     public function down()

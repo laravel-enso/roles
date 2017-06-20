@@ -9,13 +9,15 @@ use LaravelEnso\RoleManager\app\DataTable\RolesTableStructure;
 use LaravelEnso\RoleManager\app\Http\Requests\ValidateRoleRequest;
 use LaravelEnso\RoleManager\app\Http\Services\RoleService;
 use LaravelEnso\RoleManager\app\Models\Role;
+use LaravelEnso\Select\app\Traits\SelectListBuilder;
 
 class RoleController extends Controller
 {
-    use DataTable;
+    use DataTable, SelectListBuilder;
 
     private $roles;
 
+    protected $selectSourceClass = Role::class;
     protected $tableStructureClass = RolesTableStructure::class;
 
     public function __construct(Request $request)

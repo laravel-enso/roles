@@ -6,15 +6,10 @@ use Illuminate\Http\Request;
 use LaravelEnso\MenuManager\app\Models\Menu;
 use LaravelEnso\PermissionManager\app\Models\Permission;
 use LaravelEnso\RoleManager\app\Models\Role;
-use LaravelEnso\Select\app\Traits\SelectListBuilder;
 
 class RoleService
 {
-    use SelectListBuilder;
-
     private $request;
-
-    protected $selectSourceClass = Role::class;
 
     public function __construct(Request $request)
     {
@@ -23,12 +18,10 @@ class RoleService
 
     public function getTableQuery()
     {
-        $query = Role::select(\DB::raw('roles.id as DT_RowId, roles.name,
+        return Role::select(\DB::raw('roles.id as DT_RowId, roles.name,
             roles.display_name, roles.description, roles.created_at, roles.updated_at,
             roles.menu_id')
         );
-
-        return $query;
     }
 
     public function index()
@@ -53,7 +46,7 @@ class RoleService
             flash()->success(__('The role was created'));
         });
 
-        return redirect('system/roles/'.$role->id.'/edit');
+        return redirect('system/roles/' . $role->id . '/edit');
     }
 
     public function edit(Role $role)

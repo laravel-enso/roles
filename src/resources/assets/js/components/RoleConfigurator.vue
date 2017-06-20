@@ -78,7 +78,7 @@
             },
             setPermissions() {
                 axios.post('/system/roles/setPermissions', this.postParams()).then((response) => {
-                    toastr[response.data.level](response.data.message);
+                    toastr.success(response.data.message);
                 }).catch(error => {
                     this.reportEnsoException(error);
                 });

@@ -11,9 +11,11 @@ class SetDefaultMenuForRoles extends Migration
         $roles = Role::all();
         $menu = Menu::whereHasChildren(false)->first();
 
-        $roles->each(function ($role) use ($menu) {
-            $role->menu_id = $menu->id;
-            $role->save();
+        \DB::transaction(function() use ($roles, $menu) {
+            $roles->each(function ($role) use ($menu) {
+                $role->menu_id = $menu->id;
+                $role->save();
+            });
         });
     }
 
