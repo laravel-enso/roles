@@ -4,7 +4,6 @@ namespace LaravelEnso\RoleManager\app\Http\Services;
 
 use Illuminate\Http\Request;
 use LaravelEnso\MenuManager\app\Models\Menu;
-use LaravelEnso\PermissionManager\app\Models\Permission;
 use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
 use LaravelEnso\RoleManager\app\Models\Role;
 
@@ -41,7 +40,7 @@ class RolePermissionService
             $role->permissions()->sync(request()->rolePermissions);
         });
 
-        return [ 'message' => __('Operation was successfull') ];
+        return ['message' => __('Operation was successfull')];
     }
 
     private function buildGroupsStructure($groups, $label = null)

@@ -22,7 +22,6 @@ class InsertDefaultRoles extends Migration
                 $role->menus()->sync($menus);
             }
         });
-
     }
 
     public function down()

@@ -46,7 +46,7 @@ class RoleService
             flash()->success(__('The role was created'));
         });
 
-        return redirect('system/roles/' . $role->id . '/edit');
+        return redirect('system/roles/'.$role->id.'/edit');
     }
 
     public function edit(Role $role)
