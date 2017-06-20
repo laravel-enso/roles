@@ -18,10 +18,10 @@ class RolePermissionController extends Controller
         $permissions = $this->buildPermissionGroupsStructure($permissionsGroups);
 
         return [
-            'menus' => $menus,
-            'roleMenus' => $roleMenus,
+            'menus'           => $menus,
+            'roleMenus'       => $roleMenus,
             'rolePermissions' => $rolePermissions,
-            'permissions' => $permissions,
+            'permissions'     => $permissions,
         ];
     }
 
@@ -34,7 +34,7 @@ class RolePermissionController extends Controller
         });
 
         return [
-            'level' => 'success',
+            'level'   => 'success',
             'message' => __('Operation was successfull'),
         ];
     }
@@ -59,7 +59,7 @@ class RolePermissionController extends Controller
         $labels = array_unique($labels);
 
         foreach ($labels as $currentLabel) {
-            $structure[$currentLabel] = $this->buildPermissionGroupsStructure($permissionsGroups, $label ? $label . '.' . $currentLabel : $currentLabel);
+            $structure[$currentLabel] = $this->buildPermissionGroupsStructure($permissionsGroups, $label ? $label.'.'.$currentLabel : $currentLabel);
         }
 
         return $structure;

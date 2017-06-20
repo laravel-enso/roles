@@ -45,15 +45,15 @@ class RoleService
 
     public function store(Role $role)
     {
-    	\DB::transaction(function() use (&$role) {
-	        $role = $role->create($this->request->all());
-	        $permissions = Permission::implicit()->pluck('id');
-	        $role->permissions()->attach($permissions);
-	        $role->menus()->attach($role->menu_id);
-	        flash()->success(__('The role was created'));
-		});
+        \DB::transaction(function () use (&$role) {
+            $role = $role->create($this->request->all());
+            $permissions = Permission::implicit()->pluck('id');
+            $role->permissions()->attach($permissions);
+            $role->menus()->attach($role->menu_id);
+            flash()->success(__('The role was created'));
+        });
 
-        return redirect('system/roles/' . $role->id . '/edit');
+        return redirect('system/roles/'.$role->id.'/edit');
     }
 
     public function edit(Role $role)
@@ -75,7 +75,7 @@ class RoleService
     public function destroy(Role $role)
     {
         if ($role->users->count()) {
-            throw new \EnsoException(__("Operation failed because the role is in use"));
+            throw new \EnsoException(__('Operation failed because the role is in use'));
         }
 
         $role->delete();
