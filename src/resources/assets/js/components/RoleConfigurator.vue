@@ -1,95 +1,98 @@
 <template>
+
     <div class="row">
-        <div class="col-xs-12" v-if="roleMenusList">
+        <div class="col-xs-12">
             <center>
                 <h5>
-                    <slot name="role-configurator-menus-title"></slot>
+                    <slot name="menus-title"></slot>
                 </h5>
             </center>
             <div class="panel-group" id="accordion-menus" role="tablist" aria-multiselectable="false">
-                <checkbox-manager v-for="(groupData, groupName) in menusList"
-                    parent="#accordion-menus"
-                    :key="groupName"
-                    :permissions-group-name="groupName"
-                    :role-permissions-list="roleMenusList"
-                    :permissions-group-data="groupData">
+                <checkbox-manager v-if="roleMenus.length"
+                    parent-accordion="#accordion-menus"
+                    group-name="sidebar"
+                    :role-permissions="roleMenus"
+                    :group-data="menus">
                 </checkbox-manager>
             </div>
         </div>
-        <div class="col-xs-12"  v-if="rolePermissionsList">
+        <div class="col-xs-12">
             <center>
                 <h5>
-                    <slot name="role-configurator-permissions-title"></slot>
+                    <slot name="permissions-title"></slot>
                 </h5>
             </center>
-            <div class="panel-group" id="accordion-permissions-groups" role="tablist" aria-multiselectable="false">
-                <checkbox-manager v-for="(groupData, groupName) in permissionsList"
+            <div class="panel-group" id="accordion-groups" role="tablist" aria-multiselectable="false">
+                <checkbox-manager v-if="rolePermissions.length"
+                    v-for="(groupData, groupName) in permissions"
                     :key="groupName"
-                    parent-accordion="#accordion-permissions-groups"
-                    :permissions-group-name="groupName"
-                    :role-permissions-list="rolePermissionsList"
-                    :permissions-group-data="groupData">
+                    parent-accordion="#accordion-groups"
+                    :group-name="groupName"
+                    :role-permissions="rolePermissions"
+                    :group-data="groupData">
                 </checkbox-manager>
             </div>
         </div>
         <center>
             <button class="btn btn-primary" @click="setPermissions">
-                <slot name="role-configurator-update-button"></slot>
+                <slot name="update-button"></slot>
             </button>
         </center>
     </div>
+
 </template>
 
 <script>
 
     export default {
-
         props: {
-
             roleId: {
-                type: Number,
+                type: String,
                 required: true
             }
         },
-        data: function() {
 
+        data() {
             return {
-
-                menusList: [],
-                roleMenusList: [],
-                rolePermissionsList: [],
-                permissionsList: []
+                menus: [],
+                permissions: {},
+                roleMenus: [],
+                rolePermissions: []
             };
         },
+
         methods: {
-
-            getPermissions: function() {
-
+            getPermissions() {
                 axios.get('/system/roles/getPermissions/' + this.roleId).then((response) => {
-
-                    this.menusList = response.data.menusList;
-                    this.permissionsGroupsList = response.data.permissionsGroupsList;
-                    this.roleMenusList = response.data.roleMenusList;
-                    this.rolePermissionsList = response.data.rolePermissionsList;
-                    this.permissionsList = response.data.permissionsList;
+                    this.setData(response);
+                }).catch(error => {
+                    this.reportEnsoException(error);
                 });
             },
-            setPermissions: function() {
-
-                let params = {
-                    role_id: this.roleId,
-                    roleMenusList: this.roleMenusList,
-                    rolePermissionsList: this.rolePermissionsList,
-                };
-
-                axios.post('/system/roles/setPermissions', params).then((response) => {
-
+            setData(response) {
+                this.menus = response.data.menus;
+                this.permissionsGroupsList = response.data.permissionsGroupsList;
+                this.roleMenus = response.data.roleMenus;
+                this.rolePermissions = response.data.rolePermissions;
+                this.permissions = response.data.permissions;
+            },
+            setPermissions() {
+                axios.post('/system/roles/setPermissions', this.postParams()).then((response) => {
                     toastr[response.data.level](response.data.message);
+                }).catch(error => {
+                    this.reportEnsoException(error);
                 });
+            },
+            postParams() {
+                return {
+                    role_id: this.roleId,
+                    roleMenus: this.roleMenus,
+                    rolePermissions: this.rolePermissions,
+                };
             }
         },
-        mounted: function() {
 
+        mounted() {
             this.getPermissions();
         }
     }

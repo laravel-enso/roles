@@ -43,10 +43,10 @@
                 <div class="box box-info" v-if="showRoleConfigurator">
                     <div class="box-body">
                         <role-configurator
-                            :role-id="parseInt('{{ $role->id }}')">
-                            <span slot="role-configurator-menus-title">{{ __("Meniuri") }}</span>
-                            <span slot="role-configurator-permissions-title">{{ __("Permissions") }}</span>
-                            <span slot="role-configurator-update-button">{{ __("Update") }}</span>
+                            role-id="{{ $role->id }}">
+                            <span slot="menus-title">{{ __("Meniuri") }}</span>
+                            <span slot="permissions-title">{{ __("Permissions") }}</span>
+                            <span slot="update-button">{{ __("Update") }}</span>
                         </role-configurator>
                     </div>
                 </div>
