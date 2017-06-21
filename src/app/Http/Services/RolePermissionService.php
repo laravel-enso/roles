@@ -20,18 +20,18 @@ class RolePermissionService
     public function getPermissions(Role $role)
     {
         $groups = PermissionGroup::with([
-            'permissions' => function($query) {
+            'permissions' => function ($query) {
                 $query->orderBy('name');
-            }
+            },
         ])->get();
 
         $permissions = (new GroupPermissionStructure($groups))->get();
 
         return [
-            'menus' => Menu::orderBy('name')->get(),
-            'roleMenus' => $role->menus->pluck('id'),
+            'menus'           => Menu::orderBy('name')->get(),
+            'roleMenus'       => $role->menus->pluck('id'),
             'rolePermissions' => $role->permissions->pluck('id'),
-            'permissions' => $permissions,
+            'permissions'     => $permissions,
         ];
     }
 
