@@ -11,7 +11,6 @@ class RolesTableStructure extends TableStructure
         $this->data = [
             'crtNo'           => __('#'),
             'actionButtons'   => __('Actions'),
-            'render'          => [3, 4],
             'notSearchable'   => [3, 4],
             'headerAlign'     => 'center',
             'bodyAlign'       => 'center',

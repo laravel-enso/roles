@@ -8,8 +8,7 @@
                 </h5>
             </center>
             <div class="panel-group" id="accordion-menus" role="tablist" aria-multiselectable="false">
-                <checkbox-manager v-if="roleMenus.length"
-                    parent-accordion="#accordion-menus"
+                <checkbox-manager parent-accordion="#accordion-menus"
                     group-name="sidebar"
                     :role-permissions="roleMenus"
                     :group-data="menus">
@@ -23,8 +22,7 @@
                 </h5>
             </center>
             <div class="panel-group" id="accordion-groups" role="tablist" aria-multiselectable="false">
-                <checkbox-manager v-if="rolePermissions.length"
-                    v-for="(groupData, groupName) in permissions"
+                <checkbox-manager v-for="(groupData, groupName) in permissions"
                     :key="groupName"
                     parent-accordion="#accordion-groups"
                     :group-name="groupName"

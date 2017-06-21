@@ -3,9 +3,12 @@
 namespace LaravelEnso\RoleManager\app\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use LaravelEnso\Helpers\Traits\DMYTimestamps;
 
 class Role extends Model
 {
+    use DMYTimestamps;
+
     protected $fillable = ['name', 'display_name', 'description', 'menu_id'];
 
     public function menus()
