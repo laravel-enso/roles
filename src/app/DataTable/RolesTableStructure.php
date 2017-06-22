@@ -14,8 +14,6 @@ class RolesTableStructure extends TableStructure
             'notSearchable'   => [3, 4],
             'headerAlign'     => 'center',
             'bodyAlign'       => 'center',
-            'tableClass'      => 'table display compact',
-            'dom'             => 'lfrtip',
             'columns'         => [
                 0 => [
                     'label' => __('Name'),

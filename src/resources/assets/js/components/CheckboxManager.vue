@@ -47,6 +47,9 @@
                             <label :class="{'text-green': permission.type === 0, 'text-warning': permission.type === 1}">
                                 {{ permission.description ? permission.description : permission.name }}
                             </label>
+                            <span class="margin-left-xs" v-if="permission.default">
+                                <i v-tooltip="'Default'" class="fa fa-exclamation-triangle text-yellow"></i>
+                            </span>
                         </div>
                     </div>
                 </div>

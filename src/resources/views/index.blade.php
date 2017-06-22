@@ -13,7 +13,8 @@
     <section class="content">
         <div class="row" v-cloak>
             <div class="col-md-12">
-                <data-table source="/system/roles">
+                <data-table source="/system/roles"
+                    id="roles-table">
                     <span slot="data-table-title">{{ __("Roles") }}</span>
                     @include('laravel-enso/core::partials.modal')
                 </data-table>
