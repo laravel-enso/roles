@@ -5,25 +5,25 @@ use LaravelEnso\Core\app\Classes\StructureManager\StructureMigration;
 class CreateStructureForRoles extends StructureMigration
 {
     protected $permissionGroup = [
-        'name' => 'system.roles', 'description' => 'Roles Permissions Group',
+        'name' => 'system.roles', 'description' => 'Roles permissions group',
     ];
 
     protected $permissions = [
         ['name' => 'system.roles.getTableData', 'description' => 'Get table data for roles', 'type' => 0, 'default' => false],
         ['name' => 'system.roles.initTable', 'description' => 'Init table for roles menu', 'type' => 0, 'default' => false],
-        ['name' => 'system.roles.create', 'description' => 'Create Role', 'type' => 1, 'default' => false],
-        ['name' => 'system.roles.edit', 'description' => 'Edit Existing Role', 'type' => 1, 'default' => false],
-        ['name' => 'system.roles.index', 'description' => 'Show Roles List', 'type' => 0, 'default' => false],
-        ['name' => 'system.roles.store', 'description' => 'Save Role', 'type' => 1, 'default' => false],
-        ['name' => 'system.roles.update', 'description' => 'Update Role', 'type' => 1, 'default' => false],
-        ['name' => 'system.roles.destroy', 'description' => 'Delete Role', 'type' => 1, 'default' => false],
-        ['name' => 'system.roles.getOptionsList', 'description' => 'Get Permissions for Role', 'type' => 1, 'default' => false],
-        ['name' => 'system.roles.getPermissions', 'description' => 'Get Role Permissions', 'type' => 0, 'default' => false],
-        ['name' => 'system.roles.setPermissions', 'description' => 'Set Permissions for Role', 'type' => 1, 'default' => false],
+        ['name' => 'system.roles.create', 'description' => 'Create role', 'type' => 1, 'default' => false],
+        ['name' => 'system.roles.edit', 'description' => 'Edit role', 'type' => 1, 'default' => false],
+        ['name' => 'system.roles.index', 'description' => 'Show roles index', 'type' => 0, 'default' => false],
+        ['name' => 'system.roles.store', 'description' => 'Store newly created role', 'type' => 1, 'default' => false],
+        ['name' => 'system.roles.update', 'description' => 'Update role', 'type' => 1, 'default' => false],
+        ['name' => 'system.roles.destroy', 'description' => 'Delete role', 'type' => 1, 'default' => false],
+        ['name' => 'system.roles.getOptionsList', 'description' => 'Get role permissions list for vue-select', 'type' => 1, 'default' => false],
+        ['name' => 'system.roles.getPermissions', 'description' => 'Get role permissions for role configurator', 'type' => 0, 'default' => false],
+        ['name' => 'system.roles.setPermissions', 'description' => 'Set role permissions for role configurator', 'type' => 1, 'default' => false],
     ];
 
     protected $menu = [
-        'name' => 'Roles', 'icon' => 'fa fa-fw fa-universal-access', 'link' => 'system/roles', 'has_children' => 0,
+        'name' => 'Roles', 'icon' => 'fa fa-fw fa-universal-access', 'link' => 'system/roles', 'has_children' => false,
     ];
 
     protected $parentMenu = 'System';

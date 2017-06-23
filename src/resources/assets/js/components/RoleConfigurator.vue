@@ -69,7 +69,6 @@
             },
             setData(response) {
                 this.menus = response.data.menus;
-                this.permissionsGroupsList = response.data.permissionsGroupsList;
                 this.roleMenus = response.data.roleMenus;
                 this.rolePermissions = response.data.rolePermissions;
                 this.permissions = response.data.permissions;

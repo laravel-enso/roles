@@ -62,7 +62,9 @@
 
         var vm = new Vue({
             el: '#app',
-            data: { showRoleConfigurator: false }
+            data: {
+                showRoleConfigurator: false
+            }
         });
 
     </script>
