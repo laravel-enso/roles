@@ -4,7 +4,7 @@ namespace LaravelEnso\RoleManager;
 
 use Illuminate\Support\ServiceProvider;
 
-class RoleManagerServiceProvider extends ServiceProvider
+class RolesServiceProvider extends ServiceProvider
 {
     public function boot()
     {
