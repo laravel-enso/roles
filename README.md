@@ -6,6 +6,12 @@
 
 Role Manager dependency for [Laravel Enso](https://github.com/laravel-enso/Enso)
 
+### Details
+
+- manages roles for the users of the application
+- uses VueJS components that allow for a visual and intuitive update of permissions for a certain role
+- comes by default with the `Administrator` and `Supervisor` roles
+
 ### Publishes
 
 - `php artisan vendor:publish --tag=roles-components` - the VueJS components
