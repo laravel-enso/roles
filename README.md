@@ -4,12 +4,18 @@
 [![Total Downloads](https://poser.pugx.org/laravel-enso/rolemanager/downloads)](https://packagist.org/packages/laravel-enso/rolemanager)
 [![Latest Stable Version](https://poser.pugx.org/laravel-enso/rolemanager/version)](https://packagist.org/packages/laravel-enso/rolemanager)
 
-Role Manager depedency for Laravel Enso
+Role Manager dependency for [Laravel Enso](https://github.com/laravel-enso/Enso)
 
 ### Use
 
-Included in LaravelEnso Core
+Included in [LaravelEnso Core](https://github.com/laravel-enso/Core)
+
+### Can publish
+
+- `php artisan vendor:publish --tag=roles-components` - the VueJS components
+- `php artisan vendor:publish --tag=update` - a common alias for when wanting to update the VueJS components, 
+once a newer version is released
 
 ### Contributions
 
-...are welcome
+are welcome
