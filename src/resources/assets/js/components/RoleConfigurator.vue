@@ -11,7 +11,8 @@
                 <checkbox-manager parent-accordion="#accordion-menus"
                     group-name="sidebar"
                     :role-permissions="roleMenus"
-                    :group-data="menus">
+                    :group-data="menus"
+                    v-if="menus.length">
                 </checkbox-manager>
             </div>
         </div>
@@ -74,7 +75,7 @@
                 this.permissions = response.data.permissions;
             },
             setPermissions() {
-                axios.post('/system/roles/setPermissions', this.postParams()).then(response => {
+                axios.post('/system/roles/setPermissions', this.postParams()).then((response) => {
                     toastr.success(response.data.message);
                 }).catch(error => {
                     this.reportEnsoException(error);
