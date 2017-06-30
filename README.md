@@ -6,6 +6,10 @@
 
 Role Manager dependency for [Laravel Enso](https://github.com/laravel-enso/Enso)
 
+[![Watch the demo](https://laravel-enso.github.io/dataimport/screenshots/Selection_006.png)](https://laravel-enso.github.io/dataimport/videos/demo_01.webm)
+<sup>click on the photo to view a short demo in compatible browsers</sup>
+
+
 ### Details
 
 - manages roles for the users of the application

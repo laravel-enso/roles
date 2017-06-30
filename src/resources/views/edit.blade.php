@@ -44,7 +44,7 @@
                     <div class="box-body">
                         <role-configurator
                             role-id="{{ $role->id }}">
-                            <span slot="menus-title">{{ __("Meniuri") }}</span>
+                            <span slot="menus-title">{{ __("Menus") }}</span>
                             <span slot="permissions-title">{{ __("Permissions") }}</span>
                             <span slot="update-button">{{ __("Update") }}</span>
                         </role-configurator>
