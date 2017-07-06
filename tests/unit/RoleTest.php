@@ -89,7 +89,7 @@ class RoleTest extends TestCase
         $response->assertStatus(200);
     }
 
-     /** @test */
+    /** @test */
     public function cantDestroyIfHasUsers()
     {
         $role = Role::create($this->postParams());
@@ -149,10 +149,10 @@ class RoleTest extends TestCase
     private function postParams()
     {
         return [
-             'name' => $this->faker->word,
-             'display_name' => $this->faker->word,
-             'description' => $this->faker->sentence,
-             'menu_id' => Menu::first(['id'])->id,
+             'name'                 => $this->faker->word,
+             'display_name'         => $this->faker->word,
+             'description'          => $this->faker->sentence,
+             'menu_id'              => Menu::first(['id'])->id,
             '_method'               => 'POST',
         ];
     }

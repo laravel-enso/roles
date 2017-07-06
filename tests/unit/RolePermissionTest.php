@@ -35,16 +35,15 @@ class RolePermissionTest extends TestCase
         var_dump($response);
 
         // $this->assertEquals($role->permissions, Permission::implicit()->pluck('id'));
-
     }
 
     private function postParams()
     {
         return [
-             'name' => $this->faker->word,
-             'display_name' => $this->faker->word,
-             'description' => $this->faker->sentence,
-             'menu_id' => Menu::first(['id'])->id,
+             'name'                 => $this->faker->word,
+             'display_name'         => $this->faker->word,
+             'description'          => $this->faker->sentence,
+             'menu_id'              => Menu::first(['id'])->id,
             '_method'               => 'POST',
         ];
     }
