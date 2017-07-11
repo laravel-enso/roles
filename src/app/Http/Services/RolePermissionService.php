@@ -43,6 +43,6 @@ class RolePermissionService
             $role->permissions()->sync(request()->rolePermissions);
         });
 
-        return ['message' => __('Operation was successfull')];
+        return ['message' => __('Operation was successful')];
     }
 }

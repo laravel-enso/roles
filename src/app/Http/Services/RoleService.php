@@ -73,6 +73,6 @@ class RoleService
 
         $role->delete();
 
-        return ['message' => __('Operation was successfull')];
+        return ['message' => __('Operation was successful')];
     }
 }
