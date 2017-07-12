@@ -10,6 +10,7 @@ class CreateStructureForRoles extends StructureMigration
 
     protected $permissions = [
         ['name' => 'system.roles.getTableData', 'description' => 'Get table data for roles', 'type' => 0, 'default' => false],
+        ['name' => 'system.roles.exportExcel', 'description' => 'Export excel for roles', 'type' => 0, 'default' => false],
         ['name' => 'system.roles.initTable', 'description' => 'Init table for roles menu', 'type' => 0, 'default' => false],
         ['name' => 'system.roles.create', 'description' => 'Create role', 'type' => 1, 'default' => false],
         ['name' => 'system.roles.edit', 'description' => 'Edit role', 'type' => 1, 'default' => false],
