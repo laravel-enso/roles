@@ -3,11 +3,12 @@
 namespace LaravelEnso\RoleManager\app\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use LaravelEnso\DbSyncMigrations\app\Traits\DbSyncMigrations;
 use LaravelEnso\Helpers\Traits\FormattedTimestamps;
 
 class Role extends Model
 {
-    use FormattedTimestamps;
+    use FormattedTimestamps, DbSyncMigrations;
 
     protected $fillable = ['name', 'display_name', 'description', 'menu_id'];
 
