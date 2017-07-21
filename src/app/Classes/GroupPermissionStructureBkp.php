@@ -5,7 +5,7 @@ namespace LaravelEnso\RoleManager\app\Classes;
 use Illuminate\Support\Collection;
 use LaravelEnso\Helpers\Classes\Object;
 
-class GroupPermissionStructure
+class GroupPermissionStructureBkp
 {
     private $structure;
 

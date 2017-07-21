@@ -20,12 +20,13 @@ class GroupPermissionStructure
     public function get()
     {
         \Log::info($this->structure->toArray());
+
         return $this->structure;
     }
 
     private function build()
     {
-        $this->groups->each(function($group) {
+        $this->groups->each(function ($group) {
             $this->fillStructure($group);
         });
     }
@@ -36,9 +37,9 @@ class GroupPermissionStructure
         $count = $labels->count();
         $obj = $this->structure;
 
-        $labels->each(function($label, $index) use ($count, &$obj, $group) {
+        $labels->each(function ($label, $index) use ($count, &$obj, $group) {
             if (!property_exists($obj, $label)) {
-                $obj->$label = $index < $count -1 ? new Object() : $group->permissions;
+                $obj->$label = $index < $count - 1 ? new Object() : $group->permissions;
             }
 
             $obj = $obj->$label;
