@@ -19,8 +19,6 @@ class GroupPermissionStructure
 
     public function get()
     {
-        \Log::info($this->structure->toArray());
-
         return $this->structure;
     }
 
