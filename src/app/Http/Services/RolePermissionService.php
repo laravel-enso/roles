@@ -4,8 +4,8 @@ namespace LaravelEnso\RoleManager\app\Http\Services;
 
 use Illuminate\Http\Request;
 use LaravelEnso\MenuManager\app\Models\Menu;
-use LaravelEnso\PermissionManager\app\Classes\GroupPermissionStructure;
 use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
+use LaravelEnso\RoleManager\app\Classes\GroupPermissionStructure;
 use LaravelEnso\RoleManager\app\Models\Role;
 
 class RolePermissionService
