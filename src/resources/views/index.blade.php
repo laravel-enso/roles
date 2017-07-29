@@ -15,8 +15,6 @@
             <div class="col-md-12">
                 <data-table source="/system/roles"
                     id="roles-table">
-                    <span slot="data-table-title">{{ __("Roles") }}</span>
-                    @include('laravel-enso/core::partials.modal')
                 </data-table>
             </div>
         </div>
