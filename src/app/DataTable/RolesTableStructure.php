@@ -9,8 +9,8 @@ class RolesTableStructure extends TableStructure
     public function __construct()
     {
         $this->data = [
-            'crtNo'         => __('#'),
             'tableName'     => __('Roles'),
+            'crtNo'         => __('#'),
             'actionButtons' => __('Actions'),
             'notSearchable' => [3, 4],
             'headerAlign'   => 'center',

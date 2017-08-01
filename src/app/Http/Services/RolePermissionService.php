@@ -17,7 +17,7 @@ class RolePermissionService
         $this->request = $request;
     }
 
-    public function getPermissions(Role $role)
+    public function index(Role $role)
     {
         $groups = PermissionGroup::with([
             'permissions' => function ($query) {
@@ -35,7 +35,7 @@ class RolePermissionService
         ];
     }
 
-    public function setPermissions()
+    public function update()
     {
         \DB::transaction(function () {
             $role = Role::find(request()->role_id);
@@ -43,6 +43,6 @@ class RolePermissionService
             $role->permissions()->sync(request()->rolePermissions);
         });
 
-        return ['message' => __('Operation was successful')];
+        return ['message' => __(config('labels.successfulOperation'))];
     }
 }

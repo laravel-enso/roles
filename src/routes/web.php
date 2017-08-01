@@ -7,18 +7,19 @@ Route::middleware(['web', 'auth', 'core'])
             ->group(function () {
                 Route::prefix('roles')->as('roles.')
                     ->group(function () {
-                        Route::get('initTable', 'RoleController@initTable')
+                        Route::get('initTable', 'RoleTableController@initTable')
                             ->name('initTable');
-                        Route::get('getTableData', 'RoleController@getTableData')
+                        Route::get('getTableData', 'RoleTableController@getTableData')
                             ->name('getTableData');
-                        Route::get('exportExcel', 'RoleController@exportExcel')
+                        Route::get('exportExcel', 'RoleTableController@exportExcel')
                             ->name('exportExcel');
 
-                        Route::get('getOptionsList', 'RoleController@getOptionsList')
+                        Route::get('getOptionsList', 'RoleSelectController@getOptionsList')
                             ->name('getOptionsList');
-                        Route::get('getPermissions/{role}', 'RolePermissionController@getPermissions')
+
+                        Route::get('getPermissions/{role}', 'RolePermissionController@index')
                             ->name('getPermissions');
-                        Route::post('setPermissions', 'RolePermissionController@setPermissions')
+                        Route::post('setPermissions', 'RolePermissionController@update')
                             ->name('setPermissions');
                     });
 

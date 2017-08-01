@@ -16,13 +16,13 @@ class RolePermissionController extends Controller
         $this->service = new RolePermissionService($request);
     }
 
-    public function getPermissions(Role $role)
+    public function index(Role $role)
     {
-        return $this->service->getPermissions($role);
+        return $this->service->index($role);
     }
 
-    public function setPermissions()
+    public function update()
     {
-        return $this->service->setPermissions();
+        return $this->service->update();
     }
 }

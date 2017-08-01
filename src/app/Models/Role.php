@@ -2,9 +2,13 @@
 
 namespace LaravelEnso\RoleManager\app\Models;
 
+use App\Owner;
+use App\User;
 use Illuminate\Database\Eloquent\Model;
 use LaravelEnso\DbSyncMigrations\app\Traits\DbSyncMigrations;
 use LaravelEnso\Helpers\Traits\FormattedTimestamps;
+use LaravelEnso\MenuManager\app\Models\Menu;
+use LaravelEnso\PermissionManager\app\Models\Permission;
 
 class Role extends Model
 {
@@ -14,35 +18,35 @@ class Role extends Model
 
     public function menus()
     {
-        return $this->belongsToMany('LaravelEnso\MenuManager\app\Models\Menu')->withTimestamps();
+        return $this->belongsToMany(Menu::class)->withTimestamps();
     }
 
     public function menu()
     {
-        return $this->belongsTo('LaravelEnso\MenuManager\app\Models\Menu');
+        return $this->belongsTo(Menu::class);
     }
 
     public function owners()
     {
-        return $this->belongsToMany('LaravelEnso\Core\app\Models\Owner');
+        return $this->belongsToMany(Owner::class);
     }
 
     public function users()
     {
-        return $this->hasMany('LaravelEnso\Core\app\Models\User');
+        return $this->hasMany(User::class);
     }
 
     public function permissions()
     {
-        return $this->belongsToMany('LaravelEnso\PermissionManager\app\Models\Permission')->withTimestamps();
+        return $this->belongsToMany(Permission::class)->withTimestamps();
     }
 
-    public function getPermissionsListAttribute()
+    public function getPermissionListAttribute()
     {
-        return $this->permissions->pluck('id')->toArray();
+        return $this->permissions->pluck('id');
     }
 
-    public function getMenusListAttribute()
+    public function getMenuListAttribute()
     {
         return $this->menus->pluck('id')->toArray();
     }

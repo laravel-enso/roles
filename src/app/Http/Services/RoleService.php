@@ -16,14 +16,6 @@ class RoleService
         $this->request = $request;
     }
 
-    public function getTableQuery()
-    {
-        return Role::select(\DB::raw('roles.id as DT_RowId, roles.name,
-            roles.display_name, roles.description, roles.created_at, roles.updated_at,
-            roles.menu_id')
-        );
-    }
-
     public function index()
     {
         return view('laravel-enso/rolemanager::index');
@@ -60,7 +52,7 @@ class RoleService
     {
         $role->update($this->request->all());
         $role->save();
-        flash()->success(__('The changes have been saved!'));
+        flash()->success(__(config('labels.savedChanges')));
 
         return back();
     }
@@ -73,6 +65,6 @@ class RoleService
 
         $role->delete();
 
-        return ['message' => __('Operation was successful')];
+        return ['message' => __(config('labels.successfulOperation'))];
     }
 }
