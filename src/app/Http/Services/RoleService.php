@@ -16,11 +16,6 @@ class RoleService
         $this->request = $request;
     }
 
-    public function index()
-    {
-        return view('laravel-enso/rolemanager::index');
-    }
-
     public function create()
     {
         $menus = Menu::pluck('name', 'id');

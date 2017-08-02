@@ -32,7 +32,7 @@ class RoleController extends Controller
 
     public function index()
     {
-        return $this->roles->index();
+        return view('laravel-enso/rolemanager::index');
     }
 
     public function create()
