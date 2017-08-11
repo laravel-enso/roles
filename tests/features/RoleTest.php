@@ -51,7 +51,7 @@ class RoleTest extends TestCase
             ->assertJsonFragment([
             'message' => 'The role was created!',
             'redirect'=> '/system/roles/'.$role->id.'/edit',
-        ]);
+            ]);
     }
 
     /** @test */
@@ -74,7 +74,7 @@ class RoleTest extends TestCase
         $data = $role->toArray();
         $data['_method'] = 'PATCH';
 
-        $response = $this->patch('/system/roles/'.$role->id, $data)
+        $this->patch('/system/roles/'.$role->id, $data)
             ->assertStatus(200)
             ->assertJson(['message' => __(config('labels.savedChanges'))]);
 
@@ -119,11 +119,6 @@ class RoleTest extends TestCase
     private function wasNotDeleted($role)
     {
         return $this->assertNotNull(Role::whereId($role->id)->first());
-    }
-
-    private function hasSessionConfirmation($response)
-    {
-        return $response->assertSessionHas('flash_notification');
     }
 
     private function hasJsonConfirmation($response)
