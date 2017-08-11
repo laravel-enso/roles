@@ -40,7 +40,7 @@ class RoleService
 
         return [
             'message'  => __('The role was created!'),
-            'redirect' => '/system/roles/' . $role->id . '/edit',
+            'redirect' => '/system/roles/'.$role->id.'/edit',
         ];
     }
 
@@ -49,7 +49,7 @@ class RoleService
         $form = (new FormBuilder(__DIR__.'/../../Forms/role.json', $role))
             ->setAction('PATCH')
             ->setTitle('Edit role')
-            ->setUrl('/system/roles/' . $role->id)
+            ->setUrl('/system/roles/'.$role->id)
             ->setSelectOptions('menu_id', Menu::isNotParent()->pluck('name', 'id'))
             ->getData();
 

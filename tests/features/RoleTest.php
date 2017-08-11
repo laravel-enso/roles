@@ -50,7 +50,7 @@ class RoleTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonFragment([
             'message' => 'The role was created!',
-            'redirect'=>'/system/roles/'.$role->id.'/edit'
+            'redirect'=> '/system/roles/'.$role->id.'/edit',
         ]);
     }
 
