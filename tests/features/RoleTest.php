@@ -47,8 +47,11 @@ class RoleTest extends TestCase
 
         $role = Role::whereName($postParams['name'])->first();
 
-        $response->assertRedirect('/system/roles/'.$role->id.'/edit');
-        $this->hasSessionConfirmation($response);
+        $response->assertStatus(200)
+            ->assertJsonFragment([
+            'message' => 'The role was created!',
+            'redirect'=>'/system/roles/'.$role->id.'/edit'
+        ]);
     }
 
     /** @test */
@@ -58,8 +61,9 @@ class RoleTest extends TestCase
 
         $response = $this->get('/system/roles/'.$role->id.'/edit');
 
-        $response->assertStatus(200);
-        $response->assertViewHas('role', $role);
+        $response->assertStatus(200)
+            ->assertViewHas('role', $role)
+            ->assertViewHas('form');
     }
 
     /** @test */
@@ -70,10 +74,10 @@ class RoleTest extends TestCase
         $data = $role->toArray();
         $data['_method'] = 'PATCH';
 
-        $response = $this->patch('/system/roles/'.$role->id, $data);
+        $response = $this->patch('/system/roles/'.$role->id, $data)
+            ->assertStatus(200)
+            ->assertJson(['message' => __(config('labels.savedChanges'))]);
 
-        $response->assertStatus(302);
-        $this->hasSessionConfirmation($response);
         $this->assertTrue($this->wasUpdated($role));
     }
 

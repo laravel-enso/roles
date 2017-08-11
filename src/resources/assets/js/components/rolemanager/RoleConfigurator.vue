@@ -7,7 +7,10 @@
                     <slot name="menus-title"></slot>
                 </h5>
             </center>
-            <div class="panel-group" id="accordion-menus" role="tablist" aria-multiselectable="false">
+            <div id="accordion-menus"
+                class="panel-group"
+                role="tablist"
+                aria-multiselectable="false">
                 <checkbox-manager parent-accordion="#accordion-menus"
                     group-name="menus"
                     :role-permissions="roleMenus"
@@ -22,7 +25,10 @@
                     <slot name="permissions-title"></slot>
                 </h5>
             </center>
-            <div class="panel-group" id="accordion-groups" role="tablist" aria-multiselectable="false">
+            <div id="accordion-groups"
+                class="panel-group"
+                role="tablist"
+                aria-multiselectable="false">
                 <checkbox-manager v-for="group in sortedKeys"
                     :key="group"
                     parent-accordion="#accordion-groups"
@@ -33,7 +39,8 @@
             </div>
         </div>
         <center>
-            <button class="btn btn-primary" @click="setPermissions">
+            <button class="btn btn-primary"
+                @click="setPermissions">
                 <slot name="update-button"></slot>
             </button>
         </center>
@@ -100,4 +107,5 @@
             this.getPermissions();
         }
     }
+
 </script>

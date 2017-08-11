@@ -3,6 +3,7 @@
 namespace LaravelEnso\RoleManager\app\Http\Services;
 
 use Illuminate\Http\Request;
+use LaravelEnso\FormBuilder\app\Classes\FormBuilder;
 use LaravelEnso\MenuManager\app\Models\Menu;
 use LaravelEnso\PermissionManager\app\Models\Permission;
 use LaravelEnso\RoleManager\app\Models\Role;
@@ -18,9 +19,14 @@ class RoleService
 
     public function create()
     {
-        $menus = Menu::pluck('name', 'id');
+        $form = (new FormBuilder(__DIR__.'/../../Forms/role.json'))
+            ->setAction('POST')
+            ->setTitle('Create Role')
+            ->setUrl('/system/roles')
+            ->setSelectOptions('menu_id', Menu::isNotParent()->pluck('name', 'id'))
+            ->getData();
 
-        return view('laravel-enso/rolemanager::create', compact('menus'));
+        return view('laravel-enso/rolemanager::create', compact('form'));
     }
 
     public function store(Role $role)
@@ -30,26 +36,34 @@ class RoleService
             $permissions = Permission::implicit()->pluck('id');
             $role->permissions()->attach($permissions);
             $role->menus()->attach($role->menu_id);
-            flash()->success(__('The role was created'));
         });
 
-        return redirect('system/roles/'.$role->id.'/edit');
+        return [
+            'message'  => __('The role was created!'),
+            'redirect' => '/system/roles/' . $role->id . '/edit',
+        ];
     }
 
     public function edit(Role $role)
     {
-        $menus = Menu::isNotParent()->pluck('name', 'id');
+        $form = (new FormBuilder(__DIR__.'/../../Forms/role.json', $role))
+            ->setAction('PATCH')
+            ->setTitle('Edit role')
+            ->setUrl('/system/roles/' . $role->id)
+            ->setSelectOptions('menu_id', Menu::isNotParent()->pluck('name', 'id'))
+            ->getData();
 
-        return view('laravel-enso/rolemanager::edit', compact('role', 'menus'));
+        return view('laravel-enso/rolemanager::edit', compact('form', 'role'));
     }
 
     public function update(Role $role)
     {
         $role->update($this->request->all());
         $role->save();
-        flash()->success(__(config('labels.savedChanges')));
 
-        return back();
+        return [
+            'message' => __(config('labels.savedChanges')),
+        ];
     }
 
     public function destroy(Role $role)

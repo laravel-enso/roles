@@ -4,21 +4,18 @@
 
 @section('content')
 
-    <section class="content-header">
-        <a class="btn btn-primary" href="/system/roles/create">
-            {{ __("Create Role") }}
-        </a>
-        @include('laravel-enso/menumanager::breadcrumbs')
-    </section>
-    <section class="content">
-        <div class="row" v-cloak>
-            <div class="col-md-12">
-                <data-table source="/system/roles"
-                    id="roles-table">
-                </data-table>
-            </div>
+    <page v-cloak>
+        <span slot="header">
+            <a class="btn btn-primary" href="/system/roles/create">
+                {{ __("Create Role") }}
+            </a>
+        </span>
+        <div class="col-md-12">
+            <data-table source="/system/roles"
+                id="roles-table">
+            </data-table>
         </div>
-    </section>
+    </page>
 
 @endsection
 

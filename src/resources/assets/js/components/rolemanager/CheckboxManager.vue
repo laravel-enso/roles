@@ -1,15 +1,19 @@
 <template>
 
     <div class="panel panel-default">
-        <div class="panel-heading" role="tab" :id="'heading-' + groupName + '-' + _uid">
+        <div :id="'heading-' + groupName + '-' + _uid"
+            class="panel-heading"
+            role="tab">
             <h4 class="panel-title">
-                <a class="collapsed" role="button"
+                <a class="collapsed"
+                    role="button"
                     data-toggle="collapse"
                     :href="'#component-' + groupName + '-' + _uid"
                     aria-expanded="false">
                     {{ groupName }}
                 </a>
-                <div class="pull-right" style="margin-bottom: 0; margin-top: -3px;">
+                <div class="pull-right"
+                    style="margin-bottom: 0; margin-top: -3px;">
                     <input type="checkbox"
                         :data-group-id="_uid"
                         :data-parent-group-id="$parent._uid"
@@ -35,9 +39,11 @@
                     @state-updated="updateGroupState">
                 </checkbox-manager>
             </div>
-            <div class="panel-body" v-if="isRoot">
+            <div class="panel-body"
+                v-if="isRoot">
                 <div class="row">
-                    <div class="col-xs-6" v-for="permission in groupData">
+                    <div class="col-xs-6"
+                        v-for="permission in groupData">
                         <div class="form-group permission-label">
                             <input type="checkbox"
                                 :key="permission.id"
@@ -47,7 +53,8 @@
                             <label :class="{'text-green': permission.type === 0, 'text-warning': permission.type === 1}">
                                 {{ permission.description ? permission.description : permission.name }}
                             </label>
-                            <span class="margin-left-xs" v-if="permission.default">
+                            <span class="margin-left-xs"
+                                v-if="permission.default">
                                 <i v-tooltip="'Default'" class="fa fa-exclamation-triangle text-yellow"></i>
                             </span>
                         </div>
@@ -219,6 +226,7 @@
             this.updateGroupState();
         }
     }
+
 </script>
 
 <style>
