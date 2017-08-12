@@ -44,14 +44,14 @@ class RoleTest extends TestHelper
     public function store()
     {
         $postParams = $this->postParams();
-        $response   = $this->post('/system/roles', $postParams);
+        $response = $this->post('/system/roles', $postParams);
 
         $role = Role::whereName($postParams['name'])->first();
 
         $response->assertStatus(200)
             ->assertJsonFragment([
                 'message'  => 'The role was created!',
-                'redirect' => '/system/roles/' . $role->id . '/edit',
+                'redirect' => '/system/roles/'.$role->id.'/edit',
             ]);
     }
 
@@ -60,7 +60,7 @@ class RoleTest extends TestHelper
     {
         $role = Role::first();
 
-        $response = $this->get('/system/roles/' . $role->id . '/edit');
+        $response = $this->get('/system/roles/'.$role->id.'/edit');
 
         $response->assertStatus(200)
             ->assertViewHas('role', $role)
@@ -71,11 +71,11 @@ class RoleTest extends TestHelper
     /** @test */
     public function update()
     {
-        $role       = Role::create($this->postParams());
+        $role = Role::create($this->postParams());
         $role->name = 'edited';
-        $data       = $role->toArray();
+        $data = $role->toArray();
 
-        $this->patch('/system/roles/' . $role->id, $data)
+        $this->patch('/system/roles/'.$role->id, $data)
             ->assertStatus(200)
             ->assertJson(['message' => __(config('labels.savedChanges'))]);
 
@@ -87,7 +87,7 @@ class RoleTest extends TestHelper
     {
         $role = Role::create($this->postParams());
 
-        $this->delete('/system/roles/' . $role->id)
+        $this->delete('/system/roles/'.$role->id)
             ->assertStatus(200)
             ->assertJsonFragment(['message']);
 
@@ -100,7 +100,7 @@ class RoleTest extends TestHelper
         $role = Role::create($this->postParams());
         $this->createUser($role);
 
-        $this->delete('/system/roles/' . $role->id)
+        $this->delete('/system/roles/'.$role->id)
             ->assertStatus(302)
             ->assertSessionHas('flash_notification');
 
@@ -115,9 +115,9 @@ class RoleTest extends TestHelper
             'phone'      => $this->faker->phoneNumber,
             'is_active'  => 1,
         ]);
-        $user->email    = $this->faker->email;
+        $user->email = $this->faker->email;
         $user->owner_id = Owner::first(['id'])->id;
-        $user->role_id  = $role->id;
+        $user->role_id = $role->id;
         $user->save();
     }
 
