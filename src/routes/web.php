@@ -14,8 +14,8 @@ Route::middleware(['web', 'auth', 'core'])
                         Route::get('exportExcel', 'RoleTableController@exportExcel')
                             ->name('exportExcel');
 
-                        Route::get('getOptionsList', 'RoleSelectController@getOptionsList')
-                            ->name('getOptionsList');
+                        Route::get('getOptionList', 'RoleSelectController@getOptionList')
+                            ->name('getOptionList');
 
                         Route::get('getPermissions/{role}', 'RolePermissionController@index')
                             ->name('getPermissions');
