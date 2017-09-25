@@ -7,44 +7,30 @@ use Illuminate\Foundation\Testing\DatabaseMigrations;
 use LaravelEnso\MenuManager\app\Models\Menu;
 use LaravelEnso\RoleManager\app\Models\Role;
 use LaravelEnso\TestHelper\app\Classes\TestHelper;
+use LaravelEnso\TestHelper\app\Classes\Traits\TestCreateForm;
+use LaravelEnso\TestHelper\app\Classes\Traits\TestDataTable;
 
 class RoleTest extends TestHelper
 {
-    use DatabaseMigrations;
+    use DatabaseMigrations, TestDataTable, TestCreateForm;
 
     private $faker;
+    private $prefix = 'system.roles';
 
     protected function setUp()
     {
         parent::setUp();
 
-        // $this->disableExceptionHandling();
+        $this->disableExceptionHandling();
         $this->faker = Factory::create();
         $this->signIn(User::first());
-    }
-
-    /** @test */
-    public function index()
-    {
-        $this->get('/system/roles')
-            ->assertStatus(200)
-            ->assertViewIs('laravel-enso/rolemanager::index');
-    }
-
-    /** @test */
-    public function create()
-    {
-        $this->get('/system/roles/create')
-            ->assertStatus(200)
-            ->assertViewIs('laravel-enso/rolemanager::create')
-            ->assertViewHas('form');
     }
 
     /** @test */
     public function store()
     {
         $postParams = $this->postParams();
-        $response = $this->post('/system/roles', $postParams);
+        $response = $this->post(route('system.roles.store', $postParams, false));
 
         $role = Role::whereName($postParams['name'])->first();
 
@@ -60,12 +46,10 @@ class RoleTest extends TestHelper
     {
         $role = Role::first();
 
-        $response = $this->get('/system/roles/'.$role->id.'/edit');
+        $response = $this->get(route('system.roles.edit', $role->id, false));
 
         $response->assertStatus(200)
-            ->assertViewHas('role', $role)
-            ->assertViewIs('laravel-enso/rolemanager::edit')
-            ->assertViewHas('form');
+            ->assertJsonStructure(['form']);
     }
 
     /** @test */
@@ -73,13 +57,13 @@ class RoleTest extends TestHelper
     {
         $role = Role::create($this->postParams());
         $role->name = 'edited';
-        $data = $role->toArray();
 
-        $this->patch('/system/roles/'.$role->id, $data)
+
+        $this->patch(route('system.roles.update', $role->id, false), $role->toArray())
             ->assertStatus(200)
-            ->assertJson(['message' => __(config('labels.savedChanges'))]);
+            ->assertJson(['message' => __(config('enso.labels.savedChanges'))]);
 
-        $this->assertEquals('edited', Role::whereId($role->id)->first(['name'])->name);
+        $this->assertEquals('edited', $role->fresh()->name);
     }
 
     /** @test */
@@ -87,11 +71,11 @@ class RoleTest extends TestHelper
     {
         $role = Role::create($this->postParams());
 
-        $this->delete('/system/roles/'.$role->id)
+        $this->delete(route('system.roles.destroy', $role->id, false))
             ->assertStatus(200)
             ->assertJsonFragment(['message']);
 
-        $this->assertNull(Role::whereName($role->name)->first());
+        $this->assertNull($role->fresh());
     }
 
     /** @test */
@@ -100,11 +84,13 @@ class RoleTest extends TestHelper
         $role = Role::create($this->postParams());
         $this->createUser($role);
 
-        $this->delete('/system/roles/'.$role->id)
-            ->assertStatus(302)
-            ->assertSessionHas('flash_notification');
+        $this->expectException(EnsoException::class);
 
-        $this->assertNotNull(Role::whereId($role->id)->first());
+        $this->delete(route('system.roles.destroy', $role->id, false))
+            ->assertStatus(302)
+            ->assertJson(['message']);
+
+        $this->assertNotNull($role->fresh());
     }
 
     private function createUser($role)

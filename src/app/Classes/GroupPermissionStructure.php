@@ -14,11 +14,12 @@ class GroupPermissionStructure
     {
         $this->groups = $groups;
         $this->structure = new Object();
-        $this->build();
     }
 
     public function get()
     {
+        $this->build();
+
         return $this->structure;
     }
 

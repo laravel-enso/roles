@@ -1,19 +1,14 @@
 {
     "title": null,
-    "action": null,
-    "url": null,
+    "method": null,
     "icon": "fa fa-universal-access",
-    "wrapperClass": "col-md-6",
-    "theme": "success",
-    "solid": false,
-    "submitStore": "Create",
-    "submitUpdate": "Save",
-    "submitDelete": "Delete",
-    "attributes": [{
+    "columns": "1",
+    "prefix": "system.roles",
+    "fields": [{
         "label": "Name",
         "column": "name",
         "value": null,
-        "config": {
+        "meta": {
             "type": "input",
             "content": "text"
         }
@@ -21,7 +16,7 @@
         "label": "Display Name",
         "column": "display_name",
         "value": null,
-        "config": {
+        "meta": {
             "type": "input",
             "content": "text"
         }
@@ -29,7 +24,7 @@
         "label": "Description",
         "column": "description",
         "value": null,
-        "config": {
+        "meta": {
             "type": "input",
             "content": "text"
         }
@@ -37,7 +32,7 @@
         "label": "Default Menu",
         "column": "menu_id",
         "value": null,
-        "config": {
+        "meta": {
             "type": "select",
             "multiple": false,
             "options": null

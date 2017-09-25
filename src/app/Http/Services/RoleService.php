@@ -10,29 +10,21 @@ use LaravelEnso\RoleManager\app\Models\Role;
 
 class RoleService
 {
-    private $request;
-
-    public function __construct(Request $request)
-    {
-        $this->request = $request;
-    }
-
     public function create()
     {
-        $form = (new FormBuilder(__DIR__.'/../../Forms/role.json'))
-            ->setAction('POST')
+        $form = (new FormBuilder(__DIR__ . '/../../Forms/role.json'))
+            ->setMethod('POST')
             ->setTitle('Create Role')
-            ->setUrl('/system/roles')
             ->setSelectOptions('menu_id', Menu::isNotParent()->pluck('name', 'id'))
             ->getData();
 
-        return view('laravel-enso/rolemanager::create', compact('form'));
+        return compact('form');
     }
 
-    public function store(Role $role)
+    public function store(Request $request, Role $role)
     {
-        \DB::transaction(function () use (&$role) {
-            $role = $role->create($this->request->all());
+        \DB::transaction(function () use ($request, &$role) {
+            $role        = $role->create($request->all());
             $permissions = Permission::implicit()->pluck('id');
             $role->permissions()->attach($permissions);
             $role->menus()->attach($role->menu_id);
@@ -40,29 +32,28 @@ class RoleService
 
         return [
             'message'  => __('The role was created!'),
-            'redirect' => '/system/roles/'.$role->id.'/edit',
+            'redirect' => route('system.roles.edit', $role->id, false),
         ];
     }
 
     public function edit(Role $role)
     {
-        $form = (new FormBuilder(__DIR__.'/../../Forms/role.json', $role))
-            ->setAction('PATCH')
+        $form = (new FormBuilder(__DIR__ . '/../../Forms/role.json', $role))
+            ->setMethod('PATCH')
             ->setTitle('Edit role')
-            ->setUrl('/system/roles/'.$role->id)
             ->setSelectOptions('menu_id', Menu::isNotParent()->pluck('name', 'id'))
             ->getData();
 
-        return view('laravel-enso/rolemanager::edit', compact('form', 'role'));
+        return compact('form', 'role');
     }
 
-    public function update(Role $role)
+    public function update(Request $request, Role $role)
     {
-        $role->update($this->request->all());
+        $role->update($request->all());
         $role->save();
 
         return [
-            'message' => __(config('labels.savedChanges')),
+            'message' => __(config('enso.labels.savedChanges')),
         ];
     }
 
@@ -74,6 +65,9 @@ class RoleService
 
         $role->delete();
 
-        return ['message' => __(config('labels.successfulOperation'))];
+        return [
+            'message'  => __(config('enso.labels.successfulOperation')),
+            'redirect' => route('system.roles.index', [], false)
+        ];
     }
 }

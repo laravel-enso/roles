@@ -32,6 +32,7 @@ class RolePermissionService
             'roleMenus'       => $role->menus->pluck('id'),
             'rolePermissions' => $role->permissions->pluck('id'),
             'permissions'     => $permissions,
+            'role' => $role
         ];
     }
 
@@ -43,6 +44,6 @@ class RolePermissionService
             $role->permissions()->sync(request()->rolePermissions);
         });
 
-        return ['message' => __(config('labels.successfulOperation'))];
+        return ['message' => __(config('enso.labels.successfulOperation'))];
     }
 }

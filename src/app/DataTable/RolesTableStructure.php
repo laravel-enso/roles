@@ -9,13 +9,19 @@ class RolesTableStructure extends TableStructure
     public function __construct()
     {
         $this->data = [
-            'tableName'     => __('Roles'),
-            'crtNo'         => __('#'),
-            'actionButtons' => __('Actions'),
-            'notSearchable' => [3, 4],
-            'headerAlign'   => 'center',
-            'bodyAlign'     => 'center',
-            'columns'       => [
+            'name'                => __('Roles'),
+            'icon'                => 'fa fa-universal-access',
+            'crtNo'               => __('#'),
+            'actions'             => __('Actions'),
+            'actionButtons'       => ['edit', 'destroy'],
+            'customActionButtons' => [
+                ['icon' => 'fa fa-sliders', 'class' => 'is-info', 'event' => 'configure-role', 'route' => 'system.roles.getPermissions'],
+            ],
+            'headerButtons'       => ['create', 'exportExcel'],
+            'notSearchable'       => [3, 4],
+            'headerAlign'         => 'center',
+            'bodyAlign'           => 'center',
+            'columns'             => [
                 0 => [
                     'label' => __('Name'),
                     'data'  => 'name',

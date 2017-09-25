@@ -4,59 +4,41 @@ namespace LaravelEnso\RoleManager\app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use LaravelEnso\DataTable\app\Traits\DataTable;
-use LaravelEnso\RoleManager\app\DataTable\RolesTableStructure;
 use LaravelEnso\RoleManager\app\Http\Requests\ValidateRoleRequest;
 use LaravelEnso\RoleManager\app\Http\Services\RoleService;
 use LaravelEnso\RoleManager\app\Models\Role;
-use LaravelEnso\Select\app\Traits\SelectListBuilder;
 
 class RoleController extends Controller
 {
-    use DataTable, SelectListBuilder;
+    private $service;
 
-    private $roles;
-
-    protected $selectSourceClass = Role::class;
-    protected $tableStructureClass = RolesTableStructure::class;
-
-    public function __construct(Request $request)
+    public function __construct(RoleService $service)
     {
-        $this->roles = new RoleService($request);
-    }
-
-    public function getTableQuery()
-    {
-        return $this->roles->getTableQuery();
-    }
-
-    public function index()
-    {
-        return view('laravel-enso/rolemanager::index');
+        $this->service = $service;
     }
 
     public function create()
     {
-        return $this->roles->create();
+        return $this->service->create();
     }
 
     public function store(ValidateRoleRequest $request, Role $role)
     {
-        return $this->roles->store($role);
+        return $this->service->store($request, $role);
     }
 
     public function edit(Role $role)
     {
-        return $this->roles->edit($role);
+        return $this->service->edit($role);
     }
 
     public function update(ValidateRoleRequest $request, Role $role)
     {
-        return $this->roles->update($role);
+        return $this->service->update($request, $role);
     }
 
     public function destroy(Role $role)
     {
-        return $this->roles->destroy($role);
+        return $this->service->destroy($role);
     }
 }
