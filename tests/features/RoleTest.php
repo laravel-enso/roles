@@ -58,7 +58,6 @@ class RoleTest extends TestHelper
         $role = Role::create($this->postParams());
         $role->name = 'edited';
 
-
         $this->patch(route('system.roles.update', $role->id, false), $role->toArray())
             ->assertStatus(200)
             ->assertJson(['message' => __(config('enso.labels.savedChanges'))]);
