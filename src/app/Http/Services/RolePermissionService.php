@@ -32,7 +32,7 @@ class RolePermissionService
             'roleMenus'       => $role->menus->pluck('id'),
             'rolePermissions' => $role->permissions->pluck('id'),
             'permissions'     => $permissions,
-            'role' => $role
+            'role'            => $role,
         ];
     }
 
