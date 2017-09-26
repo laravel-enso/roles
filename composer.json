@@ -41,7 +41,7 @@
     "extra": {
         "laravel": {
             "providers": [
-                "LaravelEnso\\RolesServiceProvider"
+                "LaravelEnso\\RoleManager\\RolesServiceProvider"
             ],
             "aliases": {}
         }
