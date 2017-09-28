@@ -3,16 +3,17 @@
 use App\Owner;
 use App\User;
 use Faker\Factory;
-use Illuminate\Foundation\Testing\DatabaseMigrations;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use LaravelEnso\MenuManager\app\Models\Menu;
 use LaravelEnso\RoleManager\app\Models\Role;
-use LaravelEnso\TestHelper\app\Classes\TestHelper;
+use LaravelEnso\TestHelper\app\Traits\SignIn;
 use LaravelEnso\TestHelper\app\Traits\TestCreateForm;
 use LaravelEnso\TestHelper\app\Traits\TestDataTable;
+use Tests\TestCase;
 
-class RoleTest extends TestHelper
+class RoleTest extends TestCase
 {
-    use DatabaseMigrations, TestDataTable, TestCreateForm;
+    use RefreshDatabase, SignIn, TestDataTable, TestCreateForm;
 
     private $faker;
     private $prefix = 'system.roles';
@@ -21,7 +22,7 @@ class RoleTest extends TestHelper
     {
         parent::setUp();
 
-        $this->disableExceptionHandling();
+        // $this->withoutExceptionHandling();
         $this->faker = Factory::create();
         $this->signIn(User::first());
     }
@@ -30,14 +31,14 @@ class RoleTest extends TestHelper
     public function store()
     {
         $postParams = $this->postParams();
-        $response = $this->post(route('system.roles.store', $postParams, false));
+        $response   = $this->post(route('system.roles.store', $postParams, false));
 
         $role = Role::whereName($postParams['name'])->first();
 
         $response->assertStatus(200)
             ->assertJsonFragment([
                 'message'  => 'The role was created!',
-                'redirect' => '/system/roles/'.$role->id.'/edit',
+                'redirect' => '/system/roles/' . $role->id . '/edit',
             ]);
     }
 
@@ -55,7 +56,7 @@ class RoleTest extends TestHelper
     /** @test */
     public function update()
     {
-        $role = Role::create($this->postParams());
+        $role       = Role::create($this->postParams());
         $role->name = 'edited';
 
         $this->patch(route('system.roles.update', $role->id, false), $role->toArray())
@@ -83,11 +84,8 @@ class RoleTest extends TestHelper
         $role = Role::create($this->postParams());
         $this->createUser($role);
 
-        $this->expectException(EnsoException::class);
-
         $this->delete(route('system.roles.destroy', $role->id, false))
-            ->assertStatus(302)
-            ->assertJson(['message']);
+            ->assertStatus(409);
 
         $this->assertNotNull($role->fresh());
     }
@@ -100,9 +98,9 @@ class RoleTest extends TestHelper
             'phone'      => $this->faker->phoneNumber,
             'is_active'  => 1,
         ]);
-        $user->email = $this->faker->email;
+        $user->email    = $this->faker->email;
         $user->owner_id = Owner::first(['id'])->id;
-        $user->role_id = $role->id;
+        $user->role_id  = $role->id;
         $user->save();
     }
 

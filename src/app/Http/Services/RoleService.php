@@ -7,6 +7,7 @@ use LaravelEnso\FormBuilder\app\Classes\FormBuilder;
 use LaravelEnso\MenuManager\app\Models\Menu;
 use LaravelEnso\PermissionManager\app\Models\Permission;
 use LaravelEnso\RoleManager\app\Models\Role;
+use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class RoleService
 {
@@ -60,7 +61,7 @@ class RoleService
     public function destroy(Role $role)
     {
         if ($role->users->count()) {
-            throw new \EnsoException(__('Operation failed because the role is in use'));
+            throw new ConflictHttpException(__('Operation failed because the role is in use'));
         }
 
         $role->delete();
