@@ -5,7 +5,7 @@ import { Configure } from './roles/configure';
 
 export const Roles = {
     path: 'roles',
-    component: require('../../components/enso/layout/Router.vue'),
+    component: require('../../../pages/enso/layout/Router.vue'),
     meta: {
         breadcrumb: 'roles',
         route: 'system.roles.index',

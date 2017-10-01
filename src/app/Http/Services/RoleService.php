@@ -11,9 +11,11 @@ use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class RoleService
 {
+    const FormPath = __DIR__ . '/../../Forms/role.json';
+
     public function create()
     {
-        $form = (new FormBuilder(__DIR__.'/../../Forms/role.json'))
+        $form = (new FormBuilder(self::FormPath))
             ->setMethod('POST')
             ->setTitle('Create Role')
             ->setSelectOptions('menu_id', Menu::isNotParent()->pluck('name', 'id'))
@@ -25,7 +27,7 @@ class RoleService
     public function store(Request $request, Role $role)
     {
         \DB::transaction(function () use ($request, &$role) {
-            $role = $role->create($request->all());
+            $role        = $role->create($request->all());
             $permissions = Permission::implicit()->pluck('id');
             $role->permissions()->attach($permissions);
             $role->menus()->attach($role->menu_id);
@@ -33,13 +35,14 @@ class RoleService
 
         return [
             'message'  => __('The role was created!'),
-            'redirect' => route('system.roles.edit', $role->id, false),
+            'redirect' => 'system.roles.edit',
+            'id'       => $role->id,
         ];
     }
 
     public function edit(Role $role)
     {
-        $form = (new FormBuilder(__DIR__.'/../../Forms/role.json', $role))
+        $form = (new FormBuilder(self::FormPath, $role))
             ->setMethod('PATCH')
             ->setTitle('Edit role')
             ->setSelectOptions('menu_id', Menu::isNotParent()->pluck('name', 'id'))
@@ -68,7 +71,7 @@ class RoleService
 
         return [
             'message'  => __(config('enso.labels.successfulOperation')),
-            'redirect' => route('system.roles.index', [], false),
+            'redirect' => 'system.roles.index',
         ];
     }
 }

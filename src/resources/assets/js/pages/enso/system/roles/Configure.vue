@@ -33,7 +33,7 @@
 
 <script>
 
-	import CheckboxManager from '../../../components/enso/rolemanager/CheckboxManager.vue';
+	import CheckboxManager from '../../../../components/enso/rolemanager/CheckboxManager.vue';
     import { mapGetters } from 'vuex';
 
     export default {
