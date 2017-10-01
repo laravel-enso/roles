@@ -31,7 +31,7 @@ class RoleTest extends TestCase
     public function store()
     {
         $postParams = $this->postParams();
-        $response   = $this->post(route('system.roles.store', $postParams, false));
+        $response = $this->post(route('system.roles.store', $postParams, false));
 
         $role = Role::whereName($postParams['name'])->first();
 
@@ -57,7 +57,7 @@ class RoleTest extends TestCase
     /** @test */
     public function update()
     {
-        $role       = Role::create($this->postParams());
+        $role = Role::create($this->postParams());
         $role->name = 'edited';
 
         $this->patch(route('system.roles.update', $role->id, false), $role->toArray())
@@ -99,9 +99,9 @@ class RoleTest extends TestCase
             'phone'      => $this->faker->phoneNumber,
             'is_active'  => 1,
         ]);
-        $user->email    = $this->faker->email;
+        $user->email = $this->faker->email;
         $user->owner_id = Owner::first(['id'])->id;
-        $user->role_id  = $role->id;
+        $user->role_id = $role->id;
         $user->save();
     }
 

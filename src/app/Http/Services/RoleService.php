@@ -11,7 +11,7 @@ use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class RoleService
 {
-    const FormPath = __DIR__ . '/../../Forms/role.json';
+    const FormPath = __DIR__.'/../../Forms/role.json';
 
     public function create()
     {
@@ -27,7 +27,7 @@ class RoleService
     public function store(Request $request, Role $role)
     {
         \DB::transaction(function () use ($request, &$role) {
-            $role        = $role->create($request->all());
+            $role = $role->create($request->all());
             $permissions = Permission::implicit()->pluck('id');
             $role->permissions()->attach($permissions);
             $role->menus()->attach($role->menu_id);
