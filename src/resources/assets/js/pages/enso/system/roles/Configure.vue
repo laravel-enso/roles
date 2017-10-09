@@ -64,6 +64,8 @@
                 axios.get(route('system.roles.getPermissions', this.roleId, false)).then(response => {
                     this.setData(response);
                     this.initialised = true;
+                }).catch(error => {
+                    this.handleError(error);
                 });
             },
             setData(response) {
@@ -76,6 +78,8 @@
             update() {
                 axios.post(route('system.roles.setPermissions', [], false), this.postParams()).then((response) => {
                     toastr.success(response.data.message);
+                }).catch(error => {
+                    this.handleError(error);
                 });
             },
             postParams() {
