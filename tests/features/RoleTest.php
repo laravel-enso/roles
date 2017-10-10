@@ -101,8 +101,7 @@ class RoleTest extends TestHelper
         $this->createUser($role);
 
         $this->delete('/system/roles/'.$role->id)
-            ->assertStatus(302)
-            ->assertSessionHas('flash_notification');
+            ->assertStatus(455);
 
         $this->assertNotNull(Role::whereId($role->id)->first());
     }
