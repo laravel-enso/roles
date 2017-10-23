@@ -16,18 +16,30 @@ Role Manager dependency for [Laravel Enso](https://github.com/laravel-enso/Enso)
 ### Details
 
 - manages roles for the users of the application
-- uses VueJS components that allow for a visual and intuitive update of permissions for a certain role
+- uses a hierarchical organization of permissions, which allow for a visual and intuitive update of permissions for a certain role
 - comes by default with the `Administrator` and `Supervisor` roles
 
 ### Publishes
 
-- `php artisan vendor:publish --tag=roles-components` - the VueJS components
-- `php artisan vendor:publish --tag=enso-update` - a common alias for when wanting to update the VueJS components,
-once a newer version is released
+- `php artisan vendor:publish --tag=vue-components` - the VueJS components and pages
+- `php artisan vendor:publish --tag=roles-assets` - the pages
+- `php artisan vendor:publish --tag=enso-assets` - a common alias for when wanting to update the VueJS assets,
+once a newer version is released, can be used with the `--force` flag
 
 ### Notes
 
 The [Laravel Enso Core](https://github.com/laravel-enso/Core) package comes with this package included.
+
+Depends on:
+ - [Datatable](https://github.com/laravel-enso/Datatable) for displaying the list of roles
+ - [DbSyncMigrations](https://github.com/laravel-enso/DbSyncMigrations) for offering the possibility to generate migrations for the changes you make locally
+ - [FormBuilder](https://github.com/laravel-enso/FormBuilder) for creating the forms when managing languages
+ - [Helpers](https://github.com/laravel-enso/Helpers) for utility classes and traits
+ - [MenuManager](https://github.com/laravel-enso/MenuManager) for managing permissions with the menus 
+ - [PermissionManager](https://github.com/laravel-enso/PermissionManager) for the integration with permissions 
+ - [Select](https://github.com/laravel-enso/Select) for the select list builder features  
+ - [Structure manager](https://github.com/laravel-enso/StructureManager) for the migrations
+
 
 <!--h-->
 ### Contributions
