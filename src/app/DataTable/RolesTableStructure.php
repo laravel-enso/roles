@@ -17,11 +17,11 @@ class RolesTableStructure extends TableStructure
             'customActionButtons' => [
                 ['icon' => 'fa fa-sliders', 'class' => 'is-info', 'event' => 'configure-role', 'route' => 'system.roles.getPermissions'],
             ],
-            'headerButtons'       => ['create', 'exportExcel'],
-            'notSearchable'       => [3, 4],
-            'headerAlign'         => 'center',
-            'bodyAlign'           => 'center',
-            'columns'             => [
+            'headerButtons' => ['create', 'exportExcel'],
+            'notSearchable' => [3, 4],
+            'headerAlign'   => 'center',
+            'bodyAlign'     => 'center',
+            'columns'       => [
                 0 => [
                     'label' => __('Name'),
                     'data'  => 'name',
