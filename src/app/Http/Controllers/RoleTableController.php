@@ -4,14 +4,14 @@ namespace LaravelEnso\RoleManager\app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use LaravelEnso\RoleManager\app\Models\Role;
-use LaravelEnso\VueDatatable\app\Traits\Excel;
 use LaravelEnso\VueDatatable\app\Traits\Datatable;
+use LaravelEnso\VueDatatable\app\Traits\Excel;
 
 class RoleTableController extends Controller
 {
     use Datatable, Excel;
 
-    private const Template = __DIR__ . '/../../Tables/roles.json';
+    private const Template = __DIR__.'/../../Tables/roles.json';
 
     public function query()
     {
