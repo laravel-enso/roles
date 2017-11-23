@@ -1,0 +1,50 @@
+{
+    "routePrefix": "system.roles",
+    "readSuffix": "getTableData",
+    "writeSuffix": null,
+    "name": "Roles",
+    "icon": "fa fa-universal-access",
+    "crtNo": true,
+    "buttons": [
+        "create",
+        {
+            "type": "row",
+            "icon": "fa fa-sliders",
+            "class": "is-info",
+            "routeSuffix": "getPermissions",
+            "event": "configure-role"
+        },
+        "edit", "destroy", "excel"
+    ],
+    "columns": [
+        {
+            "label": "Name",
+            "name": "name",
+            "meta": ["searchable","sortable"]
+        },
+        {
+            "label": "Display Name",
+            "name": "display_name",
+            "meta": ["searchable","sortable"]
+        },
+        {
+            "label": "Description",
+            "name": "description",
+            "meta": ["searchable","sortable"]
+        },
+        {
+            "label": "Created At",
+            "name": "created_at",
+            "meta": [
+                "sortable"
+            ]
+        },
+        {
+            "label": "Updated At",
+            "name": "updated_at",
+            "meta": [
+                "sortable"
+            ]
+        }
+    ]
+}

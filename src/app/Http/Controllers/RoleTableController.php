@@ -3,21 +3,21 @@
 namespace LaravelEnso\RoleManager\app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use LaravelEnso\DataTable\app\Traits\DataTable;
-use LaravelEnso\RoleManager\app\DataTable\RolesTableStructure;
 use LaravelEnso\RoleManager\app\Models\Role;
+use LaravelEnso\VueDatatable\app\Traits\Excel;
+use LaravelEnso\VueDatatable\app\Traits\Datatable;
 
 class RoleTableController extends Controller
 {
-    use DataTable;
+    use Datatable, Excel;
 
-    protected $tableStructureClass = RolesTableStructure::class;
+    private const Template = __DIR__ . '/../../Tables/roles.json';
 
-    public function getTableQuery()
+    public function query()
     {
-        return Role::select(\DB::raw('roles.id as DT_RowId, roles.name,
-            roles.display_name, roles.description, roles.created_at, roles.updated_at,
-            roles.menu_id')
-        );
+        return Role::select(\DB::raw(
+            'roles.id as dtRowId, roles.name, roles.display_name, roles.description,
+            roles.created_at, roles.updated_at, roles.menu_id'
+        ));
     }
 }

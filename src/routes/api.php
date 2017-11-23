@@ -6,11 +6,11 @@ Route::middleware(['web', 'auth', 'core'])
     ->group(function () {
         Route::prefix('roles')->as('roles.')
             ->group(function () {
-                Route::get('initTable', 'RoleTableController@initTable')
+                Route::get('initTable', 'RoleTableController@init')
                     ->name('initTable');
-                Route::get('getTableData', 'RoleTableController@getTableData')
+                Route::get('getTableData', 'RoleTableController@data')
                     ->name('getTableData');
-                Route::get('exportExcel', 'RoleTableController@exportExcel')
+                Route::get('exportExcel', 'RoleTableController@excel')
                     ->name('exportExcel');
 
                 Route::get('getOptionList', 'RoleSelectController@getOptionList')
