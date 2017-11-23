@@ -10,8 +10,8 @@
 
 <script>
 
-    import { mapGetters } from 'vuex';
-    import VueTable from '../../../../components/enso/vue-datatable/VueTable.vue';
+import { mapGetters } from 'vuex';
+import VueTable from '../../../../components/enso/vue-datatable/VueTable.vue';
 
 export default {
     components: { VueTable },
@@ -25,6 +25,6 @@ export default {
             path: route('system.roles.initTable', [], false),
         };
     },
-    }
+}
 
 </script>
