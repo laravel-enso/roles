@@ -2,12 +2,12 @@
 
 namespace LaravelEnso\RoleManager\app\Models;
 
-use App\Owner;
 use App\User;
+use App\Owner;
 use Illuminate\Database\Eloquent\Model;
-use LaravelEnso\DbSyncMigrations\app\Traits\DbSyncMigrations;
 use LaravelEnso\MenuManager\app\Models\Menu;
 use LaravelEnso\PermissionManager\app\Models\Permission;
+use LaravelEnso\DbSyncMigrations\app\Traits\DbSyncMigrations;
 
 class Role extends Model
 {

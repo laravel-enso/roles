@@ -3,10 +3,10 @@
 namespace LaravelEnso\RoleManager\app\Http\Services;
 
 use Illuminate\Http\Request;
-use LaravelEnso\FormBuilder\app\Classes\FormBuilder;
 use LaravelEnso\MenuManager\app\Models\Menu;
-use LaravelEnso\PermissionManager\app\Models\Permission;
 use LaravelEnso\RoleManager\app\Models\Role;
+use LaravelEnso\FormBuilder\app\Classes\FormBuilder;
+use LaravelEnso\PermissionManager\app\Models\Permission;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class RoleService
@@ -34,9 +34,9 @@ class RoleService
         });
 
         return [
-            'message'  => __('The role was created!'),
+            'message' => __('The role was created!'),
             'redirect' => 'system.roles.edit',
-            'id'       => $role->id,
+            'id' => $role->id,
         ];
     }
 
@@ -70,7 +70,7 @@ class RoleService
         $role->delete();
 
         return [
-            'message'  => __(config('enso.labels.successfulOperation')),
+            'message' => __(config('enso.labels.successfulOperation')),
             'redirect' => 'system.roles.index',
         ];
     }

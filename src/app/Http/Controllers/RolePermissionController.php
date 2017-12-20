@@ -2,10 +2,10 @@
 
 namespace LaravelEnso\RoleManager\app\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
-use LaravelEnso\RoleManager\app\Http\Services\RolePermissionService;
+use App\Http\Controllers\Controller;
 use LaravelEnso\RoleManager\app\Models\Role;
+use LaravelEnso\RoleManager\app\Http\Services\RolePermissionService;
 
 class RolePermissionController extends Controller
 {

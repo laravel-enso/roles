@@ -4,8 +4,8 @@ namespace LaravelEnso\RoleManager\app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use LaravelEnso\RoleManager\app\Models\Role;
-use LaravelEnso\VueDatatable\app\Traits\Datatable;
 use LaravelEnso\VueDatatable\app\Traits\Excel;
+use LaravelEnso\VueDatatable\app\Traits\Datatable;
 
 class RoleTableController extends Controller
 {

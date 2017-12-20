@@ -3,9 +3,9 @@
 namespace LaravelEnso\RoleManager\app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
-use LaravelEnso\RoleManager\app\Http\Requests\ValidateRoleRequest;
-use LaravelEnso\RoleManager\app\Http\Services\RoleService;
 use LaravelEnso\RoleManager\app\Models\Role;
+use LaravelEnso\RoleManager\app\Http\Services\RoleService;
+use LaravelEnso\RoleManager\app\Http\Requests\ValidateRoleRequest;
 
 class RoleController extends Controller
 {
