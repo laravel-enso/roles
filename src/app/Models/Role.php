@@ -6,13 +6,12 @@ use App\Owner;
 use App\User;
 use Illuminate\Database\Eloquent\Model;
 use LaravelEnso\DbSyncMigrations\app\Traits\DbSyncMigrations;
-use LaravelEnso\Helpers\Traits\FormattedTimestamps;
 use LaravelEnso\MenuManager\app\Models\Menu;
 use LaravelEnso\PermissionManager\app\Models\Permission;
 
 class Role extends Model
 {
-    use FormattedTimestamps, DbSyncMigrations;
+    use DbSyncMigrations;
 
     protected $fillable = ['name', 'display_name', 'description', 'menu_id'];
 
