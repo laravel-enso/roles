@@ -5,7 +5,7 @@ namespace LaravelEnso\RoleManager\app\Http\Services;
 use Illuminate\Http\Request;
 use LaravelEnso\MenuManager\app\Models\Menu;
 use LaravelEnso\RoleManager\app\Models\Role;
-use LaravelEnso\FormBuilder\app\Classes\FormBuilder;
+use LaravelEnso\FormBuilder\app\Classes\Form;
 use LaravelEnso\PermissionManager\app\Models\Permission;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
@@ -15,11 +15,10 @@ class RoleService
 
     public function create()
     {
-        $form = (new FormBuilder(self::FormPath))
-            ->setMethod('POST')
-            ->setTitle('Create Role')
-            ->setSelectOptions('menu_id', Menu::isNotParent()->pluck('name', 'id'))
-            ->getData();
+        $form = (new Form(self::FormPath))
+            ->create()
+            ->options('menu_id', Menu::isNotParent()->pluck('name', 'id'))
+            ->get();
 
         return compact('form');
     }
@@ -42,11 +41,10 @@ class RoleService
 
     public function edit(Role $role)
     {
-        $form = (new FormBuilder(self::FormPath, $role))
-            ->setMethod('PATCH')
-            ->setTitle('Edit role')
-            ->setSelectOptions('menu_id', Menu::isNotParent()->pluck('name', 'id'))
-            ->getData();
+        $form = (new Form(self::FormPath))
+            ->edit($role)
+            ->options('menu_id', Menu::isNotParent()->pluck('name', 'id'))
+            ->get();
 
         return compact('form', 'role');
     }
