@@ -6,7 +6,7 @@
     "icon": "fa fa-universal-access",
     "crtNo": true,
     "buttons": [
-        "create",
+        "excel", "create",
         {
             "type": "row",
             "icon": "fa fa-sliders",
@@ -14,7 +14,7 @@
             "routeSuffix": "getPermissions",
             "event": "configure-role"
         },
-        "edit", "destroy", "excel"
+        "edit", "destroy"
     ],
     "columns": [
         {
