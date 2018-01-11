@@ -1,4 +1,4 @@
-import RoleIndex from '../../../../pages/enso/system/roles/Index.vue';
+const RoleIndex = () => import('../../../pages/system/roles/Index.vue');
 
 export default {
     name: 'system.roles.index',

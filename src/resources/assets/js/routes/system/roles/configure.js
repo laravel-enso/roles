@@ -1,4 +1,4 @@
-import RoleConfigure from '../../../../pages/enso/system/roles/Configure.vue';
+const RoleConfigure = () => import('../../../pages/system/roles/Configure.vue');
 
 export default {
     name: 'system.roles.configure',

@@ -1,4 +1,4 @@
-import RoleEdit from '../../../../pages/enso/system/roles/Edit.vue';
+const RoleEdit = () => import('../../../pages/system/roles/Edit.vue');
 
 export default {
     name: 'system.roles.edit',
