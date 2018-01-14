@@ -17,8 +17,7 @@ class InsertDefaultRoles extends Migration
             $menus = Menu::pluck('id');
 
             foreach ($roles as $role) {
-                $role = new Role($role);
-                $role->save();
+                $role = Role::create($role);
                 $role->menus()->sync($menus);
             }
         });

@@ -13,8 +13,7 @@ class SetDefaultMenuForRoles extends Migration
 
         \DB::transaction(function () use ($roles, $menu) {
             $roles->each(function ($role) use ($menu) {
-                $role->menu_id = $menu->id;
-                $role->save();
+                $role->update(['menu_id' => $menu->id]);
             });
         });
     }
@@ -24,8 +23,7 @@ class SetDefaultMenuForRoles extends Migration
         $roles = Role::all();
 
         $roles->each(function ($role) {
-            $role->menu_id = null;
-            $role->save();
+            $role->update(['menu_id' => null]);
         });
     }
 }

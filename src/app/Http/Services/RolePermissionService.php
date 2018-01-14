@@ -10,13 +10,6 @@ use LaravelEnso\RoleManager\app\Classes\GroupPermissionStructure;
 
 class RolePermissionService
 {
-    private $request;
-
-    public function __construct(Request $request)
-    {
-        $this->request = $request;
-    }
-
     public function index(Role $role)
     {
         $groups = PermissionGroup::with([
@@ -36,12 +29,12 @@ class RolePermissionService
         ];
     }
 
-    public function update()
+    public function update(Request $request)
     {
-        \DB::transaction(function () {
-            $role = Role::find(request()->role_id);
-            $role->menus()->sync(request()->roleMenus);
-            $role->permissions()->sync(request()->rolePermissions);
+        \DB::transaction(function () use ($request) {
+            $role = Role::find($request->get('role_id'));
+            $role->menus()->sync($request->get('roleMenus'));
+            $role->permissions()->sync($request->get('rolePermissions'));
         });
 
         return ['message' => __(config('enso.labels.successfulOperation'))];

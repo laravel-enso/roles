@@ -9,20 +9,13 @@ use LaravelEnso\RoleManager\app\Http\Services\RolePermissionService;
 
 class RolePermissionController extends Controller
 {
-    private $service;
-
-    public function __construct(Request $request)
+    public function index(Role $role, RolePermissionService $service)
     {
-        $this->service = new RolePermissionService($request);
+        return $service->index($role);
     }
 
-    public function index(Role $role)
+    public function update(Request $request, RolePermissionService $service)
     {
-        return $this->service->index($role);
-    }
-
-    public function update()
-    {
-        return $this->service->update();
+        return $service->update($request);
     }
 }

@@ -9,35 +9,28 @@ use LaravelEnso\RoleManager\app\Http\Requests\ValidateRoleRequest;
 
 class RoleController extends Controller
 {
-    private $service;
-
-    public function __construct(RoleService $service)
+    public function create(RoleService $service)
     {
-        $this->service = $service;
+        return $service->create();
     }
 
-    public function create()
+    public function store(ValidateRoleRequest $request, Role $role, RoleService $service)
     {
-        return $this->service->create();
+        return $service->store($request, $role);
     }
 
-    public function store(ValidateRoleRequest $request, Role $role)
+    public function edit(Role $role, RoleService $service)
     {
-        return $this->service->store($request, $role);
+        return $service->edit($role);
     }
 
-    public function edit(Role $role)
+    public function update(ValidateRoleRequest $request, Role $role, RoleService $service)
     {
-        return $this->service->edit($role);
+        return $service->update($request, $role);
     }
 
-    public function update(ValidateRoleRequest $request, Role $role)
+    public function destroy(Role $role, RoleService $service)
     {
-        return $this->service->update($request, $role);
-    }
-
-    public function destroy(Role $role)
-    {
-        return $this->service->destroy($role);
+        return $service->destroy($role);
     }
 }
