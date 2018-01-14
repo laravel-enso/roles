@@ -3,7 +3,7 @@
 namespace LaravelEnso\RoleManager\app\Classes;
 
 use Illuminate\Support\Collection;
-use LaravelEnso\Helpers\Classes\Obj;
+use LaravelEnso\Helpers\app\Classes\Obj;
 
 class GroupPermissionStructure
 {
