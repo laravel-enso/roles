@@ -3,7 +3,7 @@
 namespace LaravelEnso\RoleManager\app\Classes;
 
 use Illuminate\Support\Collection;
-use LaravelEnso\Helpers\Classes\Object;
+use LaravelEnso\Helpers\Classes\Obj;
 
 class GroupPermissionStructure
 {
@@ -13,7 +13,7 @@ class GroupPermissionStructure
     public function __construct(Collection $groups)
     {
         $this->groups = $groups;
-        $this->structure = new Object();
+        $this->structure = new Obj();
         $this->build();
     }
 
@@ -37,7 +37,7 @@ class GroupPermissionStructure
 
         $labels->each(function ($label, $index) use ($count, &$obj, $group) {
             if (!property_exists($obj, $label)) {
-                $obj->$label = $index < $count - 1 ? new Object() : $group->permissions;
+                $obj->$label = $index < $count - 1 ? new Obj() : $group->permissions;
             }
 
             $obj = $obj->$label;
