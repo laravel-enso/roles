@@ -2,8 +2,8 @@
 
 namespace LaravelEnso\RoleManager\app\Forms\Builders;
 
-use LaravelEnso\RoleManager\app\Models\Role;
 use LaravelEnso\MenuManager\app\Models\Menu;
+use LaravelEnso\RoleManager\app\Models\Role;
 use LaravelEnso\FormBuilder\app\Classes\Form;
 
 class RoleForm

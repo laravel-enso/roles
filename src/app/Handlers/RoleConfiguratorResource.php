@@ -3,8 +3,8 @@
 namespace LaravelEnso\RoleManager\app\Handlers;
 
 use LaravelEnso\Helpers\app\Classes\Obj;
-use LaravelEnso\RoleManager\app\Models\Role;
 use LaravelEnso\MenuManager\app\Models\Menu;
+use LaravelEnso\RoleManager\app\Models\Role;
 use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
 
 class RoleConfiguratorResource
