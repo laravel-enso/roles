@@ -5,17 +5,20 @@ namespace LaravelEnso\RoleManager\app\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use LaravelEnso\RoleManager\app\Models\Role;
-use LaravelEnso\RoleManager\app\Http\Services\RolePermissionService;
+use LaravelEnso\RoleManager\app\Handlers\RoleConfiguratorResource;
 
 class RolePermissionController extends Controller
 {
-    public function index(Role $role, RolePermissionService $service)
+    public function index(Role $role)
     {
-        return $service->index($role);
+        return (new RoleConfiguratorResource($role))->get();
     }
 
-    public function update(Request $request, RolePermissionService $service)
+    public function update(Request $request, Role $role)
     {
-        return $service->update($request);
+        tap($role)->updatePermissions($request->get('rolePermissions'))
+            ->updateMenus($request->get('roleMenus'));
+
+        return ['message' => __(config('enso.labels.successfulOperation'))];
     }
 }

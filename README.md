@@ -32,7 +32,6 @@ The [Laravel Enso Core](https://github.com/laravel-enso/Core) package comes with
 
 Depends on:
  - [Datatable](https://github.com/laravel-enso/Datatable) for displaying the list of roles
- - [DbSyncMigrations](https://github.com/laravel-enso/DbSyncMigrations) for offering the possibility to generate migrations for the changes you make locally
  - [FormBuilder](https://github.com/laravel-enso/FormBuilder) for creating the forms when managing languages
  - [Helpers](https://github.com/laravel-enso/Helpers) for utility classes and traits
  - [MenuManager](https://github.com/laravel-enso/MenuManager) for managing permissions with the menus 

@@ -37,9 +37,9 @@ class RoleTest extends TestCase
 
         $response->assertStatus(200)
             ->assertJsonFragment([
-                'message'  => 'The role was created!',
+                'message' => 'The role was created!',
                 'redirect' => 'system.roles.edit',
-                'id'       => $role->id,
+                'id' => $role->id,
             ]);
     }
 
@@ -95,9 +95,9 @@ class RoleTest extends TestCase
     {
         $user = new User([
             'first_name' => $this->faker->firstName,
-            'last_name'  => $this->faker->lastName,
-            'phone'      => $this->faker->phoneNumber,
-            'is_active'  => 1,
+            'last_name' => $this->faker->lastName,
+            'phone' => $this->faker->phoneNumber,
+            'is_active' => 1,
         ]);
         $user->email = $this->faker->email;
         $user->owner_id = Owner::first(['id'])->id;
@@ -108,11 +108,11 @@ class RoleTest extends TestCase
     private function postParams()
     {
         return [
-            'name'         => $this->faker->word,
+            'name' => $this->faker->word,
             'display_name' => $this->faker->word,
-            'description'  => $this->faker->sentence,
-            'menu_id'      => Menu::first(['id'])->id,
-            '_method'      => 'POST',
+            'description' => $this->faker->sentence,
+            'menu_id' => Menu::first(['id'])->id,
+            '_method' => 'POST',
         ];
     }
 }

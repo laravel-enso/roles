@@ -4,11 +4,11 @@ namespace LaravelEnso\RoleManager\app\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use LaravelEnso\RoleManager\app\Models\Role;
-use LaravelEnso\Select\app\Traits\SelectListBuilder;
+use LaravelEnso\Select\app\Traits\OptionsBuilder;
 
 class RoleSelectController extends Controller
 {
-    use SelectListBuilder;
+    use OptionsBuilder;
 
-    protected $selectSourceClass = Role::class;
+    protected $class = Role::class;
 }

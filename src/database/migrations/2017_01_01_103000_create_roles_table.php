@@ -10,8 +10,7 @@ class CreateRolesTable extends Migration
         Schema::create('roles', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('menu_id')->unsigned()->index()->nullable();
-            $table->foreign('menu_id')->references('id')->on('menus')
-                ->onUpdate('restrict')->onDelete('restrict');
+            $table->foreign('menu_id')->references('id')->on('menus');
             $table->string('name')->unique();
             $table->string('display_name');
             $table->string('description')->nullable();

@@ -6,7 +6,7 @@ use Illuminate\Http\Request;
 use LaravelEnso\MenuManager\app\Models\Menu;
 use LaravelEnso\RoleManager\app\Models\Role;
 use LaravelEnso\PermissionManager\app\Models\PermissionGroup;
-use LaravelEnso\RoleManager\app\Classes\GroupPermissionStructure;
+use LaravelEnso\RoleManager\app\Handlers\RoleConfiguratorCollection;
 
 class RolePermissionService
 {
@@ -18,7 +18,7 @@ class RolePermissionService
             },
         ])->get();
 
-        $permissions = (new GroupPermissionStructure($groups))->get();
+        $permissions = (new RoleConfiguratorCollection($groups))->get();
 
         return [
             'menus' => Menu::orderBy('name')->get(),

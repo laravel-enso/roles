@@ -13,12 +13,12 @@ Route::middleware(['web', 'auth', 'core'])
                 Route::get('exportExcel', 'RoleTableController@excel')
                     ->name('exportExcel');
 
-                Route::get('getOptionList', 'RoleSelectController@getOptionList')
-                    ->name('getOptionList');
+                Route::get('selectOptions', 'RoleSelectController@options')
+                    ->name('selectOptions');
 
                 Route::get('getPermissions/{role}', 'RolePermissionController@index')
                     ->name('getPermissions');
-                Route::post('setPermissions', 'RolePermissionController@update')
+                Route::post('setPermissions/{role}', 'RolePermissionController@update')
                     ->name('setPermissions');
             });
 
