@@ -16,7 +16,7 @@
                         </span>
                         <span class="icon has-text-info"
                             v-if="entry.default">
-                            <i class="is-icon fa fa-exclamation-triangle"
+                            <i class="is-icon fas fa-exclamation-triangle"
                                 v-tooltip="__('Default')">
                             </i>
                         </span>

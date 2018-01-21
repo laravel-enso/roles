@@ -51,7 +51,7 @@ class RoleConfiguratorResource
         $count = $labels->count();
         $obj = $collection;
 
-        $labels->each(function ($label, $index) use ($obj, $group, $count) {
+        $labels->each(function ($label, $index) use (&$obj, $group, $count) {
             if (!property_exists($obj, $label)) {
                 $obj->$label = $index + 1 < $count
                     ? new Obj()
