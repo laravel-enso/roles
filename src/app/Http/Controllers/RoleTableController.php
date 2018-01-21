@@ -16,7 +16,7 @@ class RoleTableController extends Controller
     public function query()
     {
         return Role::select(\DB::raw(
-            'roles.id as dtRowId, roles.name, roles.display_name, roles.description,
+            'roles.id as "dtRowId", roles.name, roles.display_name, roles.description,
             roles.created_at, roles.updated_at, roles.menu_id'
         ));
     }
