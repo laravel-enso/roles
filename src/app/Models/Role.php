@@ -65,12 +65,12 @@ class Role extends Model
 
     public function updatePermissions(array $permissionIds)
     {
-        $this->sync($permissionIds);
+        $this->permissions()->sync($permissionIds);
     }
 
     public function updateMenus(array $menuIds)
     {
-        $this->sync($menuIds);
+        $this->menus()->sync($menuIds);
     }
 
     public function delete()
