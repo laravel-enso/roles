@@ -27,6 +27,7 @@
         "laravel-enso/permissionmanager": "2.1.*",
         "laravel-enso/select": "2.2.*",
         "laravel-enso/structuremanager": "2.1.*",
+        "laravel-enso/vuecomponents": "2.1.*",
         "laravel-enso/vuedatatable": "1.0.*"
     },
     "require-dev": {
