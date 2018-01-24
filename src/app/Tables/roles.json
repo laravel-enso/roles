@@ -3,13 +3,13 @@
     "readSuffix": "getTableData",
     "writeSuffix": null,
     "name": "Roles",
-    "icon": "fas fa-universal-access",
+    "icon": "universal-access",
     "crtNo": true,
     "buttons": [
         "excel", "create",
         {
             "type": "row",
-            "icon": "fas fa-sliders-h",
+            "icon": "sliders-h",
             "class": "is-info",
             "routeSuffix": "getPermissions",
             "event": "configure-role"
