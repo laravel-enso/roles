@@ -20,14 +20,14 @@ class RoleForm
     public function create()
     {
         return $this->form
-            ->options('menu_id', Menu::isNotParent()->pluck('name', 'id'))
+            ->options('menu_id', Menu::isNotParent()->get(['name', 'id']))
             ->create();
     }
 
     public function edit(Role $role)
     {
         return $this->form
-            ->options('menu_id', Menu::isNotParent()->pluck('name', 'id'))
+            ->options('menu_id', Menu::isNotParent()->get(['name', 'id']))
             ->edit($role);
     }
 }
