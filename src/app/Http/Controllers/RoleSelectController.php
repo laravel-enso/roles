@@ -10,5 +10,5 @@ class RoleSelectController extends Controller
 {
     use OptionsBuilder;
 
-    protected $class = Role::class;
+    protected $model = Role::class;
 }
