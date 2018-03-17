@@ -1,38 +1,43 @@
 {
-    "columns": "2",
     "routePrefix": "system.roles",
-    "fields": [{
-        "label": "Name",
-        "name": "name",
-        "value": null,
-        "meta": {
-            "type": "input",
-            "content": "text"
-        }
-    }, {
-        "label": "Display Name",
-        "name": "display_name",
-        "value": null,
-        "meta": {
-            "type": "input",
-            "content": "text"
-        }
-    }, {
-        "label": "Description",
-        "name": "description",
-        "value": null,
-        "meta": {
-            "type": "input",
-            "content": "text"
-        }
-    }, {
-        "label": "Default Menu",
-        "name": "menu_id",
-        "value": null,
-        "meta": {
-            "type": "select",
-            "multiple": false,
-            "options": []
-        }
+    "sections": [{
+        "columns": "2",
+        "fields": [{
+            "label": "Name",
+            "name": "name",
+            "value": null,
+            "meta": {
+                "type": "input",
+                "content": "text"
+            }
+        },
+        {
+            "label": "Display Name",
+            "name": "display_name",
+            "value": null,
+            "meta": {
+                "type": "input",
+                "content": "text"
+            }
+        },
+        {
+            "label": "Description",
+            "name": "description",
+            "value": null,
+            "meta": {
+                "type": "input",
+                "content": "text"
+            }
+        },
+        {
+            "label": "Default Menu",
+            "name": "menu_id",
+            "value": null,
+            "meta": {
+                "type": "select",
+                "multiple": false,
+                "options": []
+            }
+        }]
     }]
 }
