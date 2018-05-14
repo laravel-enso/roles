@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\RoleManager\app\Handlers;
+namespace LaravelEnso\RoleManager\app\Classes;
 
 use LaravelEnso\Helpers\app\Classes\Obj;
 use LaravelEnso\MenuManager\app\Models\Menu;

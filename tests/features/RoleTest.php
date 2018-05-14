@@ -62,7 +62,7 @@ class RoleTest extends TestCase
 
         $this->patch(route('system.roles.update', $role->id, false), $role->toArray())
             ->assertStatus(200)
-            ->assertJson(['message' => __(config('enso.labels.savedChanges'))]);
+            ->assertJsonFragment(['message']);
 
         $this->assertEquals('edited', $role->fresh()->name);
     }

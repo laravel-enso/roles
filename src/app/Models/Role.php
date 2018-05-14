@@ -76,7 +76,9 @@ class Role extends Model
     public function delete()
     {
         if ($this->users()->count()) {
-            throw new ConflictHttpException(__('Operation failed because the role is in use'));
+            throw new ConflictHttpException(__(
+                'Operation failed because the role is in use'
+            ));
         }
 
         parent::delete();

@@ -14,8 +14,10 @@ class CreateOwnerRolePivotTable extends Migration
             $table->integer('owner_id')->unsigned()->index();
             $table->foreign('owner_id')->references('id')->on('owners')
                 ->onUpdate('cascade')->onDelete('cascade');
-            $table->timestamps();
+
             $table->primary(['role_id', 'owner_id']);
+
+            $table->timestamps();
         });
     }
 

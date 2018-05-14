@@ -14,8 +14,10 @@ class CreateMenuRolePivotTable extends Migration
             $table->integer('menu_id')->unsigned()->index();
             $table->foreign('menu_id')->references('id')->on('menus')
                 ->onUpdate('cascade')->onDelete('cascade');
-            $table->timestamps();
+
             $table->primary(['role_id', 'menu_id']);
+
+            $table->timestamps();
         });
     }
 

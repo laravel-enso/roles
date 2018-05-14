@@ -5,7 +5,7 @@ namespace LaravelEnso\RoleManager\app\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use LaravelEnso\RoleManager\app\Models\Role;
-use LaravelEnso\RoleManager\app\Handlers\RoleConfiguratorResource;
+use LaravelEnso\RoleManager\app\Classes\RoleConfiguratorResource;
 
 class RolePermissionController extends Controller
 {
@@ -19,6 +19,6 @@ class RolePermissionController extends Controller
         tap($role)->updatePermissions($request->get('rolePermissions'))
             ->updateMenus($request->get('roleMenus'));
 
-        return ['message' => __(config('enso.labels.successfulOperation'))];
+        return ['message' => __("The role's permissions were successfully updated")];
     }
 }

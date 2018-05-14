@@ -35,7 +35,7 @@ class RoleController extends Controller
         $role->update($request->all());
 
         return [
-            'message' => __(config('enso.labels.savedChanges')),
+            'message' => __('The role was successfully updated'),
         ];
     }
 
@@ -44,7 +44,7 @@ class RoleController extends Controller
         $role->delete();
 
         return [
-            'message' => __(config('enso.labels.successfulOperation')),
+            'message' => __('The role was successfully deleted'),
             'redirect' => 'system.roles.index',
         ];
     }
