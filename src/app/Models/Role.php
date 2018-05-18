@@ -3,7 +3,6 @@
 namespace LaravelEnso\RoleManager\app\Models;
 
 use App\User;
-use App\Owner;
 use Illuminate\Database\Eloquent\Model;
 use LaravelEnso\MenuManager\app\Models\Menu;
 use LaravelEnso\PermissionManager\app\Models\Permission;
@@ -25,7 +24,7 @@ class Role extends Model
 
     public function owners()
     {
-        return $this->belongsToMany(Owner::class);
+        return $this->belongsToMany(config('enso.config.ownerModel'));
     }
 
     public function users()
