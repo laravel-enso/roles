@@ -1,6 +1,5 @@
 <?php
 
-use App\Owner;
 use App\User;
 use Faker\Factory;
 use Illuminate\Foundation\Testing\RefreshDatabase;
@@ -100,7 +99,7 @@ class RoleTest extends TestCase
             'is_active' => 1,
         ]);
         $user->email = $this->faker->email;
-        $user->owner_id = Owner::first(['id'])->id;
+        $user->owner_id = config('enso.config.ownerModel')::first(['id'])->id;
         $user->role_id = $role->id;
         $user->save();
     }
