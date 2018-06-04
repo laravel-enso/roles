@@ -39,12 +39,12 @@ class Role extends Model
 
     public function getPermissionListAttribute()
     {
-        return $this->permissions->pluck('id');
+        return $this->permissions()->pluck('id');
     }
 
     public function getMenuListAttribute()
     {
-        return $this->menus->pluck('id')->toArray();
+        return $this->menus->pluck('id');
     }
 
     public function storeWithPermissions(array $attributes)

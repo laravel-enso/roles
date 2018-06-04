@@ -13,7 +13,7 @@ trait HasRoles
 
     public function getRoleListAttribute()
     {
-        return $this->roles->pluck('id');
+        return $this->roles()->pluck('id');
     }
 
     public function updateWithRoles(array $attributes, array $roles)

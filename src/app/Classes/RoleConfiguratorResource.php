@@ -20,8 +20,8 @@ class RoleConfiguratorResource
     {
         return [
             'menus' => Menu::orderBy('name')->get(),
-            'roleMenus' => $this->role->menus->pluck('id'),
-            'rolePermissions' => $this->role->permissions->pluck('id'),
+            'roleMenus' => $this->role->menus()->pluck('id'),
+            'rolePermissions' => $this->role->permissions()->pluck('id'),
             'permissions' => $this->permissions(),
             'role' => $this->role,
         ];
