@@ -16,7 +16,7 @@ class ValidateRoleRequest extends FormRequest
     {
         $nameUnique = Rule::unique('roles', 'name');
 
-        $nameUnique = $request->method() === 'PATCH'
+        $nameUnique = $this->method() === 'PATCH'
             ? $nameUnique->ignore($this->route('role')->id)
             : $nameUnique;
 
