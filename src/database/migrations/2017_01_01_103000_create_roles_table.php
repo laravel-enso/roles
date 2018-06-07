@@ -14,6 +14,7 @@ class CreateRolesTable extends Migration
                 ->index()->nullable();
             $table->foreign('menu_id')->references('id')
                 ->on('menus');
+
             $table->string('name')->unique();
             $table->string('display_name');
             $table->string('description')->nullable();

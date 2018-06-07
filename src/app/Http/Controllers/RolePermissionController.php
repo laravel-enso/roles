@@ -11,7 +11,8 @@ class RolePermissionController extends Controller
 {
     public function index(Role $role)
     {
-        return (new RoleConfiguratorResource($role))->get();
+        return (new RoleConfiguratorResource($role))
+            ->get();
     }
 
     public function update(Request $request, Role $role)

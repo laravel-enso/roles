@@ -38,11 +38,12 @@ class RoleConfiguratorResource
 
     private function permissions()
     {
-        return $this->groups()->reduce(function ($collection, $group) {
-            $this->fill($collection, $group);
+        return $this->groups()
+            ->reduce(function ($collection, $group) {
+                $this->fill($collection, $group);
 
-            return $collection;
-        }, new Obj());
+                return $collection;
+            }, new Obj());
     }
 
     private function fill($collection, $group)

@@ -24,7 +24,9 @@ class Role extends Model
 
     public function owners()
     {
-        return $this->belongsToMany(config('enso.config.ownerModel'));
+        return $this->belongsToMany(
+            config('enso.config.ownerModel')
+        );
     }
 
     public function users()
@@ -39,12 +41,14 @@ class Role extends Model
 
     public function getPermissionListAttribute()
     {
-        return $this->permissions()->pluck('id');
+        return $this->permissions()
+            ->pluck('id');
     }
 
     public function getMenuListAttribute()
     {
-        return $this->menus->pluck('id');
+        return $this->menus()
+            ->pluck('id');
     }
 
     public function storeWithPermissions(array $attributes)
@@ -64,12 +68,14 @@ class Role extends Model
 
     public function updatePermissions(array $permissionIds)
     {
-        $this->permissions()->sync($permissionIds);
+        $this->permissions()
+            ->sync($permissionIds);
     }
 
     public function updateMenus(array $menuIds)
     {
-        $this->menus()->sync($menuIds);
+        $this->menus()
+            ->sync($menuIds);
     }
 
     public function delete()
