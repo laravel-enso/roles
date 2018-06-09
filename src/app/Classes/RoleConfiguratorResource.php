@@ -46,11 +46,10 @@ class RoleConfiguratorResource
             }, new Obj());
     }
 
-    private function fill($collection, $group)
+    private function fill(Obj $obj, PermissionGroup $group)
     {
         $labels = collect(explode('.', $group->name));
         $count = $labels->count();
-        $obj = $collection;
 
         $labels->each(function ($label, $index) use (&$obj, $group, $count) {
             if (!property_exists($obj, $label)) {
