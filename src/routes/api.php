@@ -16,9 +16,9 @@ Route::middleware(['web', 'auth', 'core'])
                 Route::get('selectOptions', 'RoleSelectController@options')
                     ->name('selectOptions');
 
-                Route::get('getPermissions/{role}', 'RolePermissionController@index')
+                Route::get('getPermissions/{role}', 'RoleConfiguratorController@index')
                     ->name('getPermissions');
-                Route::post('setPermissions/{role}', 'RolePermissionController@update')
+                Route::post('setPermissions/{role}', 'RoleConfiguratorController@update')
                     ->name('setPermissions');
             });
 
