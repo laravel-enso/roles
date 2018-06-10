@@ -35,7 +35,8 @@ class TreeGenerator
         return PermissionGroup::with([
             'permissions' => function ($query) {
                 $query->orderBy('name');
-            }, ])->get();
+            },
+        ])->get();
     }
 
     private function build(PermissionGroup $branch)
