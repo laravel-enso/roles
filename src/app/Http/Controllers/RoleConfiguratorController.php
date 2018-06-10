@@ -20,7 +20,7 @@ class RoleConfiguratorController extends Controller
             ->updateMenus($request->get('roleMenus'));
 
         return [
-            'message' => __("The role's permissions were successfully updated")
+            'message' => __("The role's permissions were successfully updated"),
         ];
     }
 }
