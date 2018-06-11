@@ -17,12 +17,12 @@ class TreeGenerator
 
     public function get()
     {
-        $this->generate();
+        $this->run();
 
         return $this->tree;
     }
 
-    private function generate()
+    private function run()
     {
         $this->branches()
             ->each(function ($branch) {
@@ -43,7 +43,7 @@ class TreeGenerator
     {
         $reference = $this->tree;
 
-        $this->branchNodes($branch)
+        $this->nodes($branch)
             ->each(function ($node, $index) use (&$reference, $branch) {
                 if (!$reference->has($node)) {
                     $reference->$node = $this->isEndingNode($index)
@@ -55,7 +55,7 @@ class TreeGenerator
             });
     }
 
-    private function branchNodes($branch)
+    private function nodes($branch)
     {
         $branchNodes = collect(
             explode('.', $branch->name)
