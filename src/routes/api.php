@@ -22,5 +22,5 @@ Route::middleware(['web', 'auth', 'core'])
                     ->name('setPermissions');
             });
 
-        Route::resource('roles', 'RoleController', ['except' => ['show']]);
+        Route::resource('roles', 'RoleController', ['except' => ['show', 'index']]);
     });

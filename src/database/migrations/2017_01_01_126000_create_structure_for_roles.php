@@ -14,6 +14,7 @@ class CreateStructureForRoles extends StructureMigration
         ['name' => 'system.roles.initTable', 'description' => 'Init table for roles menu', 'type' => 0, 'is_default' => false],
         ['name' => 'system.roles.create', 'description' => 'Create role', 'type' => 1, 'is_default' => false],
         ['name' => 'system.roles.edit', 'description' => 'Edit role', 'type' => 1, 'is_default' => false],
+        ['name' => 'system.roles.configure', 'description' => 'Configure role permissions', 'type' => 1, 'is_default' => false],
         ['name' => 'system.roles.index', 'description' => 'Show roles index', 'type' => 0, 'is_default' => false],
         ['name' => 'system.roles.store', 'description' => 'Store newly created role', 'type' => 1, 'is_default' => false],
         ['name' => 'system.roles.update', 'description' => 'Update role', 'type' => 1, 'is_default' => false],
