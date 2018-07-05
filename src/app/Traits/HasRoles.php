@@ -13,23 +13,24 @@ trait HasRoles
 
     public function getRoleListAttribute()
     {
-        return $this->roles()->pluck('id');
+        return $this->roles()
+            ->pluck('id');
     }
 
-    public function updateWithRoles(array $attributes, array $roles)
+    public function updateWithRoles(array $attributes)
     {
         tap($this)->update($attributes)
             ->roles()
-            ->sync($roles);
+            ->sync($attributes['roleList']);
     }
 
-    public function storeWithRoles(array $attributes, array $roles)
+    public function storeWithRoles(array $attributes)
     {
         $this->fill($attributes);
 
         tap($this)->save()
             ->roles()
-            ->sync($roles);
+            ->sync($attributes['roleList']);
 
         return $this;
     }

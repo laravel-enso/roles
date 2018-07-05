@@ -16,7 +16,7 @@ class RoleController extends Controller
 
     public function store(ValidateRoleRequest $request, Role $role)
     {
-        $role = $role->storeWithPermissions($request->all());
+        $role = $role->storeWithPermissions($request->validated());
 
         return [
             'message' => __('The role was created!'),
@@ -32,7 +32,7 @@ class RoleController extends Controller
 
     public function update(ValidateRoleRequest $request, Role $role)
     {
-        $role->update($request->all());
+        $role->update($request->validated());
 
         return [
             'message' => __('The role was successfully updated'),
