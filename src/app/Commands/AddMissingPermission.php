@@ -26,7 +26,7 @@ class AddMissingPermission extends Command
             'name' => 'system.roles.writeConfig',
             'description' => 'Write role configuration file',
             'type' => 1,
-            'is_default' => false
+            'is_default' => false,
         ]);
 
         $this->info('The `system.roles.writeConfig` permission was successfully added');

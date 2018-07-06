@@ -12,7 +12,7 @@ class ConfigWriterController
         (new ConfigWriter($role))->run();
 
         return [
-            'message' => 'The config file was successfully written'
+            'message' => 'The config file was successfully written',
         ];
     }
 }
