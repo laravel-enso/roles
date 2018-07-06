@@ -82,7 +82,7 @@ class ConfigWriter
     private function checkDirectory()
     {
         if (!\File::isDirectory(config_path('local/roles/'))) {
-            \File::makeDirectory(config_path('local/roles/'), 0755, $recursive = true);
+            \File::makeDirectory(config_path('local/roles/'), 0755, true);
         }
     }
 

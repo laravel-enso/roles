@@ -1,6 +1,5 @@
 <?php
 
-use LaravelEnso\MenuManager\app\Models\Menu;
 use LaravelEnso\RoleManager\app\Models\Role;
 use Illuminate\Database\Migrations\Migration;
 
@@ -13,8 +12,6 @@ class InsertDefaultRoles extends Migration
                 ['menu_id' => null, 'name' => 'admin', 'display_name' => 'Administrator', 'description' => 'Administrator role. Full featured.'],
                 ['menu_id' => null, 'name' => 'supervisor', 'display_name' => 'Supervisor', 'description' => 'Supervisor role.'],
             ];
-
-            $menus = Menu::pluck('id');
 
             collect($roles)->each(function ($role) {
                 Role::create($role);
