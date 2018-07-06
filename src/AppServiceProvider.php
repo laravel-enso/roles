@@ -3,11 +3,18 @@
 namespace LaravelEnso\RoleManager;
 
 use Illuminate\Support\ServiceProvider;
+use LaravelEnso\RoleManager\app\Commands\GenerateRoleConfig;
+use LaravelEnso\RoleManager\app\Commands\AddMissingPermission;
 
 class AppServiceProvider extends ServiceProvider
 {
     public function boot()
     {
+        $this->commands([
+            GenerateRoleConfig::class,
+            AddMissingPermission::class,
+        ]);
+
         $this->loadDependencies();
         $this->publishesAll();
     }
@@ -27,6 +34,10 @@ class AppServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/resources/assets/js' => resource_path('assets/js'),
         ], 'enso-assets');
+
+        $this->publishes([
+            __DIR__.'/database/seeds' => database_path('seeds'),
+        ], 'roles-seeder');
     }
 
     public function register()

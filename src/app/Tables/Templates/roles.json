@@ -14,6 +14,15 @@
             "routeSuffix": "getPermissions",
             "event": "configure-role"
         },
+        {
+            "type": "row",
+            "icon": "file-alt",
+            "class": "is-primary",
+            "routeSuffix": "writeConfig",
+            "event": "write-config-file",
+            "action": "ajax",
+            "method": "POST"
+        },
         "edit", "destroy"
     ],
     "columns": [

@@ -23,8 +23,8 @@ Role Manager dependency for [Laravel Enso](https://github.com/laravel-enso/Enso)
 
 - `php artisan vendor:publish --tag=vue-components` - the VueJS components and pages
 - `php artisan vendor:publish --tag=roles-assets` - the pages
-- `php artisan vendor:publish --tag=enso-assets` - a common alias for when wanting to update the VueJS assets,
-once a newer version is released, can be used with the `--force` flag
+- `php artisan vendor:publish --tag=enso-assets` - a common alias for when wanting to update the VueJS assets, once a newer version is released, can be used with the `--force` flag
+- `php artisan vendor:publish --tag=roles-seeder` - a seeder that will allow you to manage roles locally and then sync them with the live instance of the app
 
 ### Notes
 

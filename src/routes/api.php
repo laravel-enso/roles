@@ -20,6 +20,9 @@ Route::middleware(['web', 'auth', 'core'])
                     ->name('getPermissions');
                 Route::post('setPermissions/{role}', 'RoleConfiguratorController@update')
                     ->name('setPermissions');
+
+                Route::post('writeConfig/{role}', 'ConfigWriterController')
+                    ->name('writeConfig');
             });
 
         Route::resource('roles', 'RoleController', ['except' => ['show', 'index']]);
