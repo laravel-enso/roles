@@ -1,7 +1,6 @@
 {
     "routePrefix": "system.roles",
     "readSuffix": "getTableData",
-    "writeSuffix": null,
     "name": "Roles",
     "icon": "universal-access",
     "crtNo": true,
