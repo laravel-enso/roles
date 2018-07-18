@@ -39,7 +39,7 @@ class RoleTest extends TestCase
                 'redirect' => 'system.roles.edit',
                 'id' => $role->id,
             ])->assertJsonStructure([
-                'message',
+                'message'
             ]);
     }
 
