@@ -36,9 +36,10 @@ class RoleTest extends TestCase
 
         $response->assertStatus(200)
             ->assertJsonFragment([
-                'message',
                 'redirect' => 'system.roles.edit',
                 'id' => $role->id,
+            ])->assertJsonStructure([
+                'message',
             ]);
     }
 
@@ -61,7 +62,7 @@ class RoleTest extends TestCase
 
         $this->patch(route('system.roles.update', $role->id, false), $role->toArray())
             ->assertStatus(200)
-            ->assertJsonFragment(['message']);
+            ->assertJsonStructure(['message']);
 
         $this->assertEquals('edited', $role->fresh()->name);
     }
@@ -73,7 +74,7 @@ class RoleTest extends TestCase
 
         $this->delete(route('system.roles.destroy', $role->id, false))
             ->assertStatus(200)
-            ->assertJsonFragment(['message']);
+            ->assertJsonStructure(['message']);
 
         $this->assertNull($role->fresh());
     }
