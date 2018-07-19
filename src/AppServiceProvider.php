@@ -3,7 +3,6 @@
 namespace LaravelEnso\RoleManager;
 
 use Illuminate\Support\ServiceProvider;
-use LaravelEnso\RoleManager\app\Commands\GenerateRoleConfig;
 use LaravelEnso\RoleManager\app\Commands\AddMissingPermission;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,7 +10,6 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         $this->commands([
-            GenerateRoleConfig::class,
             AddMissingPermission::class,
         ]);
 
