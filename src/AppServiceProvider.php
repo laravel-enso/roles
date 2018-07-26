@@ -12,7 +12,7 @@ class AppServiceProvider extends ServiceProvider
         $this->commands([
             AddMissingPermission::class,
         ]);
-        
+
         $this->loadDependencies();
         $this->publishesAll();
     }
