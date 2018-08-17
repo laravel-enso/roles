@@ -28,7 +28,7 @@
         "laravel-enso/select": "2.5.*",
         "laravel-enso/structuremanager": "2.2.*",
         "laravel-enso/vuecomponents": "2.3.*",
-        "laravel-enso/vuedatatable": "1.3.*"
+        "laravel-enso/vuedatatable": "1.4.*"
     },
     "require-dev": {
         "laravel-enso/testhelper": "1.4.*"

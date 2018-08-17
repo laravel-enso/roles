@@ -1,22 +1,20 @@
 {
     "routePrefix": "system.roles",
     "readSuffix": "getTableData",
-    "name": "Roles",
-    "icon": "universal-access",
     "crtNo": true,
     "buttons": [
         "excel", "create",
         {
             "type": "row",
             "icon": "sliders-h",
-            "class": "is-info",
+            "class": "is-row-button",
             "routeSuffix": "getPermissions",
             "event": "configure-role"
         },
         {
             "type": "row",
             "icon": "file-alt",
-            "class": "is-primary",
+            "class": "is-row-button",
             "routeSuffix": "writeConfig",
             "event": "write-config-file",
             "action": "ajax",
