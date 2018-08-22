@@ -3,16 +3,11 @@
 namespace LaravelEnso\RoleManager;
 
 use Illuminate\Support\ServiceProvider;
-use LaravelEnso\RoleManager\app\Commands\AddMissingPermission;
 
 class AppServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->commands([
-            AddMissingPermission::class,
-        ]);
-
         $this->loadDependencies();
         $this->publishesAll();
     }
