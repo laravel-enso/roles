@@ -22,14 +22,18 @@ class RoleTest extends TestCase
         parent::setUp();
 
         // $this->withoutExceptionHandling();
+
+        $this->seed()
+            ->signIn(User::first());
+
         $this->faker = Factory::create();
-        $this->signIn(User::first());
     }
 
     /** @test */
     public function store()
     {
         $postParams = $this->postParams();
+
         $response = $this->post(route('system.roles.store', $postParams, false));
 
         $role = Role::whereName($postParams['name'])->first();
@@ -58,6 +62,7 @@ class RoleTest extends TestCase
     public function update()
     {
         $role = Role::create($this->postParams());
+
         $role->name = 'edited';
 
         $this->patch(route('system.roles.update', $role->id, false), $role->toArray())
@@ -83,6 +88,7 @@ class RoleTest extends TestCase
     public function cant_destroy_if_has_users()
     {
         $role = Role::create($this->postParams());
+
         $this->createUser($role);
 
         $this->delete(route('system.roles.destroy', $role->id, false))
@@ -93,16 +99,15 @@ class RoleTest extends TestCase
 
     private function createUser($role)
     {
-        $user = new User([
+        User::create([
             'first_name' => $this->faker->firstName,
             'last_name' => $this->faker->lastName,
             'phone' => $this->faker->phoneNumber,
             'is_active' => 1,
+            'email' => $this->faker->email,
+            'owner_id' => config('enso.config.ownerModel')::first(['id'])->id,
+            'role_id' => $role->id,
         ]);
-        $user->email = $this->faker->email;
-        $user->owner_id = config('enso.config.ownerModel')::first(['id'])->id;
-        $user->role_id = $role->id;
-        $user->save();
     }
 
     private function postParams()

@@ -3,11 +3,16 @@
 namespace LaravelEnso\RoleManager;
 
 use Illuminate\Support\ServiceProvider;
+use LaravelEnso\RoleManager\app\Commands\Sync;
 
 class AppServiceProvider extends ServiceProvider
 {
     public function boot()
     {
+        $this->commands([
+            Sync::class,
+        ]);
+
         $this->loadDependencies();
         $this->publishesAll();
     }
@@ -31,6 +36,10 @@ class AppServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/database/seeds' => database_path('seeds'),
         ], 'roles-seeder');
+        
+        $this->publishes([
+            __DIR__.'/database/seeds' => database_path('seeds'),
+        ], 'enso-seeders');
     }
 
     public function register()
