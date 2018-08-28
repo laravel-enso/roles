@@ -11,10 +11,11 @@ trait HasRoles
         return $this->belongsToMany(Role::class);
     }
 
-    public function getRoleListAttribute()
+    public function roleList()
     {
         return $this->roles()
-            ->pluck('id');
+            ->pluck('id')
+            ->toArray();
     }
 
     public function updateWithRoles(array $attributes)

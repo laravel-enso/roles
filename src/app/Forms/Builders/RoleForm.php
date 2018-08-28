@@ -14,20 +14,17 @@ class RoleForm
 
     public function __construct()
     {
-        $this->form = new Form(self::FormPath);
+        $this->form = (new Form(self::FormPath))
+            ->options('menu_id', Menu::isNotParent()->get(['name', 'id']));
     }
 
     public function create()
     {
-        return $this->form
-            ->options('menu_id', Menu::isNotParent()->get(['name', 'id']))
-            ->create();
+        return $this->form->create();
     }
 
     public function edit(Role $role)
     {
-        return $this->form
-            ->options('menu_id', Menu::isNotParent()->get(['name', 'id']))
-            ->edit($role);
+        return $this->form->edit($role);
     }
 }
