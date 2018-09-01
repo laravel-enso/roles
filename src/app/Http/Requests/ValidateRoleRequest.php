@@ -23,6 +23,7 @@ class ValidateRoleRequest extends FormRequest
         return [
             'name' => ['required', $nameUnique],
             'display_name' => 'required',
+            'description' => 'nullable',
             'menu_id' => 'required',
         ];
     }
