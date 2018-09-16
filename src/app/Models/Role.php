@@ -2,7 +2,7 @@
 
 namespace LaravelEnso\RoleManager\app\Models;
 
-use App\User;
+use LaravelEnso\Core\app\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use LaravelEnso\MenuManager\app\Models\Menu;
 use LaravelEnso\PermissionManager\app\Models\Permission;
