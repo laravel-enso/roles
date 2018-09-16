@@ -35,6 +35,14 @@ class AppServiceProvider extends ServiceProvider
         ], 'enso-assets');
 
         $this->publishes([
+            __DIR__.'/database/factories' => database_path('factories'),
+        ], 'roles-factory');
+
+        $this->publishes([
+            __DIR__.'/database/factories' => database_path('factories'),
+        ], 'enso-factories');
+        
+        $this->publishes([
             __DIR__.'/database/seeds' => database_path('seeds'),
         ], 'roles-seeder');
 
