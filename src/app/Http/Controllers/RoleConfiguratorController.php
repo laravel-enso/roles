@@ -3,7 +3,7 @@
 namespace LaravelEnso\RoleManager\app\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controller;
 use LaravelEnso\RoleManager\app\Models\Role;
 use LaravelEnso\RoleManager\app\Http\Responses\RoleConfigurator;
 

@@ -2,7 +2,7 @@
 
 namespace LaravelEnso\RoleManager\app\Http\Controllers;
 
-use App\Http\Controllers\Controller;
+use Illuminate\Routing\Controller;
 use LaravelEnso\RoleManager\app\Models\Role;
 use LaravelEnso\Select\app\Traits\OptionsBuilder;
 
