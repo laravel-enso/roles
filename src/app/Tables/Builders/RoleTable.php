@@ -13,7 +13,7 @@ class RoleTable extends Table
     {
         return Role::select(\DB::raw(
             'roles.id as "dtRowId", roles.name, roles.display_name, roles.description,
-            roles.created_at, roles.updated_at, roles.menu_id'
-        ));
+            roles.created_at, menus.name as defaultMenu'
+        ))->join('menus', 'roles.menu_id', '=', 'menus.id');
     }
 }

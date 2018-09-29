@@ -10,8 +10,7 @@
             "class": "is-row-button",
             "routeSuffix": "getPermissions",
             "event": "configure-role"
-        },
-        {
+        }, {
             "type": "row",
             "icon": "file-alt",
             "class": "is-row-button",
@@ -28,29 +27,25 @@
             "name": "name",
             "data": "roles.name",
             "meta": ["searchable","sortable"]
-        },
-        {
+        }, {
             "label": "Display Name",
             "name": "display_name",
             "data": "roles.display_name",
             "meta": ["searchable","sortable"]
-        },
-        {
+        }, {
             "label": "Description",
             "name": "description",
             "data": "roles.description",
             "meta": ["searchable","sortable"]
-        },
-        {
+        }, {
+            "label": "Default Menu",
+            "name": "defaultMenu",
+            "data": "menus.defaultMenu",
+            "meta": ["searchable", "sortable"]
+        }, {
             "label": "Created At",
             "name": "created_at",
             "data": "roles.created_at",
-            "meta": ["sortable", "date"]
-        },
-        {
-            "label": "Updated At",
-            "name": "updated_at",
-            "data": "roles.updated_at",
             "meta": ["sortable", "date"]
         }
     ]

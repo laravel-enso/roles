@@ -14,7 +14,10 @@ class RoleSeeder extends Seeder
 
     public function run()
     {
-        \DB::table('roles')->insert(self::Roles);
+        collect(self::Roles)
+            ->each(function ($role) {
+                Role::create($role);
+            });
 
         $role = Role::whereName('admin')->first();
 
