@@ -11,7 +11,7 @@ use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 class Role extends Model
 {
     const AdminId = 1;
-    const SupervisorId = 1;
+    const SupervisorId = 2;
 
     protected $fillable = ['name', 'display_name', 'description', 'menu_id'];
 
