@@ -14,25 +14,24 @@ class RoleSeeder extends Seeder
 
     public function run()
     {
-        collect(self::Roles)
-            ->each(function ($role) {
-                Role::create($role);
-            });
+        $roles = collect(self::Roles)->map(function ($role) {
+            return factory(Role::class)->create($role);
+        });
 
-        $role = Role::whereName('admin')->first();
+        $admin = $roles->first();
 
-        $role->permissions()
+        $admin->permissions()
                 ->attach(Permission::all());
 
-        $role->menus()
+        $admin->menus()
             ->attach(Menu::all());
 
-        $role = Role::whereName('supervisor')->first();
+        $supervisor = $roles->last();
 
-        $role->permissions()
+        $supervisor->permissions()
                 ->attach(Permission::implicit()->get());
 
-        $role->menus()
+        $supervisor->menus()
             ->attach(Menu::all());
     }
 }

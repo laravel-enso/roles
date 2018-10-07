@@ -4,6 +4,7 @@ namespace LaravelEnso\RoleManager\app\Models;
 
 use LaravelEnso\Core\app\Models\User;
 use Illuminate\Database\Eloquent\Model;
+use LaravelEnso\Core\app\Models\UserGroup;
 use LaravelEnso\MenuManager\app\Models\Menu;
 use LaravelEnso\PermissionManager\app\Models\Permission;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
@@ -25,11 +26,9 @@ class Role extends Model
         return $this->belongsTo(Menu::class);
     }
 
-    public function owners()
+    public function userGroups()
     {
-        return $this->belongsToMany(
-            config('enso.config.ownerModel')
-        );
+        return $this->belongsToMany(UserGroup::class);
     }
 
     public function users()

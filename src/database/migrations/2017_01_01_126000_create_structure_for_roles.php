@@ -19,7 +19,7 @@ class CreateStructureForRoles extends StructureMigration
         ['name' => 'system.roles.store', 'description' => 'Store newly created role', 'type' => 1, 'is_default' => false],
         ['name' => 'system.roles.update', 'description' => 'Update role', 'type' => 1, 'is_default' => false],
         ['name' => 'system.roles.destroy', 'description' => 'Delete role', 'type' => 1, 'is_default' => false],
-        ['name' => 'system.roles.selectOptions', 'description' => 'Get role permissions list for vue-select', 'type' => 0, 'is_default' => true],
+        ['name' => 'system.roles.options', 'description' => 'Get options for select', 'type' => 0, 'is_default' => true],
         ['name' => 'system.roles.getPermissions', 'description' => 'Get role permissions for role configurator', 'type' => 0, 'is_default' => false],
         ['name' => 'system.roles.setPermissions', 'description' => 'Set role permissions for role configurator', 'type' => 1, 'is_default' => false],
         ['name' => 'system.roles.writeConfig', 'description' => 'Write role configuration file', 'type' => 1, 'is_default' => false],

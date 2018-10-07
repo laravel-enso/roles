@@ -4,14 +4,11 @@ namespace LaravelEnso\RoleManager\app\Http\Controllers;
 
 use Illuminate\Routing\Controller;
 use LaravelEnso\RoleManager\app\Models\Role;
-use Illuminate\Foundation\Validation\ValidatesRequests;
 use LaravelEnso\RoleManager\app\Forms\Builders\RoleForm;
 use LaravelEnso\RoleManager\app\Http\Requests\ValidateRoleRequest;
 
 class RoleController extends Controller
 {
-    use ValidatesRequests;
-
     public function create(RoleForm $form)
     {
         return ['form' => $form->create()];

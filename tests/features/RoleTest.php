@@ -1,21 +1,21 @@
 <?php
 
-use LaravelEnso\Core\app\Models\User;
 use Faker\Factory;
-use Illuminate\Foundation\Testing\RefreshDatabase;
-use LaravelEnso\MenuManager\app\Models\Menu;
-use LaravelEnso\RoleManager\app\Models\Role;
-use LaravelEnso\TestHelper\app\Traits\SignIn;
-use LaravelEnso\TestHelper\app\Traits\TestCreateForm;
-use LaravelEnso\TestHelper\app\Traits\TestDataTable;
 use Tests\TestCase;
+use LaravelEnso\Core\app\Models\User;
+use LaravelEnso\RoleManager\app\Models\Role;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+use LaravelEnso\FormBuilder\app\TestTraits\EditForm;
+use LaravelEnso\FormBuilder\app\TestTraits\CreateForm;
+use LaravelEnso\FormBuilder\app\TestTraits\DestroyForm;
+use LaravelEnso\VueDatatable\app\Traits\Tests\Datatable;
 
 class RoleTest extends TestCase
 {
-    use RefreshDatabase, SignIn, TestDataTable, TestCreateForm;
+    use CreateForm, Datatable, DestroyForm, EditForm, RefreshDatabase;
 
-    private $faker;
-    private $prefix = 'system.roles';
+    private $permissionGroup = 'system.roles';
+    private $testModel;
 
     protected function setUp()
     {
@@ -24,19 +24,22 @@ class RoleTest extends TestCase
         // $this->withoutExceptionHandling();
 
         $this->seed()
-            ->signIn(User::first());
+            ->actingAs(User::first());
 
-        $this->faker = Factory::create();
+        $this->testModel = factory(Role::class)
+            ->make();
     }
 
     /** @test */
-    public function store()
+    public function can_store_role()
     {
-        $postParams = $this->postParams();
+        $response = $this->post(
+            route('system.roles.store'),
+            $this->testModel->toArray()
+        );
 
-        $response = $this->post(route('system.roles.store', $postParams, false));
-
-        $role = Role::whereName($postParams['name'])->first();
+        $role = Role::whereName($this->testModel->name)
+            ->first();
 
         $response->assertStatus(200)
             ->assertJsonFragment([
@@ -48,76 +51,33 @@ class RoleTest extends TestCase
     }
 
     /** @test */
-    public function edit()
+    public function can_update_role()
     {
-        $role = Role::first();
+        $this->testModel->save();
 
-        $response = $this->get(route('system.roles.edit', $role->id, false));
+        $this->testModel->name = 'edited';
 
-        $response->assertStatus(200)
-            ->assertJsonStructure(['form']);
-    }
+        $this->patch(
+            route('system.roles.update', $this->testModel->id, false),
+            $this->testModel->toArray()
+        )->assertStatus(200)
+        ->assertJsonStructure(['message']);
 
-    /** @test */
-    public function update()
-    {
-        $role = Role::create($this->postParams());
-
-        $role->name = 'edited';
-
-        $this->patch(route('system.roles.update', $role->id, false), $role->toArray())
-            ->assertStatus(200)
-            ->assertJsonStructure(['message']);
-
-        $this->assertEquals('edited', $role->fresh()->name);
-    }
-
-    /** @test */
-    public function destroy()
-    {
-        $role = Role::create($this->postParams());
-
-        $this->delete(route('system.roles.destroy', $role->id, false))
-            ->assertStatus(200)
-            ->assertJsonStructure(['message']);
-
-        $this->assertNull($role->fresh());
+        $this->assertEquals('edited', $this->testModel->fresh()->name);
     }
 
     /** @test */
     public function cant_destroy_if_has_users()
     {
-        $role = Role::create($this->postParams());
+        $this->testModel->save();
 
-        $this->createUser($role);
+        factory(User::class)->create([
+            'role_id' => $this->testModel->id,
+        ]);
 
-        $this->delete(route('system.roles.destroy', $role->id, false))
+        $this->delete(route('system.roles.destroy', $this->testModel->id, false))
             ->assertStatus(409);
 
-        $this->assertNotNull($role->fresh());
-    }
-
-    private function createUser($role)
-    {
-        User::create([
-            'first_name' => $this->faker->firstName,
-            'last_name' => $this->faker->lastName,
-            'phone' => $this->faker->phoneNumber,
-            'is_active' => 1,
-            'email' => $this->faker->email,
-            'owner_id' => config('enso.config.ownerModel')::first(['id'])->id,
-            'role_id' => $role->id,
-        ]);
-    }
-
-    private function postParams()
-    {
-        return [
-            'name' => $this->faker->word,
-            'display_name' => $this->faker->word,
-            'description' => $this->faker->sentence,
-            'menu_id' => Menu::first(['id'])->id,
-            '_method' => 'POST',
-        ];
+        $this->assertNotNull($this->testModel->fresh());
     }
 }

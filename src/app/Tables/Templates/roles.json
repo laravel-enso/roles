@@ -40,7 +40,7 @@
         }, {
             "label": "Default Menu",
             "name": "defaultMenu",
-            "data": "menus.defaultMenu",
+            "data": "menus.name",
             "meta": ["searchable", "sortable"]
         }, {
             "label": "Created At",

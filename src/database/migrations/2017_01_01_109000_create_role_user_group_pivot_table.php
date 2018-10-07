@@ -3,19 +3,19 @@
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateOwnerRolePivotTable extends Migration
+class CreateRoleUserGroupPivotTable extends Migration
 {
     public function up()
     {
-        Schema::create('owner_role', function (Blueprint $table) {
+        Schema::create('role_user_group', function (Blueprint $table) {
             $table->integer('role_id')->unsigned()->index();
             $table->foreign('role_id')->references('id')->on('roles')
                 ->onUpdate('cascade')->onDelete('cascade');
-            $table->integer('owner_id')->unsigned()->index();
-            $table->foreign('owner_id')->references('id')->on('owners')
+            $table->integer('user_group_id')->unsigned()->index();
+            $table->foreign('user_group_id')->references('id')->on('user_groups')
                 ->onUpdate('cascade')->onDelete('cascade');
 
-            $table->primary(['role_id', 'owner_id']);
+            $table->primary(['role_id', 'user_group_id']);
 
             $table->timestamps();
         });
@@ -23,6 +23,6 @@ class CreateOwnerRolePivotTable extends Migration
 
     public function down()
     {
-        Schema::dropIfExists('owner_role');
+        Schema::dropIfExists('role_user_group');
     }
 }

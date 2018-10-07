@@ -13,15 +13,16 @@ class AppServiceProvider extends ServiceProvider
             Sync::class,
         ]);
 
-        $this->load();
-
-        $this->publish();
+        $this->load()
+            ->publish();
     }
 
     private function load()
     {
         $this->loadRoutesFrom(__DIR__.'/routes/api.php');
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
+
+        return $this;
     }
 
     private function publish()
