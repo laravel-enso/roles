@@ -11,6 +11,6 @@ $factory->define(Role::class, function (Faker $faker) {
         'description' => $faker->sentence,
         'menu_id' => function () {
             return factory(Menu::class)->create()->id;
-        }
+        },
     ];
 });
