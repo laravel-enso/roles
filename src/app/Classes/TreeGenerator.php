@@ -45,7 +45,7 @@ class TreeGenerator
 
         $this->nodes($branch)
             ->each(function ($node, $index) use (&$reference, $branch) {
-                if (!$reference->has($node)) {
+                if (! $reference->has($node)) {
                     $reference->$node = $this->isEndingNode($index)
                         ? $branch->permissions
                         : new Obj();

@@ -81,7 +81,7 @@ class ConfigWriter
 
     private function checkDirectory()
     {
-        if (!\File::isDirectory(config_path('local/roles/'))) {
+        if (! \File::isDirectory(config_path('local/roles/'))) {
             \File::makeDirectory(config_path('local/roles/'), 0755, true);
         }
     }
