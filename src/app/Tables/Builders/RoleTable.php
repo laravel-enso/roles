@@ -11,9 +11,9 @@ class RoleTable extends Table
 
     public function query()
     {
-        return Role::select(\DB::raw(
-            'roles.id as "dtRowId", roles.name, roles.display_name, roles.description,
-            roles.created_at, menus.name as defaultMenu'
-        ))->join('menus', 'roles.menu_id', '=', 'menus.id');
+        return Role::select(\DB::raw('
+            roles.id as "dtRowId", roles.name, roles.display_name, roles.description,
+            roles.created_at, menus.name as defaultMenu
+        '))->join('menus', 'roles.menu_id', '=', 'menus.id');
     }
 }

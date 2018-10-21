@@ -11,6 +11,7 @@ class CreateRoleUserGroupPivotTable extends Migration
             $table->integer('role_id')->unsigned()->index();
             $table->foreign('role_id')->references('id')->on('roles')
                 ->onUpdate('cascade')->onDelete('cascade');
+
             $table->integer('user_group_id')->unsigned()->index();
             $table->foreign('user_group_id')->references('id')->on('user_groups')
                 ->onUpdate('cascade')->onDelete('cascade');

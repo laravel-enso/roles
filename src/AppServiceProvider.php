@@ -13,11 +13,11 @@ class AppServiceProvider extends ServiceProvider
             Sync::class,
         ]);
 
-        $this->load()
-            ->publish();
+        $this->loadDependencies()
+            ->publishDependencies();
     }
 
-    private function load()
+    private function loadDependencies()
     {
         $this->loadRoutesFrom(__DIR__.'/routes/api.php');
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
@@ -25,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
         return $this;
     }
 
-    private function publish()
+    private function publishDependencies()
     {
         $this->publishes([
             __DIR__.'/resources/js' => resource_path('js'),
