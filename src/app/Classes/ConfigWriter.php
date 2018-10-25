@@ -4,6 +4,7 @@ namespace LaravelEnso\RoleManager\app\Classes;
 
 use LaravelEnso\MenuManager\app\Models\Menu;
 use LaravelEnso\RoleManager\app\Models\Role;
+use LaravelEnso\RoleManager\app\Exceptions\RoleException;
 
 class ConfigWriter
 {
@@ -16,7 +17,8 @@ class ConfigWriter
 
     public function run()
     {
-        $this->checkDirectory();
+        $this->validateRole()
+            ->validateDirectory();
 
         $replaceArray = array_filter($this->replaceArray());
 
@@ -38,7 +40,6 @@ class ConfigWriter
             '${name}' => $this->role->name,
             '${displayName}' => $this->role->display_name,
             '${defaultMenuRoute}' => $this->menuRoute(),
-            '${menus}' => $this->menus(),
             '${permissions}' => $this->permissions(),
         ];
     }
@@ -52,8 +53,10 @@ class ConfigWriter
 
     private function menuRoute()
     {
-        return Menu::find($this->role->menu_id)
-            ->link;
+        return Menu::with('permission')
+            ->find($this->role->menu_id)
+            ->permission
+            ->name;
     }
 
     private function menus()
@@ -79,7 +82,16 @@ class ConfigWriter
         return '"'.$enumeration.'"';
     }
 
-    private function checkDirectory()
+    private function validateRole()
+    {
+        if ($this->role->id === Role::AdminId) {
+            throw new RoleException('The admin role already has all permissions and does not need syncing');
+        }
+
+        return $this;
+    }
+
+    private function validateDirectory()
     {
         if (! \File::isDirectory(config_path('local/roles/'))) {
             \File::makeDirectory(config_path('local/roles/'), 0755, true);

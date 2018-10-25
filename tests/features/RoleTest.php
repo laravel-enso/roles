@@ -44,7 +44,7 @@ class RoleTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonFragment([
                 'redirect' => 'system.roles.edit',
-                'id' => $role->id,
+                'param' => ['role' => $role->id],
             ])->assertJsonStructure([
                 'message'
             ]);

@@ -16,8 +16,9 @@ class RoleConfiguratorController extends Controller
 
     public function update(Request $request, Role $role)
     {
-        tap($role)->updatePermissions($request->get('rolePermissions'))
-            ->updateMenus($request->get('roleMenus'));
+        $role->syncPermissions(
+            $request->get('rolePermissions')
+        );
 
         return [
             'message' => __("The role's permissions were successfully updated"),

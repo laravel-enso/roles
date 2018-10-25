@@ -1,6 +1,5 @@
 {
     "routePrefix": "system.roles",
-    "readSuffix": "getTableData",
     "crtNo": true,
     "buttons": [
         "excel", "create",
@@ -12,7 +11,7 @@
             "event": "configure-role"
         }, {
             "type": "row",
-            "icon": "file-alt",
+            "icon": "save",
             "class": "is-row-button",
             "routeSuffix": "writeConfig",
             "event": "write-config-file",

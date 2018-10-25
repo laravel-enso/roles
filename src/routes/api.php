@@ -8,8 +8,8 @@ Route::middleware(['web', 'auth', 'core'])
             ->group(function () {
                 Route::get('initTable', 'RoleTableController@init')
                     ->name('initTable');
-                Route::get('getTableData', 'RoleTableController@data')
-                    ->name('getTableData');
+                Route::get('tableData', 'RoleTableController@data')
+                    ->name('tableData');
                 Route::get('exportExcel', 'RoleTableController@excel')
                     ->name('exportExcel');
 

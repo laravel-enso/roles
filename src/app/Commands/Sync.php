@@ -22,15 +22,15 @@ class Sync extends Command
                 return config('local.roles.'.$config);
             })->sortBy('order')
             ->each(function ($config) {
-                $this->create($config);
+                $this->sync($config);
             });
 
         $this->info('Roles were successfully synced');
     }
 
-    private function create(array $config)
+    private function sync(array $config)
     {
-        $role = Role::firstOrCreate(
+        $role = Role::updateOrCreate(
             ['name' => $config['role']['name']],
             [
                 'display_name' => $config['role']['display_name'],
@@ -40,26 +40,21 @@ class Sync extends Command
 
         $role->permissions()
             ->sync($this->permissionIds($config));
-
-        $role->menus()
-            ->sync($this->menuIds($config));
     }
 
     private function menuId($config)
     {
-        return optional(Menu::whereLink($config['default_menu'])->first())
+        $permission = Permission::whereName($config['default_menu'])
+            ->first();
+
+        return Menu::wherePermissionId($permission->id)
+            ->first()
             ->id;
     }
 
     private function permissionIds($config)
     {
         return Permission::whereIn('name', $config['permissions'])
-                ->pluck('id');
-    }
-
-    private function menuIds($config)
-    {
-        return Menu::whereIn('name', $config['menus'])
                 ->pluck('id');
     }
 }

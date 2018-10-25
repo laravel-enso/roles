@@ -4,12 +4,8 @@ use LaravelEnso\StructureManager\app\Classes\StructureMigration;
 
 class CreateStructureForRoles extends StructureMigration
 {
-    protected $permissionGroup = [
-        'name' => 'system.roles', 'description' => 'Roles permissions group',
-    ];
-
     protected $permissions = [
-        ['name' => 'system.roles.getTableData', 'description' => 'Get table data for roles', 'type' => 0, 'is_default' => false],
+        ['name' => 'system.roles.tableData', 'description' => 'Get table data for roles', 'type' => 0, 'is_default' => false],
         ['name' => 'system.roles.exportExcel', 'description' => 'Export excel for roles', 'type' => 0, 'is_default' => false],
         ['name' => 'system.roles.initTable', 'description' => 'Init table for roles menu', 'type' => 0, 'is_default' => false],
         ['name' => 'system.roles.create', 'description' => 'Create role', 'type' => 1, 'is_default' => false],
@@ -26,7 +22,7 @@ class CreateStructureForRoles extends StructureMigration
     ];
 
     protected $menu = [
-        'name' => 'Roles', 'icon' => 'universal-access', 'link' => 'system.roles.index', 'order_index' => 999, 'has_children' => false,
+        'name' => 'Roles', 'icon' => 'universal-access', 'route' => 'system.roles.index', 'order_index' => 999, 'has_children' => false,
     ];
 
     protected $parentMenu = 'System';

@@ -5,7 +5,7 @@ namespace LaravelEnso\RoleManager\app\Http\Responses;
 use LaravelEnso\MenuManager\app\Models\Menu;
 use LaravelEnso\RoleManager\app\Models\Role;
 use Illuminate\Contracts\Support\Responsable;
-use LaravelEnso\RoleManager\app\Classes\TreeGenerator;
+use LaravelEnso\RoleManager\app\Classes\PermissionTree;
 
 class RoleConfigurator implements Responsable
 {
@@ -19,10 +19,8 @@ class RoleConfigurator implements Responsable
     public function toResponse($request)
     {
         return [
-            'menus' => $this->menus(),
-            'permissionTree' => (new TreeGenerator())->get(),
+            'permissions' => (new PermissionTree())->get(),
             'role' => $this->role,
-            'roleMenus' => $this->roleMenus(),
             'rolePermissions' => $this->rolePermissions(),
         ];
     }

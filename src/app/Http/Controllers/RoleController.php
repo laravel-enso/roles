@@ -14,14 +14,16 @@ class RoleController extends Controller
         return ['form' => $form->create()];
     }
 
-    public function store(ValidateRoleRequest $request, Role $role)
+    public function store(ValidateRoleRequest $request)
     {
-        $role = $role->storeWithPermissions($request->validated());
+        $role = Role::create($request->validated());
+
+        $role->addDefaultPermissions();
 
         return [
             'message' => __('The role was created!'),
             'redirect' => 'system.roles.edit',
-            'id' => $role->id,
+            'param' => ['role' => $role->id],
         ];
     }
 
