@@ -11,18 +11,11 @@ trait HasRoles
         return $this->belongsToMany(Role::class);
     }
 
-    public function roleList()
-    {
-        return $this->roles()
-            ->pluck('id')
-            ->toArray();
-    }
-
     public function updateWithRoles(array $attributes)
     {
         tap($this)->update($attributes)
             ->roles()
-            ->sync($attributes['roleList']);
+            ->sync($attributes['roles']);
     }
 
     public function storeWithRoles(array $attributes)
@@ -31,7 +24,7 @@ trait HasRoles
 
         tap($this)->save()
             ->roles()
-            ->sync($attributes['roleList']);
+            ->sync($attributes['roles']);
 
         return $this;
     }
