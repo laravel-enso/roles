@@ -9,7 +9,6 @@ class PermissionTree
 {
     private $tree;
     private $current;
-    private $branchNodesCount;
 
     public function __construct()
     {

@@ -20,15 +20,15 @@
     ],
     "require": {
         "php": ">=7.1.0",
-        "laravel-enso/core": "3.3.*",
-        "laravel-enso/formbuilder": "2.11.*",
-        "laravel-enso/helpers": "1.9.*",
+        "laravel-enso/core": "3.4.*",
+        "laravel-enso/formbuilder": "2.12.*",
+        "laravel-enso/helpers": "1.10.*",
         "laravel-enso/menumanager": "2.3.*",
         "laravel-enso/permissionmanager": "2.3.*",
         "laravel-enso/select": "2.7.*",
         "laravel-enso/structuremanager": "2.4.*",
-        "laravel-enso/vuecomponents": "2.5.*",
-        "laravel-enso/vuedatatable": "1.8.*"
+        "laravel-enso/vuecomponents": "2.6.*",
+        "laravel-enso/vuedatatable": "1.9.*"
     },
     "autoload": {
         "psr-4": {
