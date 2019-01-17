@@ -44,8 +44,9 @@ class PermissionTree
 
     private function emptyNode()
     {
-        return new Obj([
-            '_items' => collect(),
-        ]);
+        $node = new Obj();
+        $node->set('_items', collect());
+
+        return $node;
     }
 }
