@@ -25,7 +25,7 @@
         "laravel-enso/helpers": "1.10.*",
         "laravel-enso/menumanager": "2.3.*",
         "laravel-enso/permissionmanager": "2.3.*",
-        "laravel-enso/select": "2.7.*",
+        "laravel-enso/select": "2.8.*",
         "laravel-enso/structuremanager": "2.5.*",
         "laravel-enso/vuecomponents": "2.7.*",
         "laravel-enso/vuedatatable": "1.9.*"
