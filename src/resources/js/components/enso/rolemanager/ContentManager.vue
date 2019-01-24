@@ -54,11 +54,9 @@ export default {
         },
     },
 
-    data() {
-        return {
-            checkedIds: [],
-        };
-    },
+    data: () => ({
+        checkedIds: [],
+    }),
 
     computed: {
         permissionIds() {
