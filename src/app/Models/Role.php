@@ -58,4 +58,13 @@ class Role extends Model
 
         parent::delete();
     }
+
+    public function scopeVisible($query)
+    {
+        return auth()->user()->belongsToAdminGroup()
+            ? $query
+            : $query->whereHas('userGroups', function ($userGroup) {
+                $userGroup->whereId(auth()->user()->group_id);
+            });
+    }
 }
