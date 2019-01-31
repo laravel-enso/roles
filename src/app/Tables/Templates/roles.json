@@ -1,6 +1,7 @@
 {
     "routePrefix": "system.roles",
     "crtNo": true,
+    "cache": true,
     "buttons": [
         "excel", "create",
         {
