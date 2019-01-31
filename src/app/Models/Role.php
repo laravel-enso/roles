@@ -7,10 +7,13 @@ use Illuminate\Database\Eloquent\Model;
 use LaravelEnso\Core\app\Models\UserGroup;
 use LaravelEnso\MenuManager\app\Models\Menu;
 use LaravelEnso\PermissionManager\app\Models\Permission;
+use LaravelEnso\Multitenancy\app\Traits\SystemConnection;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class Role extends Model
 {
+    use SystemConnection;
+
     const AdminId = 1;
     const SupervisorId = 2;
 
