@@ -10,5 +10,8 @@ class RoleSelectController extends Controller
 {
     use OptionsBuilder;
 
-    protected $model = Role::class;
+    public function query()
+    {
+        return Role::visible();
+    }
 }
