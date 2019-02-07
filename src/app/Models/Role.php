@@ -8,12 +8,11 @@ use LaravelEnso\Core\app\Models\UserGroup;
 use LaravelEnso\MenuManager\app\Models\Menu;
 use LaravelEnso\VueDatatable\app\Traits\TableCache;
 use LaravelEnso\PermissionManager\app\Models\Permission;
-use LaravelEnso\Multitenancy\app\Traits\SystemConnection;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class Role extends Model
 {
-    use SystemConnection, TableCache;
+    use TableCache;
 
     const AdminId = 1;
     const SupervisorId = 2;
