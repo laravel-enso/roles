@@ -17,7 +17,7 @@ class RoleTest extends TestCase
     private $permissionGroup = 'system.roles';
     private $testModel;
 
-    protected function setUp()
+    protected function setUp(): void
     {
         parent::setUp();
 
