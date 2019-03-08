@@ -28,14 +28,6 @@ class AppServiceProvider extends ServiceProvider
     private function publishDependencies()
     {
         $this->publishes([
-            __DIR__.'/resources/js' => resource_path('js'),
-        ], 'roles-assets');
-
-        $this->publishes([
-            __DIR__.'/resources/js' => resource_path('js'),
-        ], 'enso-assets');
-
-        $this->publishes([
             __DIR__.'/database/factories' => database_path('factories'),
         ], 'roles-factory');
 
