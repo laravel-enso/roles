@@ -9,7 +9,7 @@ class ConfigWriterController
 {
     public function __invoke(Role $role)
     {
-        (new ConfigWriter($role))->run();
+        (new ConfigWriter($role))->handle();
 
         return [
             'message' => 'The config file was successfully written',

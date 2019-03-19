@@ -15,7 +15,7 @@ class ConfigWriter
         $this->role = $role;
     }
 
-    public function run()
+    public function handle()
     {
         $this->validateRole()
             ->validateDirectory();
@@ -59,27 +59,18 @@ class ConfigWriter
             ->name;
     }
 
-    private function menus()
-    {
-        $roles = $this->role->menus()
-            ->pluck('name')
-            ->implode('",'.PHP_EOL.'        "');
-
-        return $this->format($roles);
-    }
-
     private function permissions()
     {
         $permissions = $this->role->permissions()
             ->pluck('name')
-            ->implode('",'.PHP_EOL.'        "');
+            ->implode("',".PHP_EOL."        '");
 
         return $this->format($permissions);
     }
 
     private function format($enumeration)
     {
-        return '"'.$enumeration.'"';
+        return "'".$enumeration."'";
     }
 
     private function validateRole()
