@@ -45,9 +45,7 @@ class RoleTest extends TestCase
             ->assertJsonFragment([
                 'redirect' => 'system.roles.edit',
                 'param' => ['role' => $role->id],
-            ])->assertJsonStructure([
-                'message'
-            ]);
+            ])->assertJsonStructure(['message']);
     }
 
     /** @test */
@@ -63,7 +61,7 @@ class RoleTest extends TestCase
         )->assertStatus(200)
         ->assertJsonStructure(['message']);
 
-        $this->assertEquals('edited', $this->testModel->fresh()->name);
+        $this->assertEquals($this->testModel->name, $this->testModel->fresh()->name);
     }
 
     /** @test */

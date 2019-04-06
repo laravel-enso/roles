@@ -9,9 +9,7 @@ class AppServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->commands([
-            Sync::class,
-        ]);
+        $this->commands(Sync::class);
 
         $this->loadDependencies()
             ->publishDependencies();
@@ -20,6 +18,7 @@ class AppServiceProvider extends ServiceProvider
     private function loadDependencies()
     {
         $this->loadRoutesFrom(__DIR__.'/routes/api.php');
+
         $this->loadMigrationsFrom(__DIR__.'/database/migrations');
 
         return $this;
@@ -42,10 +41,5 @@ class AppServiceProvider extends ServiceProvider
         $this->publishes([
             __DIR__.'/database/seeds' => database_path('seeds'),
         ], 'enso-seeders');
-    }
-
-    public function register()
-    {
-        //
     }
 }

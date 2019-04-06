@@ -19,8 +19,6 @@ class Role extends Model
 
     protected $fillable = ['menu_id', 'name', 'display_name', 'description'];
 
-    protected $cachedTable = 'roles';
-
     public function menu()
     {
         return $this->belongsTo(Menu::class);

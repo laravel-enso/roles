@@ -25,5 +25,6 @@ Route::middleware(['web', 'auth', 'core'])
                     ->name('writeConfig');
             });
 
-        Route::resource('roles', 'RoleController', ['except' => ['show', 'index']]);
+        Route::resource('roles', 'RoleController')
+            ->except('show', 'index');
     });
