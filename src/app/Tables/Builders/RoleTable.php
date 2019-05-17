@@ -1,9 +1,9 @@
 <?php
 
-namespace LaravelEnso\RoleManager\app\Tables\Builders;
+namespace LaravelEnso\Roles\app\Tables\Builders;
 
-use LaravelEnso\RoleManager\app\Models\Role;
-use LaravelEnso\VueDatatable\app\Classes\Table;
+use LaravelEnso\Roles\app\Models\Role;
+use LaravelEnso\Tables\app\Services\Table;
 
 class RoleTable extends Table
 {
@@ -11,9 +11,9 @@ class RoleTable extends Table
 
     public function query()
     {
-        return Role::select(\DB::raw('
+        return Role::selectRaw('
             roles.id as "dtRowId", roles.name, roles.display_name, roles.description,
             roles.created_at, menus.name as defaultMenu
-        '))->join('menus', 'roles.menu_id', '=', 'menus.id');
+        ')->join('menus', 'roles.menu_id', '=', 'menus.id');
     }
 }

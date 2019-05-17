@@ -1,21 +1,18 @@
 <?php
 
-namespace LaravelEnso\RoleManager\app\Models;
+namespace LaravelEnso\Roles\app\Models;
 
 use LaravelEnso\Core\app\Models\User;
+use LaravelEnso\Menus\app\Models\Menu;
 use Illuminate\Database\Eloquent\Model;
 use LaravelEnso\Core\app\Models\UserGroup;
-use LaravelEnso\MenuManager\app\Models\Menu;
-use LaravelEnso\VueDatatable\app\Traits\TableCache;
-use LaravelEnso\PermissionManager\app\Models\Permission;
+use LaravelEnso\Permissions\app\Models\Permission;
+use LaravelEnso\Tables\app\Traits\TableCache;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class Role extends Model
 {
     use TableCache;
-
-    const AdminId = 1;
-    const SupervisorId = 2;
 
     protected $fillable = ['menu_id', 'name', 'display_name', 'description'];
 

@@ -1,11 +1,11 @@
 <?php
 
-namespace LaravelEnso\RoleManager\app\Http\Requests;
+namespace LaravelEnso\Roles\app\Http\Requests;
 
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ValidateRoleRequest extends FormRequest
+class ValidateRoleStore extends FormRequest
 {
     public function authorize()
     {
@@ -14,17 +14,16 @@ class ValidateRoleRequest extends FormRequest
 
     public function rules()
     {
-        $nameUnique = Rule::unique('roles', 'name');
-
-        $nameUnique = $this->method() === 'PATCH'
-            ? $nameUnique->ignore($this->route('role')->id)
-            : $nameUnique;
-
         return [
-            'name' => ['required', $nameUnique],
+            'name' => ['required', $this->nameUnique()],
             'display_name' => 'required',
             'description' => 'nullable',
             'menu_id' => 'required',
         ];
+    }
+
+    protected function nameUnique()
+    {
+        return Rule::unique('roles', 'name');
     }
 }

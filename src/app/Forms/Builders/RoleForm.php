@@ -1,10 +1,10 @@
 <?php
 
-namespace LaravelEnso\RoleManager\app\Forms\Builders;
+namespace LaravelEnso\Roles\app\Forms\Builders;
 
-use LaravelEnso\MenuManager\app\Models\Menu;
-use LaravelEnso\RoleManager\app\Models\Role;
-use LaravelEnso\FormBuilder\app\Classes\Form;
+use LaravelEnso\Menus\app\Models\Menu;
+use LaravelEnso\Roles\app\Models\Role;
+use LaravelEnso\Forms\app\Services\Form;
 
 class RoleForm
 {

@@ -1,13 +1,13 @@
 {
-    "name": "laravel-enso/rolemanager",
+    "name": "laravel-enso/roles",
     "description": "Role Manager dependency for Laravel Enso",
     "keywords": [
         "laravel-enso",
-        "rolemanager",
+        "roles",
         "role-manager",
         "laravel-roles"
     ],
-    "homepage": "https://github.com/laravel-enso/RoleManager",
+    "homepage": "https://github.com/laravel-enso/Roles",
     "type": "library",
     "license": "MIT",
     "authors": [
@@ -20,24 +20,24 @@
     ],
     "require": {
         "php": ">=7.1.0",
-        "laravel-enso/core": "4.2.*",
-        "laravel-enso/formbuilder": "3.0.*",
-        "laravel-enso/helpers": "1.10.*",
-        "laravel-enso/menumanager": "3.0.*",
-        "laravel-enso/permissionmanager": "3.0.*",
-        "laravel-enso/select": "3.0.*",
-        "laravel-enso/structuremanager": "3.0.*",
-        "laravel-enso/vuedatatable": "2.0.*"
+        "laravel-enso/core": "4.3.*",
+        "laravel-enso/forms": "3.1.*",
+        "laravel-enso/helpers": "1.11.*",
+        "laravel-enso/menus": "3.1.*",
+        "laravel-enso/permissions": "3.1.*",
+        "laravel-enso/select": "3.1.*",
+        "laravel-enso/migrator": "1.0.*",
+        "laravel-enso/tables": "2.1.*"
     },
     "autoload": {
         "psr-4": {
-            "LaravelEnso\\RoleManager\\": "src/"
+            "LaravelEnso\\Roles\\": "src/"
         }
     },
     "extra": {
         "laravel": {
             "providers": [
-                "LaravelEnso\\RoleManager\\AppServiceProvider"
+                "LaravelEnso\\Roles\\AppServiceProvider"
             ],
             "aliases": {}
         }

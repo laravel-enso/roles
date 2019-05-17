@@ -1,8 +1,8 @@
 <?php
 
-use LaravelEnso\StructureManager\app\Classes\StructureMigration;
+use LaravelEnso\Migrator\app\Database\Migration;
 
-class CreateStructureForRoles extends StructureMigration
+class CreateStructureForRoles extends Migration
 {
     protected $permissions = [
         ['name' => 'system.roles.tableData', 'description' => 'Get table data for roles', 'type' => 0, 'is_default' => false],

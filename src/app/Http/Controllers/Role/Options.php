@@ -1,12 +1,12 @@
 <?php
 
-namespace LaravelEnso\RoleManager\app\Http\Controllers;
+namespace LaravelEnso\Roles\app\Http\Controllers\Role;
 
 use Illuminate\Routing\Controller;
-use LaravelEnso\RoleManager\app\Models\Role;
+use LaravelEnso\Roles\app\Models\Role;
 use LaravelEnso\Select\app\Traits\OptionsBuilder;
 
-class RoleSelectController extends Controller
+class Options extends Controller
 {
     use OptionsBuilder;
 

@@ -1,14 +1,19 @@
 <?php
 
-namespace LaravelEnso\RoleManager;
+namespace LaravelEnso\Roles;
 
+use LaravelEnso\Roles\app\Enums\Roles;
 use Illuminate\Support\ServiceProvider;
-use LaravelEnso\RoleManager\app\Commands\Sync;
+use LaravelEnso\Roles\app\Commands\Sync;
 
 class AppServiceProvider extends ServiceProvider
 {
     public function boot()
     {
+        $this->app->bind('roles', function () {
+            return new Roles;
+        });
+
         $this->commands(Sync::class);
 
         $this->loadDependencies()

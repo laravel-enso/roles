@@ -1,10 +1,11 @@
 <?php
 
-namespace LaravelEnso\RoleManager\app\Classes;
+namespace LaravelEnso\Roles\app\Services;
 
-use LaravelEnso\MenuManager\app\Models\Menu;
-use LaravelEnso\RoleManager\app\Models\Role;
-use LaravelEnso\RoleManager\app\Exceptions\RoleException;
+use Illuminate\Support\Facades\App;
+use LaravelEnso\Menus\app\Models\Menu;
+use LaravelEnso\Roles\app\Models\Role;
+use LaravelEnso\Roles\app\Exceptions\RoleException;
 
 class ConfigWriter
 {
@@ -75,7 +76,7 @@ class ConfigWriter
 
     private function validateRole()
     {
-        if ($this->role->id === Role::AdminId) {
+        if ($this->role->id === App::make('roles')::Admin) {
             throw new RoleException('The admin role already has all permissions and does not need syncing');
         }
 

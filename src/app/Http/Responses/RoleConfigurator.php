@@ -1,11 +1,10 @@
 <?php
 
-namespace LaravelEnso\RoleManager\app\Http\Responses;
+namespace LaravelEnso\Roles\app\Http\Responses;
 
-use LaravelEnso\MenuManager\app\Models\Menu;
-use LaravelEnso\RoleManager\app\Models\Role;
+use LaravelEnso\Roles\app\Models\Role;
 use Illuminate\Contracts\Support\Responsable;
-use LaravelEnso\RoleManager\app\Classes\PermissionTree;
+use LaravelEnso\Roles\app\Services\PermissionTree;
 
 class RoleConfigurator implements Responsable
 {
@@ -23,19 +22,6 @@ class RoleConfigurator implements Responsable
             'role' => $this->role,
             'rolePermissions' => $this->rolePermissions(),
         ];
-    }
-
-    private function menus()
-    {
-        return Menu::orderBy('name')
-            ->get(['id', 'name']);
-    }
-
-    public function roleMenus()
-    {
-        return $this->role
-            ->menus()
-            ->pluck('id');
     }
 
     public function rolePermissions()

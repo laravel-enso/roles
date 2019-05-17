@@ -1,11 +1,12 @@
 <?php
 
-namespace LaravelEnso\RoleManager\app\Commands;
+namespace LaravelEnso\Roles\app\Commands;
 
 use Illuminate\Console\Command;
-use LaravelEnso\MenuManager\app\Models\Menu;
-use LaravelEnso\RoleManager\app\Models\Role;
-use LaravelEnso\PermissionManager\app\Models\Permission;
+use Illuminate\Support\Facades\File;
+use LaravelEnso\Menus\app\Models\Menu;
+use LaravelEnso\Roles\app\Models\Role;
+use LaravelEnso\Permissions\app\Models\Permission;
 
 class Sync extends Command
 {
@@ -15,7 +16,7 @@ class Sync extends Command
 
     public function handle()
     {
-        collect(\File::files(config_path('local/roles')))
+        collect(File::files(config_path('local/roles')))
             ->map(function ($file) {
                 $config = str_replace('.php', '', $file->getFilename());
 

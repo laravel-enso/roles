@@ -1,9 +1,9 @@
 <?php
 
-namespace LaravelEnso\RoleManager\app\Classes;
+namespace LaravelEnso\Roles\app\Services;
 
 use LaravelEnso\Helpers\app\Classes\Obj;
-use LaravelEnso\PermissionManager\app\Models\Permission;
+use LaravelEnso\Permissions\app\Models\Permission;
 
 class PermissionTree
 {

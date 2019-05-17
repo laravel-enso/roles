@@ -1,30 +1,29 @@
 <?php
 
 Route::middleware(['web', 'auth', 'core'])
-    ->prefix('api/system')->as('system.')
-    ->namespace('LaravelEnso\RoleManager\app\Http\Controllers')
+    ->prefix('api/system/roles')->as('system.roles.')
+    ->namespace('LaravelEnso\Roles\app\Http\Controllers')
     ->group(function () {
-        Route::prefix('roles')->as('roles.')
+        Route::namespace('Role')
             ->group(function () {
-                Route::get('initTable', 'RoleTableController@init')
-                    ->name('initTable');
-                Route::get('tableData', 'RoleTableController@data')
-                    ->name('tableData');
-                Route::get('exportExcel', 'RoleTableController@excel')
-                    ->name('exportExcel');
+                Route::get('create', 'Create')->name('create');
+                Route::post('', 'Store')->name('store');
+                Route::get('{role}/edit', 'Edit')->name('edit');
+                Route::patch('{role}', 'Update')->name('update');
+                Route::delete('{role}', 'Destroy')->name('destroy');
 
-                Route::get('options', 'RoleSelectController@options')
-                    ->name('options');
+                Route::get('initTable', 'Table@init')->name('initTable');
+                Route::get('tableData', 'Table@data')->name('tableData');
+                Route::get('exportExcel', 'Table@excel')->name('exportExcel');
 
-                Route::get('getPermissions/{role}', 'RoleConfiguratorController@index')
-                    ->name('getPermissions');
-                Route::post('setPermissions/{role}', 'RoleConfiguratorController@update')
-                    ->name('setPermissions');
-
-                Route::post('writeConfig/{role}', 'ConfigWriterController')
-                    ->name('writeConfig');
+                Route::get('options', 'Options')->name('options');
             });
 
-        Route::resource('roles', 'RoleController')
-            ->except('show', 'index');
+        Route::namespace('Configure')
+            ->group(function () {
+                Route::get('getPermissions/{role}', 'Index')->name('getPermissions');
+                Route::post('setPermissions/{role}', 'Update')->name('setPermissions');
+            });
+
+        Route::post('writeConfig/{role}', 'ConfigWriter')->name('writeConfig');
     });

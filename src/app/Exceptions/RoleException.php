@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\RoleManager\app\Exceptions;
+namespace LaravelEnso\Roles\app\Exceptions;
 
 use LaravelEnso\Helpers\app\Exceptions\EnsoException;
 
