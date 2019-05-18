@@ -18,7 +18,7 @@ class ValidateRoleStore extends FormRequest
             'name' => ['required', $this->nameUnique()],
             'display_name' => 'required',
             'description' => 'nullable',
-            'menu_id' => 'required',
+            'menu_id' => 'nullable|exists:menus,id',
         ];
     }
 

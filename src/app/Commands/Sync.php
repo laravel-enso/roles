@@ -45,6 +45,10 @@ class Sync extends Command
 
     private function menuId($config)
     {
+        if ($config['default_menu'] === null) {
+            return null;
+        }
+
         $permission = Permission::whereName($config['default_menu'])
             ->first();
 

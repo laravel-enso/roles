@@ -6,8 +6,8 @@ use LaravelEnso\Core\app\Models\User;
 use LaravelEnso\Menus\app\Models\Menu;
 use Illuminate\Database\Eloquent\Model;
 use LaravelEnso\Core\app\Models\UserGroup;
-use LaravelEnso\Permissions\app\Models\Permission;
 use LaravelEnso\Tables\app\Traits\TableCache;
+use LaravelEnso\Permissions\app\Models\Permission;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class Role extends Model
