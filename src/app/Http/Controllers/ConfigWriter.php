@@ -12,7 +12,7 @@ class ConfigWriter
         (new Service($role))->handle();
 
         return [
-            'message' => 'The config file was successfully written',
+            'message' => __('The config file was successfully written'),
         ];
     }
 }

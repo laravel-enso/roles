@@ -15,7 +15,7 @@
             "icon": "save",
             "class": "is-row-button",
             "routeSuffix": "writeConfig",
-            "event": "write-config-file",
+            "postEvent": "write-config-file",
             "action": "ajax",
             "method": "POST"
         },
