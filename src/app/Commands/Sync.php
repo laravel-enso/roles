@@ -16,6 +16,12 @@ class Sync extends Command
 
     public function handle()
     {
+        if (! File::isDirectory(config_path('local/roles'))) {
+            $this->error('The "roles" directory is not present inside the local configuration folder!');
+
+            return;
+        }
+
         collect(File::files(config_path('local/roles')))
             ->map(function ($file) {
                 $config = str_replace('.php', '', $file->getFilename());
