@@ -17,7 +17,7 @@ class Sync extends Command
     public function handle()
     {
         if (! File::isDirectory(config_path('local/roles'))) {
-            $this->error('The "roles" directory is not present inside the local configuration folder!');
+            $this->warning('No action will be made due to missing the "roles" directory inside the local configuration folder!');
 
             return;
         }
@@ -37,16 +37,18 @@ class Sync extends Command
 
     private function sync(array $config)
     {
-        $role = Role::updateOrCreate(
-            ['name' => $config['role']['name']],
-            [
+        $role = Role::updateOrCreate([
+                'name' => $config['role']['name']
+            ], [
                 'display_name' => $config['role']['display_name'],
                 'menu_id' => $this->menuId($config),
             ]
         );
 
         $role->permissions()
-            ->sync($this->permissionIds($config));
+            ->sync(
+                $this->permissionIds($config)
+            );
     }
 
     private function menuId($config)
@@ -58,14 +60,17 @@ class Sync extends Command
         $permission = Permission::whereName($config['default_menu'])
             ->first();
 
-        return Menu::wherePermissionId($permission->id)
-            ->first()
+        return Menu::query()
+            ->wherePermissionId(
+                optional($permission)->id
+            )->first()
             ->id;
     }
 
     private function permissionIds($config)
     {
-        return Permission::whereIn('name', $config['permissions'])
+        return Permission::query()
+                ->whereIn('name', $config['permissions'])
                 ->pluck('id');
     }
 }
