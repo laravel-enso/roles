@@ -38,7 +38,7 @@ class Sync extends Command
     private function sync(array $config)
     {
         $role = Role::updateOrCreate([
-                'name' => $config['role']['name']
+                'name' => $config['role']['name'],
             ], [
                 'display_name' => $config['role']['display_name'],
                 'menu_id' => $this->menuId($config),
