@@ -17,7 +17,7 @@ class Sync extends Command
     public function handle()
     {
         if (! File::isDirectory(config_path('local/roles'))) {
-            $this->warning('No action will be made due to missing the "roles" directory inside the local configuration folder!');
+            $this->warn('No action will be made due to missing the "roles" directory inside the local configuration folder!');
 
             return;
         }
