@@ -2,6 +2,7 @@
 
 namespace LaravelEnso\Roles\app\Models;
 
+use Illuminate\Support\Facades\Auth;
 use LaravelEnso\Core\app\Models\User;
 use LaravelEnso\Menus\app\Models\Menu;
 use Illuminate\Database\Eloquent\Model;
@@ -50,9 +51,9 @@ class Role extends Model
 
     public function delete()
     {
-        if ($this->users()->count()) {
+        if ($this->users()->exists()) {
             throw new ConflictHttpException(__(
-                'Operation failed because the role is in use'
+                'You cannot delete this role while being in use by users'
             ));
         }
 
@@ -61,10 +62,10 @@ class Role extends Model
 
     public function scopeVisible($query)
     {
-        return auth()->user()->belongsToAdminGroup()
+        return Auth::user()->belongsToAdminGroup()
             ? $query
             : $query->whereHas('userGroups', function ($userGroup) {
-                $userGroup->whereId(auth()->user()->group_id);
+                $userGroup->whereId(Auth::user()->group_id);
             });
     }
 }

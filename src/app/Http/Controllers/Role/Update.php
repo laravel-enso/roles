@@ -12,8 +12,6 @@ class Update extends Controller
     {
         $role->update($request->validated());
 
-        return [
-            'message' => __('The role was successfully updated'),
-        ];
+        return ['message' => __('The role was successfully updated')];
     }
 }

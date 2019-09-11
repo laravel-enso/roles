@@ -26,8 +26,6 @@ class RoleConfigurator implements Responsable
 
     public function rolePermissions()
     {
-        return $this->role
-            ->permissions()
-            ->pluck('id');
+        return $this->role->permissions()->pluck('id');
     }
 }

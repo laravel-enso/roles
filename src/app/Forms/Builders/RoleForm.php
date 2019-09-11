@@ -8,13 +8,13 @@ use LaravelEnso\Forms\app\Services\Form;
 
 class RoleForm
 {
-    private const FormPath = __DIR__.'/../Templates/role.json';
+    protected const FormPath = __DIR__.'/../Templates/role.json';
 
-    private $form;
+    protected $form;
 
     public function __construct()
     {
-        $this->form = (new Form(self::FormPath))
+        $this->form = (new Form(static::FormPath))
             ->options('menu_id', Menu::isNotParent()->get(['name', 'id']));
     }
 

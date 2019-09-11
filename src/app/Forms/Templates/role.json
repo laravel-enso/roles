@@ -10,8 +10,7 @@
                 "type": "input",
                 "content": "text"
             }
-        },
-        {
+        }, {
             "label": "Display Name",
             "name": "display_name",
             "value": "",
@@ -19,8 +18,7 @@
                 "type": "input",
                 "content": "text"
             }
-        },
-        {
+        }, {
             "label": "Description",
             "name": "description",
             "value": "",
@@ -28,8 +26,7 @@
                 "type": "input",
                 "content": "text"
             }
-        },
-        {
+        }, {
             "label": "Default Menu",
             "name": "menu_id",
             "value": null,

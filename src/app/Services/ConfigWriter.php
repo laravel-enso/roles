@@ -3,7 +3,9 @@
 namespace LaravelEnso\Roles\app\Services;
 
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\FacadesFile;
 use LaravelEnso\Menus\app\Models\Menu;
+use LaravelEnso\Roles\app\Enums\Roles;
 use LaravelEnso\Roles\app\Models\Role;
 use LaravelEnso\Roles\app\Exceptions\RoleException;
 
@@ -31,7 +33,7 @@ class ConfigWriter
 
         $path = config_path('local/roles/'.$this->role->name.'.php');
 
-        \File::put($path, $migration);
+        File::put($path, $migration);
     }
 
     private function replaceArray()
@@ -76,7 +78,7 @@ class ConfigWriter
 
     private function validateRole()
     {
-        if ($this->role->id === App::make('roles')::Admin) {
+        if ($this->role->id === App::make(Roles::class)::Admin) {
             throw new RoleException('The admin role already has all permissions and does not need syncing');
         }
 
@@ -85,13 +87,13 @@ class ConfigWriter
 
     private function validateDirectory()
     {
-        if (! \File::isDirectory(config_path('local/roles/'))) {
-            \File::makeDirectory(config_path('local/roles/'), 0755, true);
+        if (! File::isDirectory(config_path('local/roles/'))) {
+            File::makeDirectory(config_path('local/roles/'), 0755, true);
         }
     }
 
     private function stub()
     {
-        return \File::get(__DIR__.'/stubs/role.stub');
+        return File::get(__DIR__.'/stubs/role.stub');
     }
 }

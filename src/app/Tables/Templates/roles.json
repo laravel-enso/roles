@@ -21,32 +21,30 @@
         },
         "edit", "destroy"
     ],
-    "columns": [
-        {
-            "label": "Name",
-            "name": "name",
-            "data": "roles.name",
-            "meta": ["searchable","sortable"]
-        }, {
-            "label": "Display Name",
-            "name": "display_name",
-            "data": "roles.display_name",
-            "meta": ["searchable","sortable"]
-        }, {
-            "label": "Description",
-            "name": "description",
-            "data": "roles.description",
-            "meta": ["searchable","sortable"]
-        }, {
-            "label": "Default Menu",
-            "name": "defaultMenu",
-            "data": "menus.name",
-            "meta": ["searchable", "sortable"]
-        }, {
-            "label": "Created At",
-            "name": "created_at",
-            "data": "roles.created_at",
-            "meta": ["sortable", "date"]
-        }
-    ]
+    "columns": [{
+        "label": "Name",
+        "name": "name",
+        "data": "roles.name",
+        "meta": ["searchable","sortable"]
+    }, {
+        "label": "Display Name",
+        "name": "display_name",
+        "data": "roles.display_name",
+        "meta": ["searchable","sortable"]
+    }, {
+        "label": "Description",
+        "name": "description",
+        "data": "roles.description",
+        "meta": ["searchable","sortable"]
+    }, {
+        "label": "Default Menu",
+        "name": "defaultMenu",
+        "data": "menus.name",
+        "meta": ["searchable", "sortable"]
+    }, {
+        "label": "Created At",
+        "name": "created_at",
+        "data": "roles.created_at",
+        "meta": ["sortable", "date"]
+    }]
 }
