@@ -9,11 +9,12 @@ use Illuminate\Database\Eloquent\Model;
 use LaravelEnso\Core\app\Models\UserGroup;
 use LaravelEnso\Tables\app\Traits\TableCache;
 use LaravelEnso\Permissions\app\Models\Permission;
+use LaravelEnso\Rememberable\app\Traits\Rememberable;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class Role extends Model
 {
-    use TableCache;
+    use Rememberable, TableCache;
 
     protected $fillable = ['menu_id', 'name', 'display_name', 'description'];
 
