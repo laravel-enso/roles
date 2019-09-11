@@ -2,7 +2,6 @@
 
 namespace LaravelEnso\Roles;
 
-use LaravelEnso\Roles\app\Enums\Roles;
 use Illuminate\Support\ServiceProvider;
 use LaravelEnso\Roles\app\Commands\Sync;
 
