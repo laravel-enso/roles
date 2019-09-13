@@ -3,6 +3,7 @@
 namespace LaravelEnso\Roles\app\Services;
 
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\File;
 use LaravelEnso\Menus\app\Models\Menu;
 use LaravelEnso\Roles\app\Enums\Roles;
 use LaravelEnso\Roles\app\Models\Role;
