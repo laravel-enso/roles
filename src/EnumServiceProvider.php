@@ -7,7 +7,7 @@ use LaravelEnso\Enums\EnumServiceProvider as ServiceProvider;
 
 class EnumServiceProvider extends ServiceProvider
 {
-    protected $register = [
+    public $register = [
         'roles' => Roles::class,
     ];
 }
