@@ -4,11 +4,11 @@ namespace LaravelEnso\Roles\app\Http\Controllers\Role;
 
 use Illuminate\Routing\Controller;
 use LaravelEnso\Roles\app\Models\Role;
-use LaravelEnso\Roles\app\Http\Requests\ValidateRoleStore;
+use LaravelEnso\Roles\app\Http\Requests\ValidateRoleRequest;
 
 class Store extends Controller
 {
-    public function __invoke(ValidateRoleStore $request, Role $role)
+    public function __invoke(ValidateRoleRequest $request, Role $role)
     {
         tap($role)->fill($request->validated())
             ->save();

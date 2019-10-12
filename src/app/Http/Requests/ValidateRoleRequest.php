@@ -5,7 +5,7 @@ namespace LaravelEnso\Roles\app\Http\Requests;
 use Illuminate\Validation\Rule;
 use Illuminate\Foundation\Http\FormRequest;
 
-class ValidateRoleStore extends FormRequest
+class ValidateRoleRequest extends FormRequest
 {
     public function authorize()
     {
@@ -24,6 +24,7 @@ class ValidateRoleStore extends FormRequest
 
     protected function nameUnique()
     {
-        return Rule::unique('roles', 'name');
+        return Rule::unique('roles', 'name')
+            ->ignore(optional($this->route('role'))->id);
     }
 }
