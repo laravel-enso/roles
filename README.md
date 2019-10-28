@@ -18,17 +18,7 @@ For live examples and demos, you may visit [laravel-enso.com](https://www.larave
 
 <sup>click on the photo to view a short demo in compatible browsers</sup>
 
-## Installation
-
-Comes pre-installed in Enso.
-
-## Features
-
-- manages roles for the users of the application
-- uses a hierarchical organization of permissions, which allow for a visual and intuitive update of permissions for a certain role
-- comes by default with the `Administrator` and `Supervisor` roles
-
-### Configuration & Usage
+### Installation, Configuration & Usage
 
 Be sure to check out the full documentation for this package available at [docs.laravel-enso.com](https://docs.laravel-enso.com/backend/roles.html)
 
