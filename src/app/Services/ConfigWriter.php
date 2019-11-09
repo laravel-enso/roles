@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\File;
 use LaravelEnso\Menus\app\Models\Menu;
 use LaravelEnso\Roles\app\Enums\Roles;
-use LaravelEnso\Roles\app\Models\Role;
 use LaravelEnso\Roles\app\Exceptions\RoleException;
+use LaravelEnso\Roles\app\Models\Role;
 
 class ConfigWriter
 {

@@ -3,8 +3,8 @@
 namespace LaravelEnso\Roles\app\Http\Controllers\Role;
 
 use Illuminate\Routing\Controller;
-use LaravelEnso\Tables\app\Traits\Excel;
 use LaravelEnso\Roles\app\Tables\Builders\RoleTable;
+use LaravelEnso\Tables\app\Traits\Excel;
 
 class ExportExcel extends Controller
 {

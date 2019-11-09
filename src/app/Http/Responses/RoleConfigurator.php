@@ -2,8 +2,8 @@
 
 namespace LaravelEnso\Roles\app\Http\Responses;
 
-use LaravelEnso\Roles\app\Models\Role;
 use Illuminate\Contracts\Support\Responsable;
+use LaravelEnso\Roles\app\Models\Role;
 use LaravelEnso\Roles\app\Services\PermissionTree;
 
 class RoleConfigurator implements Responsable

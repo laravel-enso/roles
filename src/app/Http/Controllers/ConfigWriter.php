@@ -3,8 +3,8 @@
 namespace LaravelEnso\Roles\app\Http\Controllers;
 
 use LaravelEnso\Roles\app\Enums\Roles;
-use LaravelEnso\Roles\app\Models\Role;
 use LaravelEnso\Roles\app\Exceptions\RoleException;
+use LaravelEnso\Roles\app\Models\Role;
 use LaravelEnso\Roles\app\Services\ConfigWriter as Service;
 
 class ConfigWriter

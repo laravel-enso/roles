@@ -5,8 +5,8 @@ namespace LaravelEnso\Roles\app\Commands;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\File;
 use LaravelEnso\Menus\app\Models\Menu;
-use LaravelEnso\Roles\app\Models\Role;
 use LaravelEnso\Permissions\app\Models\Permission;
+use LaravelEnso\Roles\app\Models\Role;
 
 class Sync extends Command
 {

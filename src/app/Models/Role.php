@@ -2,14 +2,14 @@
 
 namespace LaravelEnso\Roles\app\Models;
 
+use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use LaravelEnso\Core\app\Models\User;
-use LaravelEnso\Menus\app\Models\Menu;
-use Illuminate\Database\Eloquent\Model;
 use LaravelEnso\Core\app\Models\UserGroup;
-use LaravelEnso\Tables\app\Traits\TableCache;
+use LaravelEnso\Menus\app\Models\Menu;
 use LaravelEnso\Permissions\app\Models\Permission;
 use LaravelEnso\Rememberable\app\Traits\Rememberable;
+use LaravelEnso\Tables\app\Traits\TableCache;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class Role extends Model
