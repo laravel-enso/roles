@@ -56,10 +56,12 @@ class ConfigWriter
 
     private function menuRoute()
     {
-        return Menu::with('permission')
-            ->find($this->role->menu_id)
-            ->permission
-            ->name;
+        return $this->role->menu_id
+            ? Menu::with('permission')
+                ->find($this->role->menu_id)
+                ->permission
+                ->name
+            : null;
     }
 
     private function permissions()

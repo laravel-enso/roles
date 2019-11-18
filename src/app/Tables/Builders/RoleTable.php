@@ -15,7 +15,7 @@ class RoleTable implements Table
         return Role::selectRaw('
             roles.id, roles.name, roles.display_name, roles.description,
             roles.created_at, menus.name as defaultMenu
-        ')->join('menus', 'roles.menu_id', '=', 'menus.id');
+        ')->leftJoin('menus', 'roles.menu_id', '=', 'menus.id');
     }
 
     public function templatePath(): string
