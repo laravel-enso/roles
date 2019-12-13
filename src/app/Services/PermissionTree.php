@@ -22,7 +22,7 @@ class PermissionTree
             ->get()
             ->each(function ($permission) {
                 $this->current = $this->tree;
-                $this->setEndingNode($permission);
+                $this->endingNode($permission);
                 $this->current->get('_items')
                     ->push($permission);
             });
@@ -30,7 +30,7 @@ class PermissionTree
         return $this->tree;
     }
 
-    private function setEndingNode($permission)
+    private function endingNode($permission)
     {
         collect(explode('.', $permission->name))
             ->slice(0, -1)->each(function ($segment) {

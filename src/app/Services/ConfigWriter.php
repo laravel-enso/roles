@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\File;
 use LaravelEnso\Menus\app\Models\Menu;
 use LaravelEnso\Roles\app\Enums\Roles;
-use LaravelEnso\Roles\app\Exceptions\RoleException;
+use LaravelEnso\Roles\app\Exceptions\Role as Exception;
 use LaravelEnso\Roles\app\Models\Role;
 
 class ConfigWriter
@@ -81,7 +81,7 @@ class ConfigWriter
     private function validateRole()
     {
         if ($this->role->id === App::make(Roles::class)::Admin) {
-            throw new RoleException('The admin role already has all permissions and does not need syncing');
+            throw Exception::noSyncForAdmin();
         }
 
         return $this;

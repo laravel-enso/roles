@@ -38,11 +38,11 @@ class Sync extends Command
     private function sync(array $config)
     {
         $role = Role::updateOrCreate([
-                'name' => $config['role']['name'],
-            ], [
-                'display_name' => $config['role']['display_name'],
-                'menu_id' => $this->menuId($config),
-            ]
+            'name' => $config['role']['name'],
+        ], [
+            'display_name' => $config['role']['display_name'],
+            'menu_id' => $this->menuId($config),
+        ]
         );
 
         $role->permissions()
@@ -70,7 +70,7 @@ class Sync extends Command
     private function permissionIds($config)
     {
         return Permission::query()
-                ->whereIn('name', $config['permissions'])
-                ->pluck('id');
+            ->whereIn('name', $config['permissions'])
+            ->pluck('id');
     }
 }
