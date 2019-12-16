@@ -81,7 +81,7 @@ class ConfigWriter
     private function validateRole()
     {
         if ($this->role->id === App::make(Roles::class)::Admin) {
-            throw Exception::noSyncForAdmin();
+            throw Exception::adminSync();
         }
 
         return $this;

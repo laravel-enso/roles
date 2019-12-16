@@ -12,7 +12,7 @@ class ConfigWriter
     public function __invoke(Role $role)
     {
         if ($role->id === Roles::Admin) {
-            throw Exception::noConfigForAdmin();
+            throw Exception::adminConfig();
         }
         (new Service($role))->handle();
 
