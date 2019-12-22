@@ -28,9 +28,7 @@ class Sync extends Command
 
                 return config('local.roles.'.$config);
             })->sortBy('order')
-            ->each(function ($config) {
-                $this->sync($config);
-            });
+            ->each(fn($config) => $this->sync($config));
 
         $this->info('Roles were successfully synced');
     }

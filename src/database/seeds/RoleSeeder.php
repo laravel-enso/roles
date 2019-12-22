@@ -13,9 +13,9 @@ class RoleSeeder extends Seeder
 
     public function run()
     {
-        $roles = collect(self::Roles)->map(function ($role) {
-            return factory(Role::class)->create($role);
-        });
+        $roles = collect(self::Roles)->map(fn($role) => (
+            factory(Role::class)->create($role)
+        ));
 
         $admin = $roles->first();
 
