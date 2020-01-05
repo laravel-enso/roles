@@ -1,52 +1,55 @@
 <?php
 
-namespace LaravelEnso\Roles\app\Services;
+namespace LaravelEnso\Roles\App\Services;
 
-use LaravelEnso\Helpers\app\Classes\Obj;
-use LaravelEnso\Permissions\app\Models\Permission;
+use Illuminate\Support\Collection;
+use LaravelEnso\Helpers\App\Classes\Obj;
+use LaravelEnso\Permissions\App\Models\Permission;
 
 class PermissionTree
 {
-    private $tree;
-    private $current;
+    private Obj $tree;
+    private Obj $current;
 
     public function __construct()
     {
         $this->tree = $this->emptyNode();
     }
 
-    public function get()
+    public function get(): Obj
     {
         Permission::with('menu:permission_id')
             ->orderBy('name')
             ->get()
-            ->each(function ($permission) {
-                $this->current = $this->tree;
-                $this->setEndingNode($permission);
-                $this->current->get('_items')
-                    ->push($permission);
-            });
+            ->each(fn ($permission) => $this->push($permission));
 
         return $this->tree;
     }
 
-    private function setEndingNode($permission)
+    private function push(Permission $permission): void
     {
-        collect(explode('.', $permission->name))
-            ->slice(0, -1)->each(function ($segment) {
-                if (! $this->current->has($segment)) {
-                    $this->current->set($segment, $this->emptyNode());
-                }
-
-                $this->current = $this->current->get($segment);
-            });
+        $this->current = $this->tree;
+        $this->nodes($permission);
+        $this->current->get('_items')->push($permission);
     }
 
-    private function emptyNode()
+    private function nodes($permission): void
     {
-        $node = new Obj();
-        $node->set('_items', collect());
+        (new Collection(explode('.', $permission->name)))->slice(0, -1)
+            ->each(fn ($segment) => $this->node($segment));
+    }
 
-        return $node;
+    private function node($segment): void
+    {
+        if (! $this->current->has($segment)) {
+            $this->current->set($segment, $this->emptyNode());
+        }
+
+        $this->current = $this->current->get($segment);
+    }
+
+    private function emptyNode(): Obj
+    {
+        return new Obj(['_items' => []]);
     }
 }

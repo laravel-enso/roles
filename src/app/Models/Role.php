@@ -1,15 +1,15 @@
 <?php
 
-namespace LaravelEnso\Roles\app\Models;
+namespace LaravelEnso\Roles\App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
-use LaravelEnso\Core\app\Models\User;
-use LaravelEnso\Core\app\Models\UserGroup;
-use LaravelEnso\Menus\app\Models\Menu;
-use LaravelEnso\Permissions\app\Models\Permission;
-use LaravelEnso\Rememberable\app\Traits\Rememberable;
-use LaravelEnso\Tables\app\Traits\TableCache;
+use LaravelEnso\Core\App\Models\User;
+use LaravelEnso\Core\App\Models\UserGroup;
+use LaravelEnso\Menus\App\Models\Menu;
+use LaravelEnso\Permissions\App\Models\Permission;
+use LaravelEnso\Rememberable\App\Traits\Rememberable;
+use LaravelEnso\Tables\App\Traits\TableCache;
 use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class Role extends Model
@@ -63,10 +63,10 @@ class Role extends Model
 
     public function scopeVisible($query)
     {
-        return Auth::user()->belongsToAdminGroup()
-            ? $query
-            : $query->whereHas('userGroups', function ($userGroup) {
-                $userGroup->whereId(Auth::user()->group_id);
-            });
+        $fromAdminGroup = Auth::user()->belongsToAdminGroup();
+
+        return $query->when($fromAdminGroup, fn ($query) => $query->whereHas(
+            'userGroup', fn ($group) => $group->whereId(Auth::user()->group_id)
+        ));
     }
 }

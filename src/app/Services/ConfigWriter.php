@@ -1,42 +1,62 @@
 <?php
 
-namespace LaravelEnso\Roles\app\Services;
+namespace LaravelEnso\Roles\App\Services;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\File;
-use LaravelEnso\Menus\app\Models\Menu;
-use LaravelEnso\Roles\app\Enums\Roles;
-use LaravelEnso\Roles\app\Exceptions\RoleException;
-use LaravelEnso\Roles\app\Models\Role;
+use LaravelEnso\Menus\App\Models\Menu;
+use LaravelEnso\Roles\App\Enums\Roles;
+use LaravelEnso\Roles\App\Exceptions\Role as Exception;
+use LaravelEnso\Roles\App\Models\Role;
 
 class ConfigWriter
 {
-    private $role;
+    private Role $role;
 
     public function __construct(Role $role)
     {
         $this->role = $role;
     }
 
-    public function handle()
+    public function handle(): void
     {
         $this->validateRole()
-            ->validateDirectory();
-
-        $replaceArray = array_filter($this->replaceArray());
-
-        $migration = str_replace(
-            array_keys($replaceArray),
-            array_values($replaceArray),
-            $this->stub()
-        );
-
-        $path = config_path('local/roles/'.$this->role->name.'.php');
-
-        File::put($path, $migration);
+            ->validateDirectory()
+            ->write();
     }
 
-    private function replaceArray()
+    private function validateRole(): self
+    {
+        if ($this->role->id === App::make(Roles::class)::Admin) {
+            throw Exception::adminRole();
+        }
+
+        return $this;
+    }
+
+    private function validateDirectory(): self
+    {
+        if (! File::isDirectory(config_path('local/roles/'))) {
+            File::makeDirectory(config_path('local/roles/'), 0755, true);
+        }
+
+        return $this;
+    }
+
+    private function write(): void
+    {
+        File::put($this->filePath(), $this->content());
+    }
+
+    private function content()
+    {
+        $fromTo = $this->fromTo();
+        [$from, $to] = [array_keys($fromTo), array_values($fromTo)];
+
+        return str_replace($from, $to, $this->stub());
+    }
+
+    private function fromTo()
     {
         return [
             '${order}' => $this->order(),
@@ -47,54 +67,34 @@ class ConfigWriter
         ];
     }
 
-    private function order()
+    private function order(): int
     {
-        return Role::whereName($this->role->name)
-            ->first()
-            ->id;
+        return Role::whereName($this->role->name)->first()->id;
     }
 
-    private function menuRoute()
+    private function menuRoute(): ?Menu
     {
         return $this->role->menu_id
             ? Menu::with('permission')
-                ->find($this->role->menu_id)
-                ->permission
-                ->name
+                ->find($this->role->menu_id)->permission->name
             : null;
     }
 
-    private function permissions()
+    private function permissions(): string
     {
         $permissions = $this->role->permissions()
             ->pluck('name')
             ->implode("',".PHP_EOL."        '");
 
-        return $this->format($permissions);
+        return "'{$permissions}'";
     }
 
-    private function format($enumeration)
+    private function filePath(): string
     {
-        return "'".$enumeration."'";
+        return config_path("local/roles/{$this->role->name}.php");
     }
 
-    private function validateRole()
-    {
-        if ($this->role->id === App::make(Roles::class)::Admin) {
-            throw new RoleException('The admin role already has all permissions and does not need syncing');
-        }
-
-        return $this;
-    }
-
-    private function validateDirectory()
-    {
-        if (! File::isDirectory(config_path('local/roles/'))) {
-            File::makeDirectory(config_path('local/roles/'), 0755, true);
-        }
-    }
-
-    private function stub()
+    private function stub(): string
     {
         return File::get(__DIR__.'/stubs/role.stub');
     }

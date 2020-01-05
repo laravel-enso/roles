@@ -1,10 +1,10 @@
 <?php
 
-namespace LaravelEnso\Roles\app\Tables\Builders;
+namespace LaravelEnso\Roles\App\Tables\Builders;
 
 use Illuminate\Database\Eloquent\Builder;
-use LaravelEnso\Roles\app\Models\Role;
-use LaravelEnso\Tables\app\Contracts\Table;
+use LaravelEnso\Roles\App\Models\Role;
+use LaravelEnso\Tables\App\Contracts\Table;
 
 class RoleTable implements Table
 {

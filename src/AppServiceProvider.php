@@ -3,16 +3,15 @@
 namespace LaravelEnso\Roles;
 
 use Illuminate\Support\ServiceProvider;
-use LaravelEnso\Roles\app\Commands\Sync;
+use LaravelEnso\Roles\App\Commands\Sync;
 
 class AppServiceProvider extends ServiceProvider
 {
     public function boot()
     {
-        $this->commands(Sync::class);
-
         $this->load()
-            ->publish();
+            ->publish()
+            ->commands(Sync::class);
     }
 
     private function load()
@@ -28,18 +27,12 @@ class AppServiceProvider extends ServiceProvider
     {
         $this->publishes([
             __DIR__.'/database/factories' => database_path('factories'),
-        ], 'roles-factory');
-
-        $this->publishes([
-            __DIR__.'/database/factories' => database_path('factories'),
-        ], 'enso-factories');
+        ], ['roles-factory', 'enso-factories']);
 
         $this->publishes([
             __DIR__.'/database/seeds' => database_path('seeds'),
-        ], 'roles-seeder');
+        ], ['roles-seeder', 'enso-seeders']);
 
-        $this->publishes([
-            __DIR__.'/database/seeds' => database_path('seeds'),
-        ], 'enso-seeders');
+        return $this;
     }
 }

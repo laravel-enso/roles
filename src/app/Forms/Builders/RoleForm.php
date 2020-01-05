@@ -1,16 +1,16 @@
 <?php
 
-namespace LaravelEnso\Roles\app\Forms\Builders;
+namespace LaravelEnso\Roles\App\Forms\Builders;
 
-use LaravelEnso\Forms\app\Services\Form;
-use LaravelEnso\Menus\app\Models\Menu;
-use LaravelEnso\Roles\app\Models\Role;
+use LaravelEnso\Forms\App\Services\Form;
+use LaravelEnso\Menus\App\Models\Menu;
+use LaravelEnso\Roles\App\Models\Role;
 
 class RoleForm
 {
     protected const FormPath = __DIR__.'/../Templates/role.json';
 
-    protected $form;
+    protected Form $form;
 
     public function __construct()
     {

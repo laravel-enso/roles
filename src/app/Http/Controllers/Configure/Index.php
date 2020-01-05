@@ -1,10 +1,10 @@
 <?php
 
-namespace LaravelEnso\Roles\app\Http\Controllers\Configure;
+namespace LaravelEnso\Roles\App\Http\Controllers\Configure;
 
 use Illuminate\Routing\Controller;
-use LaravelEnso\Roles\app\Http\Responses\RoleConfigurator;
-use LaravelEnso\Roles\app\Models\Role;
+use LaravelEnso\Roles\App\Http\Responses\RoleConfigurator;
+use LaravelEnso\Roles\App\Models\Role;
 
 class Index extends Controller
 {

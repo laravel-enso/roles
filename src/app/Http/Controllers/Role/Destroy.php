@@ -1,9 +1,9 @@
 <?php
 
-namespace LaravelEnso\Roles\app\Http\Controllers\Role;
+namespace LaravelEnso\Roles\App\Http\Controllers\Role;
 
 use Illuminate\Routing\Controller;
-use LaravelEnso\Roles\app\Models\Role;
+use LaravelEnso\Roles\App\Models\Role;
 
 class Destroy extends Controller
 {

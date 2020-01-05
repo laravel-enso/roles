@@ -1,8 +1,8 @@
 <?php
 
-namespace LaravelEnso\Roles\app\Traits;
+namespace LaravelEnso\Roles\App\Traits;
 
-use LaravelEnso\Roles\app\Models\Role;
+use LaravelEnso\Roles\App\Models\Role;
 
 trait HasRoles
 {
@@ -14,8 +14,7 @@ trait HasRoles
     public function updateWithRoles(array $attributes)
     {
         tap($this)->update($attributes)
-            ->roles()
-            ->sync($attributes['roles']);
+            ->roles()->sync($attributes['roles']);
     }
 
     public function storeWithRoles(array $attributes)
@@ -23,8 +22,7 @@ trait HasRoles
         $this->fill($attributes);
 
         tap($this)->save()
-            ->roles()
-            ->sync($attributes['roles']);
+            ->roles()->sync($attributes['roles']);
 
         return $this;
     }
