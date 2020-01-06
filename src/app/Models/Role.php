@@ -2,6 +2,7 @@
 
 namespace LaravelEnso\Roles\App\Models;
 
+use App\Exceptions\RoleConflict;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use LaravelEnso\Core\App\Models\User;
@@ -10,7 +11,6 @@ use LaravelEnso\Menus\App\Models\Menu;
 use LaravelEnso\Permissions\App\Models\Permission;
 use LaravelEnso\Rememberable\App\Traits\Rememberable;
 use LaravelEnso\Tables\App\Traits\TableCache;
-use Symfony\Component\HttpKernel\Exception\ConflictHttpException;
 
 class Role extends Model
 {
@@ -53,9 +53,7 @@ class Role extends Model
     public function delete()
     {
         if ($this->users()->exists()) {
-            throw new ConflictHttpException(__(
-                'You cannot delete this role while being in use by users'
-            ));
+            throw RoleConflict::inUse();
         }
 
         parent::delete();
