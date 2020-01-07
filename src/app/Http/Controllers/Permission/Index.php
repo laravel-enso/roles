@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\Roles\App\Http\Controllers\Configure;
+namespace LaravelEnso\Roles\App\Http\Controllers\Permission;
 
 use Illuminate\Routing\Controller;
 use LaravelEnso\Roles\App\Http\Responses\RoleConfigurator;
