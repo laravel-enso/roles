@@ -64,7 +64,7 @@ class Role extends Model
         $fromAdminGroup = Auth::user()->belongsToAdminGroup();
 
         return $query->when($fromAdminGroup, fn ($query) => $query->whereHas(
-            'userGroup', fn ($group) => $group->whereId(Auth::user()->group_id)
+            'userGroups', fn ($groups) => $groups->whereId(Auth::user()->group_id)
         ));
     }
 }
