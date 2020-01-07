@@ -17,9 +17,9 @@ class CreateStructureForRoles extends Migration
         ['name' => 'system.roles.update', 'description' => 'Update role', 'type' => Types::Write, 'is_default' => false],
         ['name' => 'system.roles.destroy', 'description' => 'Delete role', 'type' => Types::Write, 'is_default' => false],
         ['name' => 'system.roles.options', 'description' => 'Get options for select', 'type' => Types::Read, 'is_default' => true],
-        ['name' => 'system.roles.getPermissions', 'description' => 'Get role permissions for role configurator', 'type' => Types::Read, 'is_default' => false],
-        ['name' => 'system.roles.setPermissions', 'description' => 'Set role permissions for role configurator', 'type' => Types::Write, 'is_default' => false],
-        ['name' => 'system.roles.writeConfig', 'description' => 'Write role configuration file', 'type' => Types::Write, 'is_default' => false],
+        ['name' => 'system.roles.permissions.get', 'description' => 'Get role permissions for role configurator', 'type' => Types::Read, 'is_default' => false],
+        ['name' => 'system.roles.permissions.set', 'description' => 'Set role permissions for role configurator', 'type' => Types::Write, 'is_default' => false],
+        ['name' => 'system.roles.permissions.write', 'description' => 'Write role configuration file', 'type' => Types::Write, 'is_default' => false],
     ];
 
     protected $menu = [

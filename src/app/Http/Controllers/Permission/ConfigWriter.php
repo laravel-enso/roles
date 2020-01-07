@@ -1,6 +1,6 @@
 <?php
 
-namespace LaravelEnso\Roles\App\Http\Controllers;
+namespace LaravelEnso\Roles\App\Http\Controllers\Permission;
 
 use LaravelEnso\Roles\App\Models\Role;
 use LaravelEnso\Roles\App\Services\ConfigWriter as Service;

@@ -7,7 +7,6 @@ Route::middleware(['web', 'auth', 'core'])
     ->namespace('LaravelEnso\Roles\App\Http\Controllers')
     ->group(function () {
         require 'app/roles.php';
-        require 'app/configure.php';
+        require 'app/permissions.php';
         //TODO refactor routes
-        Route::post('writeConfig/{role}', 'ConfigWriter')->name('writeConfig');
     });
