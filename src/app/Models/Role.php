@@ -2,7 +2,6 @@
 
 namespace LaravelEnso\Roles\App\Models;
 
-use App\Exceptions\RoleConflict;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
 use LaravelEnso\Core\App\Models\User;
@@ -10,6 +9,7 @@ use LaravelEnso\Core\App\Models\UserGroup;
 use LaravelEnso\Menus\App\Models\Menu;
 use LaravelEnso\Permissions\App\Models\Permission;
 use LaravelEnso\Rememberable\App\Traits\Rememberable;
+use LaravelEnso\Roles\App\Exceptions\RoleConflict;
 use LaravelEnso\Tables\App\Traits\TableCache;
 
 class Role extends Model

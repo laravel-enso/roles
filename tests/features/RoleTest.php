@@ -1,14 +1,13 @@
 <?php
 
-use Faker\Factory;
-use Tests\TestCase;
-use LaravelEnso\Core\App\Models\User;
-use LaravelEnso\Roles\App\Models\Role;
 use Illuminate\Foundation\Testing\RefreshDatabase;
-use LaravelEnso\Forms\App\TestTraits\EditForm;
+use LaravelEnso\Core\App\Models\User;
 use LaravelEnso\Forms\App\TestTraits\CreateForm;
 use LaravelEnso\Forms\App\TestTraits\DestroyForm;
+use LaravelEnso\Forms\App\TestTraits\EditForm;
+use LaravelEnso\Roles\App\Models\Role;
 use LaravelEnso\Tables\App\Traits\Tests\Datatable;
+use Tests\TestCase;
 
 class RoleTest extends TestCase
 {
