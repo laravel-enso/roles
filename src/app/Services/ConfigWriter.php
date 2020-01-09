@@ -72,7 +72,7 @@ class ConfigWriter
         return Role::whereName($this->role->name)->first()->id;
     }
 
-    private function menuRoute(): ?Menu
+    private function menuRoute(): ?string
     {
         return $this->role->menu_id
             ? Menu::with('permission')
