@@ -29,6 +29,7 @@ class PermissionTree
     private function push(Permission $permission): void
     {
         $this->current = $this->tree;
+        $permission->setAppends(['type']);
         $this->nodes($permission);
         $this->current->get('_items')->push($permission);
     }
