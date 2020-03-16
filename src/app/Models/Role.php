@@ -10,6 +10,7 @@ use LaravelEnso\Menus\App\Models\Menu;
 use LaravelEnso\Permissions\App\Models\Permission;
 use LaravelEnso\Rememberable\App\Traits\Rememberable;
 use LaravelEnso\Roles\App\Exceptions\RoleConflict;
+use LaravelEnso\Roles\App\Services\ConfigWriter;
 use LaravelEnso\Tables\App\Traits\TableCache;
 
 class Role extends Model
@@ -38,6 +39,16 @@ class Role extends Model
         return $this->belongsToMany(Permission::class)->withTimestamps();
     }
 
+    public function scopeVisible($query)
+    {
+        $fromAdminGroup = Auth::user()->belongsToAdminGroup();
+
+        return $query->when(! $fromAdminGroup, fn ($query) => $query->whereHas(
+            'userGroups',
+            fn ($groups) => $groups->whereId(Auth::user()->group_id)
+        ));
+    }
+
     public function syncPermissions($permissionList)
     {
         $this->permissions()
@@ -59,12 +70,8 @@ class Role extends Model
         parent::delete();
     }
 
-    public function scopeVisible($query)
+    public function writeConfig()
     {
-        $fromAdminGroup = Auth::user()->belongsToAdminGroup();
-
-        return $query->when(! $fromAdminGroup, fn ($query) => $query->whereHas(
-            'userGroups', fn ($groups) => $groups->whereId(Auth::user()->group_id)
-        ));
+        (new ConfigWriter($this))->handle();
     }
 }
