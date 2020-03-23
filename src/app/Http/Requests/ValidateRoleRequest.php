@@ -18,7 +18,7 @@ class ValidateRoleRequest extends FormRequest
             'name' => ['required', $this->nameUnique()],
             'display_name' => 'required',
             'description' => 'nullable',
-            'menu_id' => 'nullable|exists:menus,id',
+            'menu_id' => 'required|exists:menus,id',
         ];
     }
 
