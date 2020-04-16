@@ -12,7 +12,7 @@ class Sync extends Command
 
     protected $description = 'Sync roles between dev and live environments';
 
-    public function handle(): void
+    public function handle(Service $service): void
     {
         if (! File::isDirectory(config_path('local/roles'))) {
             $this->warn('No action will be made due to missing the "roles" directory & files');
@@ -20,7 +20,7 @@ class Sync extends Command
             return;
         }
 
-        (new Service())->handle();
+        $service->handle();
 
         $this->info('Roles were successfully synced');
     }
