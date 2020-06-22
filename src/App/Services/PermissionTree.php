@@ -4,6 +4,7 @@ namespace LaravelEnso\Roles\App\Services;
 
 use Illuminate\Support\Collection;
 use LaravelEnso\Helpers\App\Classes\Obj;
+use LaravelEnso\Permissions\App\Http\Resources\Permission as Resource;
 use LaravelEnso\Permissions\App\Models\Permission;
 
 class PermissionTree
@@ -29,9 +30,8 @@ class PermissionTree
     private function push(Permission $permission): void
     {
         $this->current = $this->tree;
-        $permission->setAppends(['type']);
         $this->nodes($permission);
-        $this->current->get('_items')->push($permission);
+        $this->current->get('_items')->push(new Resource($permission));
     }
 
     private function nodes($permission): void
