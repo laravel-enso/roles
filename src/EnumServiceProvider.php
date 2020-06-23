@@ -3,7 +3,7 @@
 namespace LaravelEnso\Roles;
 
 use LaravelEnso\Enums\EnumServiceProvider as ServiceProvider;
-use LaravelEnso\Roles\App\Enums\Roles;
+use LaravelEnso\Roles\Enums\Roles;
 
 class EnumServiceProvider extends ServiceProvider
 {
