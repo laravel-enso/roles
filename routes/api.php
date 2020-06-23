@@ -8,5 +8,4 @@ Route::middleware(['api', 'auth', 'core'])
     ->group(function () {
         require 'app/roles.php';
         require 'app/permissions.php';
-        //TODO refactor routes
     });
