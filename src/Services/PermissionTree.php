@@ -3,7 +3,7 @@
 namespace LaravelEnso\Roles\Services;
 
 use Illuminate\Support\Collection;
-use LaravelEnso\Helpers\Classes\Obj;
+use LaravelEnso\Helpers\Services\Obj;
 use LaravelEnso\Permissions\Http\Resources\Permission as Resource;
 use LaravelEnso\Permissions\Models\Permission;
 
