@@ -25,5 +25,5 @@ class CreateStructureForRoles extends Migration
         'name' => 'Roles', 'icon' => 'universal-access', 'route' => 'system.roles.index', 'order_index' => 999, 'has_children' => false,
     ];
 
-    protected string $parentMenu = 'System';
+    protected ?string $parentMenu = 'System';
 }
