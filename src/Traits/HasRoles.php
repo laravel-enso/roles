@@ -11,18 +11,18 @@ trait HasRoles
         return $this->belongsToMany(Role::class);
     }
 
-    public function updateWithRoles(array $attributes)
+    public function updateWithRoles(array $attributes,array $roles)
     {
         tap($this)->update($attributes)
-            ->roles()->sync($attributes['roles']);
+            ->roles()->sync($roles);
     }
 
-    public function storeWithRoles(array $attributes)
+    public function storeWithRoles(array $attributes,array $roles)
     {
         $this->fill($attributes);
 
         tap($this)->save()
-            ->roles()->sync($attributes['roles']);
+            ->roles()->sync($roles);
 
         return $this;
     }
