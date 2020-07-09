@@ -1,6 +1,6 @@
 # Roles
 
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/bd4373f8222b4bcb81c08148404909c9)](https://www.codacy.com/app/laravel-enso/roles?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=laravel-enso/roles&amp;utm_campaign=Badge_Grade)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/a563369b562c492dbfcc9da2b4287eb0)](https://www.codacy.com/gh/laravel-enso/roles?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=laravel-enso/roles&amp;utm_campaign=Badge_Grade) 
 [![StyleCI](https://github.styleci.io/repos/94814370/shield?branch=master)](https://github.styleci.io/repos/94814370)
 [![License](https://poser.pugx.org/laravel-enso/roles/license)](https://packagist.org/packages/laravel-enso/roles)
 [![Total Downloads](https://poser.pugx.org/laravel-enso/roles/downloads)](https://packagist.org/packages/laravel-enso/roles)
