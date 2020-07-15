@@ -31,7 +31,7 @@ class Sync
 
     private function menu($config): ?Menu
     {
-        if($config['default_menu']) {
+        if ($config['default_menu']) {
             $permission = Permission::whereName($config['default_menu'])->first();
 
             return Menu::wherePermissionId($permission->id)->first();
