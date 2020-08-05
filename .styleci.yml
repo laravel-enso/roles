@@ -10,7 +10,6 @@ enabled:
 
 disabled:
   - short_array_syntax
-  - simplified_null_return
 
 finder:
   exclude:
