@@ -23,8 +23,7 @@
         "edit",
         "destroy"
     ],
-    "columns": [
-        {
+    "columns": [{
             "label": "Name",
             "name": "name",
             "data": "roles.name",
@@ -53,7 +52,7 @@
         },
         {
             "label": "Default Menu",
-            "name": "defaultMenu",
+            "name": "menu",
             "data": "menus.name",
             "meta": [
                 "searchable",
