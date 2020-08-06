@@ -2,20 +2,23 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;
+use LaravelEnso\Menus\Models\Menu;
 use LaravelEnso\Permissions\Models\Permission;
 use LaravelEnso\Roles\Models\Role;
 
 class RoleSeeder extends Seeder
 {
     private const Roles = [
-        ['menu_id' => 1, 'name' => 'admin', 'display_name' => 'Administrator', 'description' => 'Administrator role. Full featured.'],
-        ['menu_id' => 1, 'name' => 'supervisor', 'display_name' => 'Supervisor', 'description' => 'Supervisor role.'],
+        ['name' => 'admin', 'display_name' => 'Administrator', 'description' => 'Administrator role. Full featured.'],
+        ['name' => 'supervisor', 'display_name' => 'Supervisor', 'description' => 'Supervisor role.'],
     ];
 
     public function run()
     {
+        $menu = Menu::whereNotNull('permission_id')->first();
         $roles = (new Collection(self::Roles))
-            ->map(fn ($role) => factory(Role::class)->create($role));
+            ->map(fn ($role) => factory(Role::class)
+                ->create($role + ['menu_id' => $menu->id]));
 
         $admin = $roles->first();
 
