@@ -25,7 +25,7 @@ class RoleTest extends TestCase
         $this->seed()
             ->actingAs(User::first());
 
-        $this->testModel = factory(Role::class)
+        $this->testModel = Role::factory()
             ->make();
     }
 
@@ -68,7 +68,7 @@ class RoleTest extends TestCase
     {
         $this->testModel->save();
 
-        factory(User::class)->create([
+        User::factory()->create([
             'role_id' => $this->testModel->id,
         ]);
 
