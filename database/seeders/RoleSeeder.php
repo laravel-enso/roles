@@ -1,5 +1,7 @@
 <?php
 
+namespace LaravelEnso\Roles\Database\Seeders;
+
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Collection;
 use LaravelEnso\Menus\Models\Menu;
@@ -17,7 +19,7 @@ class RoleSeeder extends Seeder
     {
         $menu = Menu::whereNotNull('permission_id')->first();
         $roles = (new Collection(self::Roles))
-            ->map(fn ($role) => factory(Role::class)
+            ->map(fn ($role) => Role::factory()
                 ->create($role + ['menu_id' => $menu->id]));
 
         $admin = $roles->first();

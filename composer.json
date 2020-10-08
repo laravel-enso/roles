@@ -19,7 +19,7 @@
         }
     ],
     "require": {
-        "laravel-enso/core": "^5.0",
+        "laravel-enso/core": "^6.0",
         "laravel-enso/enums": "^2.0",
         "laravel-enso/forms": "^4.0",
         "laravel-enso/helpers": "^2.0",
@@ -31,7 +31,9 @@
     },
     "autoload": {
         "psr-4": {
-            "LaravelEnso\\Roles\\": "src/"
+            "LaravelEnso\\Roles\\": "src/",
+            "LaravelEnso\\Roles\\Database\\Factories\\": "database/factories/",
+            "LaravelEnso\\Roles\\Database\\Seeders\\": "database/seeders/"
         }
     },
     "extra": {
