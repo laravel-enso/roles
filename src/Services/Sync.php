@@ -26,7 +26,7 @@ class Sync
         ], [
             'display_name' => $config['role']['display_name'],
             'menu_id' => optional($this->menu($config))->id,
-        ])->permissions()->sync($this->permissionIds($config));
+        ])->syncPermissions($this->permissionIds($config));
     }
 
     private function menu($config): ?Menu

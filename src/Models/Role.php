@@ -5,6 +5,7 @@ namespace LaravelEnso\Roles\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Cache;
 use LaravelEnso\Core\Models\User;
 use LaravelEnso\Core\Models\UserGroup;
 use LaravelEnso\Menus\Models\Menu;
@@ -54,6 +55,16 @@ class Role extends Model
     {
         $this->permissions()
             ->sync($permissionList);
+
+        Cache::tags('roles')->flush();
+    }
+
+    public function hasPermission($name): bool
+    {
+        return Cache::tags('roles')->rememberForever(
+            "has_permission:{$name}:roleId:{$this->id}",
+            fn () => $this->permissions()->whereName($name)->exists()
+        );
     }
 
     public function addDefaultPermissions()
