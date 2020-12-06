@@ -58,7 +58,7 @@ class RoleTest extends TestCase
             route('system.roles.update', $this->testModel->id, false),
             $this->testModel->toArray()
         )->assertStatus(200)
-        ->assertJsonStructure(['message']);
+            ->assertJsonStructure(['message']);
 
         $this->assertEquals($this->testModel->name, $this->testModel->fresh()->name);
     }

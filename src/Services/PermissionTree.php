@@ -20,8 +20,7 @@ class PermissionTree
     public function get(): Obj
     {
         Permission::with('menu:permission_id')
-            ->orderBy('name')
-            ->get()
+            ->orderBy('name')->get()
             ->each(fn ($permission) => $this->push($permission));
 
         return $this->tree;

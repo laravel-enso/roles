@@ -3,7 +3,9 @@
 namespace LaravelEnso\Roles\Services;
 
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 use LaravelEnso\Menus\Models\Menu;
 use LaravelEnso\Permissions\Models\Permission;
 use LaravelEnso\Roles\Models\Role;
@@ -14,8 +16,7 @@ class Sync
     public function handle(): void
     {
         (new Collection(File::files(config_path('local/roles'))))
-            ->map(fn ($file) => config("local.roles.{$this->role($file)}"))
-            ->sortBy('order')//TODO Why do we need this?!
+            ->map(fn ($file) => Config::get("local.roles.{$this->role($file)}"))
             ->each(fn ($config) => $this->sync($config));
     }
 
@@ -47,6 +48,6 @@ class Sync
 
     private function role(SplFileInfo $file): string
     {
-        return str_replace('.php', '', $file->getFilename());
+        return Str::of($file->getFilename())->replace('.php', '');
     }
 }

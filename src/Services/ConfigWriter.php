@@ -4,6 +4,7 @@ namespace LaravelEnso\Roles\Services;
 
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 use LaravelEnso\Menus\Models\Menu;
 use LaravelEnso\Roles\Enums\Roles;
 use LaravelEnso\Roles\Exceptions\Role as Exception;
@@ -53,13 +54,12 @@ class ConfigWriter
         $fromTo = $this->fromTo();
         [$from, $to] = [array_keys($fromTo), array_values($fromTo)];
 
-        return str_replace($from, $to, $this->stub());
+        return Str::of($this->stub())->replace($from, $to);
     }
 
     private function fromTo()
     {
         return [
-            '${order}' => $this->order(),
             '${name}' => $this->role->name,
             '${displayName}' => $this->role->display_name,
             '${defaultMenuRoute}' => $this->menuRoute(),
@@ -67,16 +67,11 @@ class ConfigWriter
         ];
     }
 
-    private function order(): int
-    {
-        return Role::whereName($this->role->name)->first()->id;
-    }
-
     private function menuRoute(): ?string
     {
         return $this->role->menu_id
             ? Menu::with('permission')
-                ->find($this->role->menu_id)->permission->name
+            ->find($this->role->menu_id)->permission->name
             : null;
     }
 
