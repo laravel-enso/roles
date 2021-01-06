@@ -60,11 +60,17 @@ class ConfigWriter
     private function fromTo()
     {
         return [
+            '${order}' => $this->order(),
             '${name}' => $this->role->name,
             '${displayName}' => $this->role->display_name,
             '${defaultMenuRoute}' => $this->menuRoute(),
             '${permissions}' => $this->permissions(),
         ];
+    }
+
+    private function order(): int
+    {
+        return Role::whereName($this->role->name)->first()->id;
     }
 
     private function menuRoute(): ?string
