@@ -15,8 +15,9 @@ class Sync
 {
     public function handle(): void
     {
-        (new Collection(File::files(config_path('local/roles'))))
+        Collection::wrap(File::files(config_path('local/roles')))
             ->map(fn ($file) => Config::get("local.roles.{$this->role($file)}"))
+            ->sortBy('order')
             ->each(fn ($config) => $this->sync($config));
     }
 

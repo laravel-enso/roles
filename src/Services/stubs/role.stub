@@ -1,6 +1,7 @@
 <?php
 
 return [
+    'order' => ${order},
     'role' => ['name' => '${name}', 'display_name' => '${displayName}'],
     'default_menu' => '${defaultMenuRoute}',
     'permissions' => [
