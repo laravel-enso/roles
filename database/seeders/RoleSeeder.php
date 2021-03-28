@@ -17,7 +17,8 @@ class RoleSeeder extends Seeder
 
     public function run()
     {
-        $menu = Menu::whereNotNull('permission_id')->first();
+        $menu = Menu::firstWhere('name', 'Dashboard');
+
         $roles = (new Collection(self::Roles))
             ->map(fn ($role) => Role::factory()
                 ->create($role + ['menu_id' => $menu->id]));
