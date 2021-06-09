@@ -27,7 +27,7 @@ class Sync
             'name' => $config['role']['name'],
         ], [
             'display_name' => $config['role']['display_name'],
-            'menu_id' => optional($this->menu($config))->id,
+            'menu_id' => $this->menu($config)?->id,
         ])->permissions()->sync($this->permissionIds($config));
     }
 

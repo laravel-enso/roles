@@ -5,14 +5,14 @@ namespace LaravelEnso\Roles\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
-use LaravelEnso\Core\Models\User;
-use LaravelEnso\Core\Models\UserGroup;
 use LaravelEnso\Menus\Models\Menu;
 use LaravelEnso\Permissions\Models\Permission;
 use LaravelEnso\Rememberable\Traits\Rememberable;
 use LaravelEnso\Roles\Exceptions\RoleConflict;
 use LaravelEnso\Roles\Services\ConfigWriter;
 use LaravelEnso\Tables\Traits\TableCache;
+use LaravelEnso\UserGroups\Models\UserGroup;
+use LaravelEnso\Users\Models\User;
 
 class Role extends Model
 {

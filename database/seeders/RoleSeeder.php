@@ -19,7 +19,7 @@ class RoleSeeder extends Seeder
     {
         $menu = Menu::firstWhere('name', 'Dashboard');
 
-        $roles = (new Collection(self::Roles))
+        $roles = Collection::wrap(self::Roles)
             ->map(fn ($role) => Role::factory()
                 ->create($role + ['menu_id' => $menu->id]));
 

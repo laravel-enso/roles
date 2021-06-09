@@ -33,8 +33,7 @@ class ValidateRoleRequest extends FormRequest
 
     protected function nameUnique()
     {
-        return Rule::unique('roles', 'name')
-            ->ignore(optional($this->route('role'))->id);
+        return Rule::unique('roles', 'name')->ignore($this->route('role')?->id);
     }
 
     private function chosenParentMenu(): bool

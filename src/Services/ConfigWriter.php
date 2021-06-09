@@ -12,11 +12,8 @@ use LaravelEnso\Roles\Models\Role;
 
 class ConfigWriter
 {
-    private Role $role;
-
-    public function __construct(Role $role)
+    public function __construct(private Role $role)
     {
-        $this->role = $role;
     }
 
     public function handle(): void

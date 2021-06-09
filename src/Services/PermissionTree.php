@@ -35,7 +35,7 @@ class PermissionTree
 
     private function nodes($permission): void
     {
-        (new Collection(explode('.', $permission->name)))->slice(0, -1)
+        Collection::wrap(explode('.', $permission->name))->slice(0, -1)
             ->each(fn ($segment) => $this->node($segment));
     }
 
