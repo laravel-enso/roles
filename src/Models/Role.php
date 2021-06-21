@@ -2,6 +2,7 @@
 
 namespace LaravelEnso\Roles\Models;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
@@ -40,14 +41,13 @@ class Role extends Model
         return $this->belongsToMany(Permission::class)->withTimestamps();
     }
 
-    public function scopeVisible($query)
+    public function scopeVisible(Builder $query): Builder
     {
         $fromAdminGroup = Auth::user()->belongsToAdminGroup();
 
-        return $query->when(! $fromAdminGroup, fn ($query) => $query->whereHas(
-            'userGroups',
-            fn ($groups) => $groups->whereId(Auth::user()->group_id)
-        ));
+        return $query->when(! $fromAdminGroup, fn ($query) => $query
+            ->whereHas('userGroups', fn ($groups) => $groups
+                ->whereId(Auth::user()->group_id)));
     }
 
     public function syncPermissions($permissionList)
