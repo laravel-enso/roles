@@ -6,12 +6,14 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use LaravelEnso\Menus\Models\Menu;
 use LaravelEnso\Permissions\Models\Permission;
 use LaravelEnso\Rememberable\Traits\Rememberable;
 use LaravelEnso\Roles\Exceptions\RoleConflict;
 use LaravelEnso\Roles\Services\ConfigWriter;
 use LaravelEnso\Tables\Traits\TableCache;
+use LaravelEnso\UserGroups\Enums\UserGroups;
 use LaravelEnso\UserGroups\Models\UserGroup;
 use LaravelEnso\Users\Models\User;
 
@@ -43,11 +45,14 @@ class Role extends Model
 
     public function scopeVisible(Builder $query): Builder
     {
-        $fromAdminGroup = Auth::user()->belongsToAdminGroup();
+        $isSuperior = Auth::user()->belongsToAdminGroup();
 
-        return $query->when(! $fromAdminGroup, fn ($query) => $query
-            ->whereHas('userGroups', fn ($groups) => $groups
-                ->whereId(Auth::user()->group_id)));
+        return $query->when(! $isSuperior, fn ($query) => $query
+            ->whereHas('userGroups', fn ($groups) => $groups->when(
+                Config::get('enso.roles.restrictedToOwnGroup'),
+                fn ($groups) => $groups->whereId(Auth::user()->group_id),
+                fn ($groups) => $groups->where('id', '<>', UserGroups::Admin),
+            )));
     }
 
     public function syncPermissions($permissionList)
