@@ -14,9 +14,9 @@ class Store extends Controller
         $role->addDefaultPermissions();
 
         return [
-            'message'  => __('The role was created!'),
+            'message' => __('The role was created!'),
             'redirect' => 'system.roles.edit',
-            'param'    => ['role' => $role->id],
+            'param' => ['role' => $role->id],
         ];
     }
 }
