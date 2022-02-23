@@ -6,7 +6,7 @@ use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 use LaravelEnso\Menus\Models\Menu;
 
-class ValidateRoleRequest extends FormRequest
+class ValidateRole extends FormRequest
 {
     public function authorize()
     {

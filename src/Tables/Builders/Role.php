@@ -3,16 +3,16 @@
 namespace LaravelEnso\Roles\Tables\Builders;
 
 use Illuminate\Database\Eloquent\Builder;
-use LaravelEnso\Roles\Models\Role;
+use LaravelEnso\Roles\Models\Role as Model;
 use LaravelEnso\Tables\Contracts\Table;
 
-class RoleTable implements Table
+class Role implements Table
 {
-    protected const TemplatPath = __DIR__.'/../Templates/roles.json';
+    private const TemplatPath = __DIR__.'/../Templates/roles.json';
 
     public function query(): Builder
     {
-        return Role::selectRaw('
+        return Model::selectRaw('
             roles.id, roles.name, roles.display_name, roles.description,
             roles.created_at, menus.name as menu
         ')->leftJoin('menus', 'roles.menu_id', '=', 'menus.id');
