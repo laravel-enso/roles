@@ -2,7 +2,7 @@
 
 use LaravelEnso\Migrator\Database\Migration;
 
-class CreateStructureForRoles extends Migration
+return new class extends Migration
 {
     protected array $permissions = [
         ['name' => 'system.roles.tableData', 'description' => 'Get table data for roles', 'is_default' => false],
@@ -26,4 +26,4 @@ class CreateStructureForRoles extends Migration
     ];
 
     protected ?string $parentMenu = 'System';
-}
+};
