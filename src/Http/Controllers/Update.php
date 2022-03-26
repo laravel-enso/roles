@@ -3,12 +3,12 @@
 namespace LaravelEnso\Roles\Http\Controllers;
 
 use Illuminate\Routing\Controller;
-use LaravelEnso\Roles\Http\Requests\ValidateRoleRequest;
+use LaravelEnso\Roles\Http\Requests\ValidateRole;
 use LaravelEnso\Roles\Models\Role;
 
 class Update extends Controller
 {
-    public function __invoke(ValidateRoleRequest $request, Role $role)
+    public function __invoke(ValidateRole $request, Role $role)
     {
         $role->update($request->validated());
 
