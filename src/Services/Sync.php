@@ -28,23 +28,24 @@ class Sync
         ], [
             'display_name' => $config['role']['display_name'],
             'menu_id' => $this->menu($config)?->id,
-        ])->permissions()->sync($this->permissionIds($config));
+        ])->syncPermissions($this->permissionIds($config));
     }
 
     private function menu($config): ?Menu
     {
-        if ($config['default_menu']) {
-            $permission = Permission::whereName($config['default_menu'])->first();
-
-            return Menu::wherePermissionId($permission->id)->first();
+        if (! $config['default_menu']) {
+            return null;
         }
 
-        return  null;
+        return Menu::query()
+            ->whereHas('permission', fn ($permission) => $permission
+                ->whereName($config['default_menu']))->first();
     }
 
-    private function permissionIds($config): Collection
+    private function permissionIds($config): array
     {
-        return Permission::whereIn('name', $config['permissions'])->pluck('id');
+        return Permission::whereIn('name', $config['permissions'])
+            ->pluck('id')->toArray();
     }
 
     private function role(SplFileInfo $file): string

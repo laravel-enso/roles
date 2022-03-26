@@ -23,12 +23,12 @@ class RoleSeeder extends Seeder
             ->map(fn ($role) => Role::factory()
                 ->create($role + ['menu_id' => $menu->id]));
 
-        $admin = $roles->first();
+        $permissions = Permission::pluck('is_default', 'id');
 
-        $admin->permissions()->sync(Permission::pluck('id'));
+        $roles->first()
+            ->syncPermissions($permissions->keys()->toArray());
 
-        $supervisor = $roles->last();
-
-        $supervisor->permissions()->sync(Permission::implicit()->pluck('id'));
+        $roles->last()
+            ->syncPermissions($permissions->filter()->keys()->toArray());
     }
 }
