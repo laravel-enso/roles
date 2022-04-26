@@ -2,12 +2,15 @@
 
 namespace LaravelEnso\Roles\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Str;
 use LaravelEnso\Menus\Models\Menu;
 use LaravelEnso\Permissions\Models\Permission;
 use LaravelEnso\Rememberable\Traits\Rememberable;
@@ -61,13 +64,7 @@ class Role extends Model
         $this->permissions()
             ->sync($permissionList);
 
-        Cache::forget("role-permissions:{$this->id}");
-    }
-
-    public function addDefaultPermissions()
-    {
-        $this->permissions()
-            ->sync(Permission::implicit()->pluck('id'));
+        $this->clearPermissionCache();
     }
 
     public function delete()
@@ -82,5 +79,33 @@ class Role extends Model
     public function writeConfig()
     {
         (new ConfigWriter($this))->handle();
+    }
+
+    public function addDefaultPermissions()
+    {
+        $this->permissions()
+            ->sync(Permission::implicit()->pluck('id'));
+    }
+
+    public function clearPermissionCache(): void
+    {
+        Cache::forget(self::permissionCacheKey($this->id));
+    }
+
+    public static function permissionList(int $id): Collection
+    {
+        $key = self::permissionCacheKey($id);
+
+        return Cache::get($key)
+            ?? Cache::remember($key, Carbon::now()
+                ->addHour(), fn () => self::find($id)
+                ->permissions()->pluck('name'));
+    }
+
+    public static function permissionCacheKey(int $id): string
+    {
+        $stub = Config::get('enso.roles.permissionKey');
+
+        return Str::of($stub)->replace('id', $id);
     }
 }
