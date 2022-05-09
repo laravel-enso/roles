@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
@@ -89,17 +90,24 @@ class Role extends Model
 
     public function clearPermissionCache(): void
     {
-        Cache::forget(self::permissionCacheKey($this->id));
+        if (App::isProduction()) {
+            Cache::forget(self::permissionCacheKey($this->id));
+        }
     }
 
     public static function permissionList(int $id): Collection
     {
+        $collection = fn () => self::find($id)
+            ->permissions()->pluck('name');
+
+        if (!App::isProduction()) {
+            return $collection();
+        }
+
         $key = self::permissionCacheKey($id);
 
         return Cache::get($key)
-            ?? Cache::remember($key, Carbon::now()
-                ->addHour(), fn () => self::find($id)
-                ->permissions()->pluck('name'));
+            ?? Cache::remember($key, Carbon::now()->addHour(), $collection);
     }
 
     public static function permissionCacheKey(int $id): string
@@ -107,5 +115,10 @@ class Role extends Model
         $stub = Config::get('enso.roles.permissionKey');
 
         return Str::of($stub)->replace('id', $id);
+    }
+
+    private static function cacheDuration()
+    {
+        return this
     }
 }
