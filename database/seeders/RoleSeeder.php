@@ -10,7 +10,7 @@ use LaravelEnso\Roles\Models\Role;
 
 class RoleSeeder extends Seeder
 {
-    private const Roles = [
+    protected array $roles = [
         ['name' => 'admin', 'display_name' => 'Administrator', 'description' => 'Administrator role. Full featured.'],
         ['name' => 'supervisor', 'display_name' => 'Supervisor', 'description' => 'Supervisor role.'],
     ];
@@ -19,7 +19,7 @@ class RoleSeeder extends Seeder
     {
         $menu = Menu::firstWhere('name', 'Dashboard');
 
-        $roles = Collection::wrap(self::Roles)
+        $roles = Collection::wrap($this->roles)
             ->map(fn ($role) => Role::factory()
                 ->create($role + ['menu_id' => $menu->id]));
 
