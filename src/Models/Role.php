@@ -100,7 +100,7 @@ class Role extends Model
         $collection = fn () => self::find($id)
             ->permissions()->pluck('name');
 
-        if (!App::isProduction()) {
+        if (! App::isProduction()) {
             return $collection();
         }
 
@@ -115,10 +115,5 @@ class Role extends Model
         $stub = Config::get('enso.roles.permissionKey');
 
         return Str::of($stub)->replace('id', $id);
-    }
-
-    private static function cacheDuration()
-    {
-        return this
     }
 }
