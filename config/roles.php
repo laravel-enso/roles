@@ -1,6 +1,6 @@
 <?php
 
 return [
-    'restrictedToOwnGroup' => false,
+    'restrictedToOwnGroup' => true,
     'permissionKey' => 'role-permissions:id',
 ];
