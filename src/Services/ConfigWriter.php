@@ -2,10 +2,8 @@
 
 namespace LaravelEnso\Roles\Services;
 
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
-use LaravelEnso\Roles\Enums\Roles;
 use LaravelEnso\Roles\Exceptions\Role as Exception;
 use LaravelEnso\Roles\Models\Role;
 
@@ -24,7 +22,7 @@ class ConfigWriter
 
     private function validateRole(): self
     {
-        if ($this->role->id === App::make(Roles::class)::Admin) {
+        if ($this->role->isAdmin()) {
             throw Exception::adminRole();
         }
 
