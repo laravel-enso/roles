@@ -25,10 +25,9 @@ class RoleSeeder extends Seeder
 
         $permissions = Permission::pluck('is_default', 'id');
 
-        $roles->first()
+        $roles->shift()
             ->syncPermissions($permissions->keys()->toArray());
 
-        $roles->last()
-            ->syncPermissions($permissions->filter()->keys()->toArray());
+        $roles->each->syncPermissions($permissions->filter()->keys()->toArray());
     }
 }
