@@ -10,7 +10,8 @@ class Update extends Controller
 {
     public function __invoke(ValidateRole $request, Role $role)
     {
-        $role->update($request->validated());
+        $role->update($request->safe()->except('userGroups'));
+        $role->userGroups()->sync($request->get('userGroups'));
 
         return ['message' => __('The role was successfully updated')];
     }

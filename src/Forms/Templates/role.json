@@ -40,6 +40,16 @@
                         "multiple": false,
                         "options": []
                     }
+                },
+                {
+                    "label": "User Groups",
+                    "name": "userGroups",
+                    "value": [],
+                    "meta": {
+                        "type": "select",
+                        "multiple": true,
+                        "source": "administration.userGroups.options"
+                    }
                 }
             ]
         }

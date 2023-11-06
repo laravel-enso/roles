@@ -10,8 +10,9 @@ class Store extends Controller
 {
     public function __invoke(ValidateRole $request, Role $role)
     {
-        $role->fill($request->validated())->save();
+        $role->fill($request->safe()->except('userGroups'))->save();
         $role->addDefaultPermissions();
+        $role->userGroups()->sync($request->get('userGroups'));
 
         return [
             'message' => __('The role was created!'),

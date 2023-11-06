@@ -20,6 +20,7 @@ class ValidateRole extends FormRequest
             'display_name' => 'required',
             'description' => 'nullable',
             'menu_id' => 'nullable|exists:menus,id',
+            'userGroups' => 'array',
         ];
     }
 
