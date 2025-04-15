@@ -3,11 +3,11 @@
 namespace LaravelEnso\Roles;
 
 use LaravelEnso\Enums\EnumServiceProvider as ServiceProvider;
-use LaravelEnso\Roles\Enums\Roles;
+use LaravelEnso\Roles\Enums\Role;
 
 class EnumServiceProvider extends ServiceProvider
 {
     public $register = [
-        'roles' => Roles::class,
+        'roles' => Role::class,
     ];
 }

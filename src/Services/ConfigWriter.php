@@ -5,7 +5,7 @@ namespace LaravelEnso\Roles\Services;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
-use LaravelEnso\Roles\Enums\Roles;
+use LaravelEnso\Roles\Enums\Role as RoleEnum;
 use LaravelEnso\Roles\Exceptions\Role as Exception;
 use LaravelEnso\Roles\Models\Role;
 
@@ -24,7 +24,7 @@ class ConfigWriter
 
     private function validateRole(): self
     {
-        if ($this->role->id === App::make(Roles::class)::Admin) {
+        if ($this->role->id === RoleEnum::Admin->value) {
             throw Exception::adminRole();
         }
 
@@ -33,7 +33,7 @@ class ConfigWriter
 
     private function validateDirectory(): self
     {
-        if (! File::isDirectory(config_path('local/roles/'))) {
+        if (!File::isDirectory(config_path('local/roles/'))) {
             File::makeDirectory(config_path('local/roles/'), 0755, true);
         }
 
@@ -73,7 +73,7 @@ class ConfigWriter
     {
         $permissions = $this->role->permissions()
             ->pluck('name')
-            ->implode("',".PHP_EOL."        '");
+            ->implode("'," . PHP_EOL . "        '");
 
         return "'{$permissions}'";
     }
@@ -85,6 +85,6 @@ class ConfigWriter
 
     private function stub(): string
     {
-        return File::get(__DIR__.'/stubs/role.stub');
+        return File::get(__DIR__ . '/stubs/role.stub');
     }
 }
