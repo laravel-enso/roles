@@ -18,7 +18,7 @@ use LaravelEnso\Rememberable\Traits\Rememberable;
 use LaravelEnso\Roles\Exceptions\RoleConflict;
 use LaravelEnso\Roles\Services\ConfigWriter;
 use LaravelEnso\Tables\Traits\TableCache;
-use LaravelEnso\UserGroups\Enums\UserGroups;
+use LaravelEnso\UserGroups\Enums\UserGroup as UserGroupEnum;
 use LaravelEnso\UserGroups\Models\UserGroup;
 use LaravelEnso\Users\Models\User;
 
@@ -56,7 +56,7 @@ class Role extends Model
             ->whereHas('userGroups', fn ($groups) => $groups->when(
                 Config::get('enso.roles.restrictedToOwnGroup'),
                 fn ($groups) => $groups->whereId(Auth::user()->group_id),
-                fn ($groups) => $groups->where('id', '<>', UserGroups::Admin),
+                fn ($groups) => $groups->where('id', '<>', UserGroupEnum::Admin->value),
             )));
     }
 
