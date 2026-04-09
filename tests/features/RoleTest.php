@@ -8,6 +8,7 @@ use LaravelEnso\Roles\Models\Role;
 use LaravelEnso\Tables\Traits\Tests\Datatable;
 use LaravelEnso\Users\Models\User;
 use Tests\TestCase;
+use PHPUnit\Framework\Attributes\Test;
 
 class RoleTest extends TestCase
 {
@@ -27,7 +28,7 @@ class RoleTest extends TestCase
             ->make();
     }
 
-    /** @test */
+    #[Test]
     public function can_store_role()
     {
         $response = $this->post(
@@ -45,7 +46,7 @@ class RoleTest extends TestCase
             ])->assertJsonStructure(['message']);
     }
 
-    /** @test */
+    #[Test]
     public function can_update_role()
     {
         $this->testModel->save();
@@ -61,7 +62,7 @@ class RoleTest extends TestCase
         $this->assertEquals($this->testModel->name, $this->testModel->fresh()->name);
     }
 
-    /** @test */
+    #[Test]
     public function cant_destroy_if_has_users()
     {
         $this->testModel->save();
