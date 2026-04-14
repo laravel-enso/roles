@@ -29,8 +29,8 @@
         "laravel-enso/rememberable": "^4.0",
         "laravel-enso/select": "^5.0",
         "laravel-enso/tables": "^5.0",
-        "laravel-enso/user-groups": "^2.0",
-        "laravel-enso/users": "^2.0"
+        "laravel-enso/user-groups": "^2.5.0",
+        "laravel-enso/users": "^2.8.1"
     },
     "autoload": {
         "psr-4": {
