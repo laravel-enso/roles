@@ -11,12 +11,16 @@ use LaravelEnso\Permissions\Models\Permission;
 use LaravelEnso\Roles\Models\Role;
 use LaravelEnso\Tables\Traits\Tests\Datatable;
 use LaravelEnso\Users\Models\User;
-use Tests\TestCase;
 use PHPUnit\Framework\Attributes\Test;
+use Tests\TestCase;
 
 class RoleTest extends TestCase
 {
-    use CreateForm, Datatable, DestroyForm, EditForm, RefreshDatabase;
+    use CreateForm;
+    use Datatable;
+    use DestroyForm;
+    use EditForm;
+    use RefreshDatabase;
 
     private $permissionGroup = 'system.roles';
     private $testModel;
@@ -55,7 +59,7 @@ class RoleTest extends TestCase
         $response->assertStatus(200)
             ->assertJsonFragment([
                 'redirect' => 'system.roles.edit',
-                'param' => ['role' => $role->id],
+                'param'    => ['role' => $role->id],
             ])->assertJsonStructure(['message']);
     }
 
@@ -137,7 +141,7 @@ class RoleTest extends TestCase
     public function can_write_role_permissions_config()
     {
         $role = Role::factory()->create([
-            'name' => 'field-agent-'.Str::lower(Str::random(8)),
+            'name'         => 'field-agent-'.Str::lower(Str::random(8)),
             'display_name' => 'Field Agent',
         ]);
         $permission = Permission::factory()->create([
@@ -170,12 +174,12 @@ class RoleTest extends TestCase
 
         Config::set("local.roles.{$name}", [
             'order' => 99,
-            'role' => [
-                'name' => $name,
+            'role'  => [
+                'name'         => $name,
                 'display_name' => 'Synced Role',
             ],
             'default_menu' => null,
-            'permissions' => [$permission->name],
+            'permissions'  => [$permission->name],
         ]);
 
         $this->artisan('enso:roles:sync')

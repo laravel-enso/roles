@@ -24,7 +24,9 @@ use LaravelEnso\Users\Models\User;
 
 class Role extends Model
 {
-    use HasFactory, Rememberable, TableCache;
+    use HasFactory;
+    use Rememberable;
+    use TableCache;
 
     protected $guarded = ['id'];
 
@@ -52,7 +54,7 @@ class Role extends Model
     {
         $isSuperior = Auth::user()->belongsToAdminGroup();
 
-        return $query->when(! $isSuperior, fn ($query) => $query
+        return $query->when(!$isSuperior, fn ($query) => $query
             ->whereHas('userGroups', fn ($groups) => $groups->when(
                 Config::get('enso.roles.restrictedToOwnGroup'),
                 fn ($groups) => $groups->whereId(Auth::user()->group_id),
@@ -100,7 +102,7 @@ class Role extends Model
         $collection = fn () => self::find($id)
             ->permissions()->pluck('name');
 
-        if (! App::isProduction()) {
+        if (!App::isProduction()) {
             return $collection();
         }
 

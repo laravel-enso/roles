@@ -16,11 +16,11 @@ class ValidateRole extends FormRequest
     public function rules()
     {
         return [
-            'name' => ['required', $this->nameUnique()],
+            'name'         => ['required', $this->nameUnique()],
             'display_name' => 'required',
-            'description' => 'nullable',
-            'menu_id' => 'nullable|exists:menus,id',
-            'userGroups' => 'array',
+            'description'  => 'nullable',
+            'menu_id'      => 'nullable|exists:menus,id',
+            'userGroups'   => 'array',
         ];
     }
 

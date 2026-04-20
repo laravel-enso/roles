@@ -18,8 +18,8 @@ class RoleConfigurator implements Responsable
     public function toResponse($request)
     {
         return [
-            'permissions' => (new PermissionTree())->get(),
-            'role' => $this->role,
+            'permissions'     => (new PermissionTree())->get(),
+            'role'            => $this->role,
             'rolePermissions' => $this->rolePermissions(),
         ];
     }

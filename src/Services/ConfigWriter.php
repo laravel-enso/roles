@@ -33,7 +33,7 @@ class ConfigWriter
 
     private function validateDirectory(): self
     {
-        if (! File::isDirectory(config_path('local/roles/'))) {
+        if (!File::isDirectory(config_path('local/roles/'))) {
             File::makeDirectory(config_path('local/roles/'), 0755, true);
         }
 
@@ -56,11 +56,11 @@ class ConfigWriter
     private function fromTo()
     {
         return [
-            '${order}' => $this->order(),
-            '${name}' => $this->role->name,
-            '${displayName}' => $this->role->display_name,
+            '${order}'            => $this->order(),
+            '${name}'             => $this->role->name,
+            '${displayName}'      => $this->role->display_name,
             '${defaultMenuRoute}' => $this->role->menu?->permission->name,
-            '${permissions}' => $this->permissions(),
+            '${permissions}'      => $this->permissions(),
         ];
     }
 

@@ -12,7 +12,7 @@ class Destroy extends Controller
         $role->delete();
 
         return [
-            'message' => __('The role was successfully deleted'),
+            'message'  => __('The role was successfully deleted'),
             'redirect' => 'system.roles.index',
         ];
     }

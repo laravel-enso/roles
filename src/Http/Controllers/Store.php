@@ -15,9 +15,9 @@ class Store extends Controller
         $role->userGroups()->sync($request->get('userGroups'));
 
         return [
-            'message' => __('The role was created!'),
+            'message'  => __('The role was created!'),
             'redirect' => 'system.roles.edit',
-            'param' => ['role' => $role->id],
+            'param'    => ['role' => $role->id],
         ];
     }
 }

@@ -2,5 +2,5 @@
 
 return [
     'restrictedToOwnGroup' => false,
-    'permissionKey' => 'role-permissions:id',
+    'permissionKey'        => 'role-permissions:id',
 ];

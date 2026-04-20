@@ -41,7 +41,7 @@ class PermissionTree
 
     private function node($segment): void
     {
-        if (! $this->current->has($segment)) {
+        if (!$this->current->has($segment)) {
             $this->current->set($segment, $this->emptyNode());
         }
 

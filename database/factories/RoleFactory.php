@@ -13,10 +13,10 @@ class RoleFactory extends Factory
     public function definition()
     {
         return [
-            'name' => $this->faker->word,
+            'name'         => $this->faker->word,
             'display_name' => $this->faker->word,
-            'description' => $this->faker->sentence,
-            'menu_id' => Menu::factory(),
+            'description'  => $this->faker->sentence,
+            'menu_id'      => Menu::factory(),
         ];
     }
 }

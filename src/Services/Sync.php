@@ -27,13 +27,13 @@ class Sync
             'name' => $config['role']['name'],
         ], [
             'display_name' => $config['role']['display_name'],
-            'menu_id' => $this->menu($config)?->id,
+            'menu_id'      => $this->menu($config)?->id,
         ])->syncPermissions($this->permissionIds($config));
     }
 
     private function menu($config): ?Menu
     {
-        if (! $config['default_menu']) {
+        if (!$config['default_menu']) {
             return null;
         }
 
