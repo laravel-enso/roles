@@ -1,9 +1,13 @@
 <?php
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 use LaravelEnso\Forms\TestTraits\CreateForm;
 use LaravelEnso\Forms\TestTraits\DestroyForm;
 use LaravelEnso\Forms\TestTraits\EditForm;
+use LaravelEnso\Permissions\Models\Permission;
 use LaravelEnso\Roles\Models\Role;
 use LaravelEnso\Tables\Traits\Tests\Datatable;
 use LaravelEnso\Users\Models\User;
@@ -16,6 +20,7 @@ class RoleTest extends TestCase
 
     private $permissionGroup = 'system.roles';
     private $testModel;
+    private array $generatedConfigFiles = [];
 
     protected function setUp(): void
     {
@@ -26,6 +31,14 @@ class RoleTest extends TestCase
 
         $this->testModel = Role::factory()
             ->make();
+    }
+
+    protected function tearDown(): void
+    {
+        collect($this->generatedConfigFiles)
+            ->each(fn (string $path) => File::delete($path));
+
+        parent::tearDown();
     }
 
     #[Test]
@@ -75,5 +88,103 @@ class RoleTest extends TestCase
             ->assertStatus(409);
 
         $this->assertNotNull($this->testModel->fresh());
+    }
+
+    #[Test]
+    public function can_get_role_options()
+    {
+        $this->testModel->save();
+
+        $this->get(route('system.roles.options', [
+            'query' => $this->testModel->name,
+            'limit' => 10,
+        ], false))
+            ->assertStatus(200)
+            ->assertJsonFragment(['name' => $this->testModel->name]);
+    }
+
+    #[Test]
+    public function can_fetch_role_permissions_configuration()
+    {
+        $role = Role::factory()->create();
+        $permission = Permission::factory()->create();
+        $role->permissions()->sync([$permission->id]);
+
+        $this->get(route('system.roles.permissions.get', $role, false))
+            ->assertStatus(200)
+            ->assertJsonFragment(['id' => $role->id])
+            ->assertJsonFragment([$permission->id]);
+    }
+
+    #[Test]
+    public function can_update_role_permissions()
+    {
+        $role = Role::factory()->create();
+        $permissions = Permission::factory()->count(2)->create();
+
+        $this->post(route('system.roles.permissions.set', $role, false), [
+            'rolePermissions' => $permissions->pluck('id')->toArray(),
+        ])->assertStatus(200)
+            ->assertJsonFragment(['message' => "The role's permissions were successfully updated"]);
+
+        $this->assertEqualsCanonicalizing(
+            $permissions->pluck('id')->toArray(),
+            $role->fresh()->permissions->pluck('id')->toArray()
+        );
+    }
+
+    #[Test]
+    public function can_write_role_permissions_config()
+    {
+        $role = Role::factory()->create([
+            'name' => 'field-agent-'.Str::lower(Str::random(8)),
+            'display_name' => 'Field Agent',
+        ]);
+        $permission = Permission::factory()->create([
+            'name' => 'testing.roles.write.'.Str::lower(Str::random(8)),
+        ]);
+        $role->permissions()->sync([$permission->id]);
+        $filePath = config_path("local/roles/{$role->name}.php");
+        $this->generatedConfigFiles[] = $filePath;
+
+        $this->post(route('system.roles.permissions.write', $role, false))
+            ->assertStatus(200)
+            ->assertJsonFragment(['message' => 'The config file was successfully written']);
+
+        $this->assertFileExists($filePath);
+    }
+
+    #[Test]
+    public function sync_command_reads_roles_from_local_config()
+    {
+        $name = 'synced-role-'.Str::lower(Str::random(8));
+        $filePath = config_path("local/roles/{$name}.php");
+
+        File::ensureDirectoryExists(config_path('local/roles'));
+        File::put($filePath, '<?php return [];');
+        $this->generatedConfigFiles[] = $filePath;
+
+        $permission = Permission::factory()->create([
+            'name' => 'testing.roles.sync.'.Str::lower(Str::random(8)),
+        ]);
+
+        Config::set("local.roles.{$name}", [
+            'order' => 99,
+            'role' => [
+                'name' => $name,
+                'display_name' => 'Synced Role',
+            ],
+            'default_menu' => null,
+            'permissions' => [$permission->name],
+        ]);
+
+        $this->artisan('enso:roles:sync')
+            ->assertExitCode(0);
+
+        $role = Role::whereName($name)->first();
+
+        $this->assertNotNull($role);
+        $this->assertSame('Synced Role', $role->display_name);
+        $this->assertTrue($role->permissions->pluck('name')->contains($permission->name));
     }
 }
