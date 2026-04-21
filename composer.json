@@ -1,13 +1,13 @@
 {
     "name": "laravel-enso/roles",
-    "description": "Role Manager dependency for Laravel Enso",
+    "description": "Role management for Laravel Enso",
     "keywords": [
         "laravel-enso",
         "roles",
         "role-manager",
         "laravel-roles"
     ],
-    "homepage": "https://github.com/laravel-enso/Roles",
+    "homepage": "https://github.com/laravel-enso/roles",
     "type": "library",
     "license": "MIT",
     "authors": [
