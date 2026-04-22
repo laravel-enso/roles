@@ -3,6 +3,7 @@
 namespace LaravelEnso\Roles\Services;
 
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 use LaravelEnso\Roles\Enums\Roles;
@@ -33,8 +34,8 @@ class ConfigWriter
 
     private function validateDirectory(): self
     {
-        if (!File::isDirectory(config_path('local/roles/'))) {
-            File::makeDirectory(config_path('local/roles/'), 0755, true);
+        if (!File::isDirectory($this->directory())) {
+            File::makeDirectory($this->directory(), 0755, true);
         }
 
         return $this;
@@ -80,7 +81,12 @@ class ConfigWriter
 
     private function filePath(): string
     {
-        return config_path("local/roles/{$this->role->name}.php");
+        return $this->directory().DIRECTORY_SEPARATOR.$this->role->name.'.php';
+    }
+
+    private function directory(): string
+    {
+        return Config::get('enso.roles.configPath', config_path('local/roles'));
     }
 
     private function stub(): string

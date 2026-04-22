@@ -2,5 +2,6 @@
 
 return [
     'restrictedToOwnGroup' => false,
-    'permissionKey'        => 'role-permissions:id',
+    'configPath' => config_path('local/roles'),
+    'permissionKey' => 'role-permissions:id',
 ];

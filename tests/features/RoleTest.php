@@ -25,10 +25,15 @@ class RoleTest extends TestCase
     private $permissionGroup = 'system.roles';
     private $testModel;
     private array $generatedConfigFiles = [];
+    private string $rolesConfigPath;
 
     protected function setUp(): void
     {
         parent::setUp();
+
+        $this->rolesConfigPath = storage_path('framework/testing/roles-'.env('TEST_TOKEN', (string) getmypid()));
+        Config::set('enso.roles.configPath', $this->rolesConfigPath);
+        File::ensureDirectoryExists($this->rolesConfigPath);
 
         $this->seed()
             ->actingAs(User::first());
@@ -41,6 +46,8 @@ class RoleTest extends TestCase
     {
         collect($this->generatedConfigFiles)
             ->each(fn (string $path) => File::delete($path));
+
+        File::deleteDirectory($this->rolesConfigPath);
 
         parent::tearDown();
     }
@@ -148,7 +155,7 @@ class RoleTest extends TestCase
             'name' => 'testing.roles.write.'.Str::lower(Str::random(8)),
         ]);
         $role->permissions()->sync([$permission->id]);
-        $filePath = config_path("local/roles/{$role->name}.php");
+        $filePath = $this->rolesConfigPath.DIRECTORY_SEPARATOR.$role->name.'.php';
         $this->generatedConfigFiles[] = $filePath;
 
         $this->post(route('system.roles.permissions.write', $role, false))
@@ -162,25 +169,28 @@ class RoleTest extends TestCase
     public function sync_command_reads_roles_from_local_config()
     {
         $name = 'synced-role-'.Str::lower(Str::random(8));
-        $filePath = config_path("local/roles/{$name}.php");
+        $filePath = $this->rolesConfigPath.DIRECTORY_SEPARATOR.$name.'.php';
 
-        File::ensureDirectoryExists(config_path('local/roles'));
+        File::ensureDirectoryExists($this->rolesConfigPath);
         File::put($filePath, '<?php return [];');
         $this->generatedConfigFiles[] = $filePath;
 
         $permission = Permission::factory()->create([
             'name' => 'testing.roles.sync.'.Str::lower(Str::random(8)),
         ]);
+        File::put($filePath, <<<PHP
+<?php
 
-        Config::set("local.roles.{$name}", [
-            'order' => 99,
-            'role'  => [
-                'name'         => $name,
-                'display_name' => 'Synced Role',
-            ],
-            'default_menu' => null,
-            'permissions'  => [$permission->name],
-        ]);
+return [
+    'order' => 99,
+    'role' => [
+        'name' => '{$name}',
+        'display_name' => 'Synced Role',
+    ],
+    'default_menu' => null,
+    'permissions' => ['{$permission->name}'],
+];
+PHP);
 
         $this->artisan('enso:roles:sync')
             ->assertExitCode(0);

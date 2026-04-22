@@ -5,18 +5,16 @@ namespace LaravelEnso\Roles\Services;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Str;
 use LaravelEnso\Menus\Models\Menu;
 use LaravelEnso\Permissions\Models\Permission;
 use LaravelEnso\Roles\Models\Role;
-use Symfony\Component\Finder\SplFileInfo;
 
 class Sync
 {
     public function handle(): void
     {
-        Collection::wrap(File::files(config_path('local/roles')))
-            ->map(fn ($file) => Config::get("local.roles.{$this->role($file)}"))
+        Collection::wrap(File::files($this->directory()))
+            ->map(fn ($file) => require $file->getRealPath())
             ->sortBy('order')
             ->each(fn ($config) => $this->sync($config));
     }
@@ -48,8 +46,8 @@ class Sync
             ->pluck('id')->toArray();
     }
 
-    private function role(SplFileInfo $file): string
+    private function directory(): string
     {
-        return Str::of($file->getFilename())->replace('.php', '');
+        return Config::get('enso.roles.configPath', config_path('local/roles'));
     }
 }
