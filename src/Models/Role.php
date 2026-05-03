@@ -2,7 +2,6 @@
 
 namespace LaravelEnso\Roles\Models;
 
-use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -54,7 +53,7 @@ class Role extends Model
     {
         $isSuperior = Auth::user()->belongsToAdminGroup();
 
-        return $query->when(!$isSuperior, fn ($query) => $query
+        return $query->when(! $isSuperior, fn ($query) => $query
             ->whereHas('userGroups', fn ($groups) => $groups->when(
                 Config::get('enso.roles.restrictedToOwnGroup'),
                 fn ($groups) => $groups->whereId(Auth::user()->group_id),
@@ -99,17 +98,17 @@ class Role extends Model
 
     public static function permissionList(int $id): Collection
     {
-        $collection = fn () => self::find($id)
-            ->permissions()->pluck('name');
+        $permissions = fn (): Collection => self::query()
+            ->findOrFail($id)
+            ->permissions()
+            ->pluck('name');
 
-        if (!App::isProduction()) {
-            return $collection();
-        }
-
-        $key = self::permissionCacheKey($id);
-
-        return Cache::get($key)
-            ?? Cache::remember($key, Carbon::now()->addHour(), $collection);
+        return App::isProduction()
+            ? Cache::remember(
+                self::permissionCacheKey($id),
+                now()->addHour(),
+                $permissions
+            ) : $permissions();
     }
 
     public static function permissionCacheKey(int $id): string

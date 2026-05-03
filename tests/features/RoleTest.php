@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
@@ -141,6 +142,60 @@ class RoleTest extends TestCase
         $this->assertEqualsCanonicalizing(
             $permissions->pluck('id')->toArray(),
             $role->fresh()->permissions->pluck('id')->toArray()
+        );
+    }
+
+    #[Test]
+    public function permission_list_is_cached_in_production(): void
+    {
+        $this->app->detectEnvironment(fn () => 'production');
+        Cache::flush();
+
+        $role = Role::factory()->create();
+        $initialPermission = Permission::factory()->create([
+            'name' => 'testing.roles.cached.initial',
+        ]);
+        $addedPermission = Permission::factory()->create([
+            'name' => 'testing.roles.cached.added',
+        ]);
+
+        $role->permissions()->sync([$initialPermission->id]);
+
+        $this->assertEqualsCanonicalizing(
+            [$initialPermission->name],
+            Role::permissionList($role->id)->all()
+        );
+
+        $role->permissions()->attach($addedPermission->id);
+
+        $this->assertEqualsCanonicalizing(
+            [$initialPermission->name],
+            Role::permissionList($role->id)->all()
+        );
+    }
+
+    #[Test]
+    public function sync_permissions_clears_production_permission_cache(): void
+    {
+        $this->app->detectEnvironment(fn () => 'production');
+        Cache::flush();
+
+        $role = Role::factory()->create();
+        $initialPermission = Permission::factory()->create([
+            'name' => 'testing.roles.cached.before-sync',
+        ]);
+        $syncedPermission = Permission::factory()->create([
+            'name' => 'testing.roles.cached.after-sync',
+        ]);
+
+        $role->syncPermissions([$initialPermission->id]);
+        Role::permissionList($role->id);
+
+        $role->syncPermissions([$syncedPermission->id]);
+
+        $this->assertEqualsCanonicalizing(
+            [$syncedPermission->name],
+            Role::permissionList($role->id)->all()
         );
     }
 
