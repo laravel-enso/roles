@@ -13,6 +13,7 @@ class RoleSeeder extends Seeder
     protected array $roles = [
         ['name' => 'admin', 'display_name' => 'Administrator', 'description' => 'Administrator role. Full featured.'],
         ['name' => 'supervisor', 'display_name' => 'Supervisor', 'description' => 'Supervisor role.'],
+        ['name' => 'application', 'display_name' => 'Application', 'description' => 'Application role.'],
     ];
 
     public function run()
